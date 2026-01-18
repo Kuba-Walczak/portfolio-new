@@ -32,11 +32,29 @@ const projects = [
     link: '#',
     image: '/placeholder-analytics.jpg',
   },
+  {
+    id: 4,
+    title: 'Analytics Dashboard',
+    description:
+      'Interactive dashboard for data visualization and business intelligence with customizable reports.',
+    tags: ['React', 'D3.js', 'AWS'],
+    link: '#',
+    image: '/placeholder-analytics.jpg',
+  },
+  {
+    id: 5,
+    title: 'Analytics Dashboard',
+    description:
+      'Interactive dashboard for data visualization and business intelligence with customizable reports.',
+    tags: ['React', 'D3.js', 'AWS'],
+    link: '#',
+    image: '/placeholder-analytics.jpg',
+  },
 ]
 
 export default function Projects() {
   return (
-    <section id="projects" className="max-w-6xl mx-auto px-6 py-24 md:py-32">
+    <section id="projects" className="mx-76 py-24 md:py-32">
       <div className="space-y-4 mb-12">
         <h2 className="text-4xl md:text-5xl font-bold text-foreground">Featured Projects</h2>
         <p className="text-lg text-muted-foreground">
@@ -50,7 +68,7 @@ export default function Projects() {
             key={project.id}
             className="bg-card border-border hover:shadow-lg transition-shadow cursor-pointer group overflow-hidden flex flex-col"
           >
-            <div className="h-48 bg-secondary overflow-hidden">
+            <div className="h-84 bg-secondary overflow-hidden">
               <img
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
