@@ -12,7 +12,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="mx-76 py-24 md:py-32"
+      className="mx-76 py-24 md:py-32 scroll-mt-20"
     >
       <div className="grid md:grid-cols-2 gap-12 items-start">
         <div className="space-y-6">

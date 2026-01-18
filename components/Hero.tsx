@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="mx-76 py-64 flex flex-col gap-8"
+      className="mx-76 py-64 flex flex-col gap-8 scroll-mt-20"
     >
       <div className="space-y-6">
         <h1 className="text-5xl md:text-7xl font-bold text-foreground text-balance leading-tight">

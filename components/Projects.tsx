@@ -54,7 +54,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="mx-76 py-24 md:py-32">
+    <section id="projects" className="mx-76 py-24 md:py-32 scroll-mt-20">
       <div className="space-y-4 mb-12">
         <h2 className="text-4xl md:text-5xl font-bold text-foreground">Featured Projects</h2>
         <p className="text-lg text-muted-foreground">
