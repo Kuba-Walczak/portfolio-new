@@ -2,23 +2,24 @@
 
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { CustomCanvas } from '@/components/CustomCanvas'
+import { Model } from '@/components/Model'
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="mx-76 py-64 flex flex-col gap-8 scroll-mt-20"
+      className="relative mx-76 py-100 flex flex-col gap-8 scroll-mt-20"
     >
+      <div className="absolute inset-0 w-full h-full flex flex-col justify-center">
       <div className="space-y-6">
         <h1 className="text-5xl md:text-7xl font-bold text-foreground text-balance leading-tight">
           Welcome to My Portfolio
         </h1>
         <p className="text-xl text-muted-foreground text-pretty">
-          I create beautiful and functional digital experiences that help businesses grow and users
-          succeed.
+          Programming student by day, 3D artist by night.
         </p>
       </div>
-
       <div className="flex flex-col sm:flex-row gap-4 pt-6">
         <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
           Contact Me
@@ -31,6 +32,12 @@ export default function Hero() {
           My Projects
           <ArrowRight className="ml-2 w-4 h-4" />
         </Button>
+      </div>
+      </div>
+      <div className="absolute inset-0 w-full h-full">
+      <CustomCanvas>
+        <Model />
+      </CustomCanvas>
       </div>
     </section>
   )
