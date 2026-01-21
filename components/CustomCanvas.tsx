@@ -2,7 +2,8 @@ import { Canvas } from '@react-three/fiber';
 
 export function CustomCanvas({ children }: { children: React.ReactNode }) {
   return (
-    <Canvas 
+    <Canvas
+      style={{ pointerEvents: 'none' }}
       gl={{ alpha: true }}
       camera={{ position: [0, 0, 0.5], fov: 25 }}
       onCreated={({ gl }) => {

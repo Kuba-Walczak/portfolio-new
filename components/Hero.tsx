@@ -34,7 +34,7 @@ export default function Hero() {
         </Button>
       </div>
       </div>
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full pointer-events-none">
       <CustomCanvas>
         <Model />
       </CustomCanvas>
