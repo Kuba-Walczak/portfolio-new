@@ -7,6 +7,8 @@ interface AppContextType {
   setProjectView: (projectView: boolean) => void
   selectedTab: string
   setSelectedTab: (selectedTab: string) => void
+  laptopReady: boolean
+  setLaptopReady: (laptopReady: boolean) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -14,12 +16,15 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 export function AppProvider({ children }: { children: ReactNode }) {
   const [projectView, setProjectView] = useState(false)
   const [selectedTab, setSelectedTab] = useState('Showcase')
-  
+  const [laptopReady, setLaptopReady] = useState(false)
+
   const value: AppContextType = {
     projectView,
     setProjectView,
     selectedTab,
     setSelectedTab,
+    laptopReady,
+    setLaptopReady,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

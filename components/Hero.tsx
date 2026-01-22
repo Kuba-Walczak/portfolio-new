@@ -9,7 +9,7 @@ import { useApp } from '@/contexts/AppContext'
 import { LaptopScreen } from '@/components/Laptop/LaptopScreen'
 
 export default function Hero() {
-  const { projectView, setSelectedTab } = useApp()
+  const { projectView, setSelectedTab, laptopReady } = useApp()
   const scrollY = useScroll()
   const translateX = scrollY * 3000
 
@@ -58,6 +58,7 @@ export default function Hero() {
         <Model />
       </CustomCanvas>
       </div>
+      <div style={{ opacity: laptopReady ? 1 : 0 }}>
       <div className="absolute flex gap-4 top-10 left-1/2 -translate-x-1/2">
         <Button variant="secondary" size="vlg" onClick={() => setSelectedTab('Showcase')}>Showcase</Button>
         <Button variant="secondary" size="vlg" onClick={() => setSelectedTab('Details')}>Details</Button>
@@ -65,6 +66,7 @@ export default function Hero() {
       </div>
       <div className="absolute inset-0 w-294 h-201 top-146 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-t-4xl">
         <LaptopScreen />
+      </div>
       </div>
     </section>
   )

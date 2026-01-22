@@ -40,7 +40,7 @@ export class Vector6D {
 }
 
 function ModelContent(props: any) {
-    const { projectView } = useApp()
+    const { projectView, laptopReady, setLaptopReady } = useApp()
     const rootRef = useRef<THREE.Group>(null)
     const laptopHingeRef = useRef<THREE.Group>(null)
     const scrollY = useScroll()
@@ -104,6 +104,7 @@ function ModelContent(props: any) {
     }
 
     useEffect(() => {
+      if (laptopReady) setLaptopReady(false)
       if (!rootRef.current || !laptopHingeRef.current) return
       const { rootTarget, hingeTarget } = getTargetValues(scrollY)
       gsap.to(rootRef.current.position, {
@@ -132,7 +133,10 @@ function ModelContent(props: any) {
         y: hingeTarget.rotY,
         z: hingeTarget.rotZ,
         duration: 0.4,
-        overwrite: 'auto'
+        overwrite: 'auto',
+        onComplete: () => {
+          if (scrollY === 0 && projectView) setLaptopReady(true)
+        }
       })
     }, [scrollY])
 
