@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import { useState, useMemo } from 'react'
 import { Separator } from './ui/separator'
+import { gsap } from 'gsap'
+import { Vector6D } from '@/components/Model'
 
 const projects = [
   {
@@ -112,6 +114,18 @@ export default function Projects() {
           <div key={project.id}>
             <Card
               className="bg-card border-border hover:shadow-lg transition-shadow cursor-pointer group overflow-hidden flex flex-col"
+              onClick={() => {
+                Vector6D.projectPreview = true
+                const scrollProxy = { y: window.pageYOffset }
+                gsap.to(scrollProxy, {
+                  y: 0,
+                  duration: 1.5,
+                  overwrite: "auto",
+                  onUpdate: () => {
+                    window.scrollTo(0, scrollProxy.y)
+                  },
+                })
+              }}
             >
             <div className="h-64 bg-secondary overflow-hidden">
               <img
