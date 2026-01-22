@@ -1,8 +1,9 @@
 import * as THREE from 'three'
-import { Suspense, useEffect, useRef, useState } from 'react'
-import { useLoader, useFrame } from '@react-three/fiber'
+import { Suspense, useEffect, useRef } from 'react'
+import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
 import { useGLTF } from '@react-three/drei'
+import { gsap } from 'gsap'
 import { useScroll } from '@/hooks/useScroll'
 
 type GLTFResult = {
@@ -16,34 +17,10 @@ type GLTFResult = {
   materials: Record<string, THREE.Material>
 }
 
-// Helper function to lerp (linear interpolate) between two values
-function lerp(start: number, end: number, t: number): number {
-  return start + (end - start) * t
-}
-
-// Helper function to lerp Vector3
-function lerpVector3(start: THREE.Vector3, end: THREE.Vector3, t: number): THREE.Vector3 {
-  return new THREE.Vector3(
-    lerp(start.x, end.x, t),
-    lerp(start.y, end.y, t),
-    lerp(start.z, end.z, t)
-  )
-}
-
-// Helper function to lerp Euler (rotation)
-function lerpEuler(start: THREE.Euler, end: THREE.Euler, t: number): THREE.Euler {
-  return new THREE.Euler(
-    lerp(start.x, end.x, t),
-    lerp(start.y, end.y, t),
-    lerp(start.z, end.z, t)
-  )
-}
-
 function ModelContent(props: any) {
     const rootRef = useRef<THREE.Group>(null)
     const laptopHingeRef = useRef<THREE.Group>(null)
     const scrollY = useScroll()
-    const smoothScrollY = useRef(0)
     const { nodes } = useGLTF(`https://PortfolioPullZone.b-cdn.net/temp-name/r3f.glb?t=2`) as unknown as GLTFResult
     const texture = useLoader(TextureLoader, 'https://PortfolioPullZone.b-cdn.net/temp-name/Bake.png')
     texture.flipY = false;
@@ -51,84 +28,154 @@ function ModelContent(props: any) {
     texture.minFilter = THREE.LinearFilter;
     texture.magFilter = THREE.LinearFilter;
 
-    // Stage 1: Current position/rotation (scroll 0-0.2)
-    const stage1 = {
-      root: {
-        position: new THREE.Vector3(0.15, -0.2, -1),
-        rotation: new THREE.Euler(-160 / 180 * Math.PI, 30 / 180 * Math.PI, Math.PI)
-      },
-      laptopHinge: {
-        position: new THREE.Vector3(0, -0.003, -0.009),
-        rotation: new THREE.Euler(2.007, 0, 0)
-      }
+    const STAGE_2_START = 0.2
+    const STAGE_3_START = 0.4
+
+    // Stage 1 values (initial state)
+    const stage1Root = {
+      x: 0.2,
+      y: -0.15,
+      z: -1,
+      rotX: -160 / 180 * Math.PI,
+      rotY: 30 / 180 * Math.PI,
+      rotZ: Math.PI
+    }
+    const stage1Hinge = {
+      x: 0,
+      y: -0.003,
+      z: -0.009,
+      rotX: 2.007,
+      rotY: 0,
+      rotZ: 0
     }
 
-    // Stage 2: Copy of stage 1 (scroll 0.2-0.4)
-    const stage2 = {
-      root: {
-        position: new THREE.Vector3(0, -0.2, -0.6),
-        rotation: new THREE.Euler(-185 / 180 * Math.PI, 0, Math.PI)
-      },
-      laptopHinge: {
-        position: new THREE.Vector3(0, -0.003, -0.009),
-        rotation: new THREE.Euler(Math.PI / 4, 0, 0)
-      }
+    // Stage 2 values
+    const stage2Root = {
+      x: 0,
+      y: -0.2,
+      z: -0.6,
+      rotX: -185 / 180 * Math.PI,
+      rotY: 0,
+      rotZ: Math.PI
+    }
+    const stage2Hinge = {
+      x: 0,
+      y: -0.003,
+      z: -0.009,
+      rotX: Math.PI / 4,
+      rotY: 0,
+      rotZ: 0
     }
 
-    // Stage 3: Copy of stage 1 (scroll 0.4+)
-    const stage3 = {
-      root: {
-        position: new THREE.Vector3(0, -0.175, -0.4),
-        rotation: new THREE.Euler(-185 / 180 * Math.PI, 0, Math.PI)
-      },
-      laptopHinge: {
-        position: new THREE.Vector3(0, -0.003, -0.009),
-        rotation: new THREE.Euler(0, 0, 0)
-      }
+    // Stage 3 values
+    const stage3Root = {
+      x: 0,
+      y: -0.175,
+      z: -0.4,
+      rotX: -185 / 180 * Math.PI,
+      rotY: 0,
+      rotZ: Math.PI
+    }
+    const stage3Hinge = {
+      x: 0,
+      y: -0.003,
+      z: -0.009,
+      rotX: 0,
+      rotY: 0,
+      rotZ: 0
     }
 
-    // Animation based on scroll with smoothing
-    useFrame(() => {
-      if (rootRef.current && laptopHingeRef.current) {
-        // Smooth the scroll value for fluid animations
-        // Factor of 0.15 creates smooth delay (similar to CSS transition)
-        const smoothingFactor = 0.15
-        smoothScrollY.current = smoothScrollY.current + (scrollY - smoothScrollY.current) * smoothingFactor
+    // Helper function to get target values based on scroll progress
+    const getTargetValues = (progress: number) => {
+      let rootTarget, hingeTarget
 
-        let currentStage, nextStage, t
-
-        if (smoothScrollY.current < 0.2) {
-          // Stage 1 -> Stage 2 (scroll 0 to 0.2)
-          currentStage = stage1
-          nextStage = stage2
-          t = smoothScrollY.current / 0.2 // Normalize to 0-1
-        } else if (smoothScrollY.current < 0.4) {
-          // Stage 2 -> Stage 3 (scroll 0.2 to 0.4)
-          currentStage = stage2
-          nextStage = stage3
-          t = (smoothScrollY.current - 0.2) / 0.2 // Normalize to 0-1
-        } else {
-          // Beyond stage 3, stay at stage 3
-          currentStage = stage3
-          nextStage = stage3
-          t = 1
+      if (progress < STAGE_2_START) {
+        // Stage 1 -> Stage 2: interpolate between stage1 and stage2
+        const t = progress / STAGE_2_START
+        rootTarget = {
+          x: stage1Root.x + (stage2Root.x - stage1Root.x) * t,
+          y: stage1Root.y + (stage2Root.y - stage1Root.y) * t,
+          z: stage1Root.z + (stage2Root.z - stage1Root.z) * t,
+          rotX: stage1Root.rotX + (stage2Root.rotX - stage1Root.rotX) * t,
+          rotY: stage1Root.rotY + (stage2Root.rotY - stage1Root.rotY) * t,
+          rotZ: stage1Root.rotZ + (stage2Root.rotZ - stage1Root.rotZ) * t
         }
-
-        // Interpolate root position and rotation
-        const rootPos = lerpVector3(currentStage.root.position, nextStage.root.position, t)
-        const rootRot = lerpEuler(currentStage.root.rotation, nextStage.root.rotation, t)
-        
-        rootRef.current.position.set(rootPos.x, rootPos.y, rootPos.z)
-        rootRef.current.rotation.set(rootRot.x, rootRot.y, rootRot.z)
-
-        // Interpolate laptopHinge position and rotation
-        const hingePos = lerpVector3(currentStage.laptopHinge.position, nextStage.laptopHinge.position, t)
-        const hingeRot = lerpEuler(currentStage.laptopHinge.rotation, nextStage.laptopHinge.rotation, t)
-        
-        laptopHingeRef.current.position.set(hingePos.x, hingePos.y, hingePos.z)
-        laptopHingeRef.current.rotation.set(hingeRot.x, hingeRot.y, hingeRot.z)
+        hingeTarget = {
+          x: stage1Hinge.x + (stage2Hinge.x - stage1Hinge.x) * t,
+          y: stage1Hinge.y + (stage2Hinge.y - stage1Hinge.y) * t,
+          z: stage1Hinge.z + (stage2Hinge.z - stage1Hinge.z) * t,
+          rotX: stage1Hinge.rotX + (stage2Hinge.rotX - stage1Hinge.rotX) * t,
+          rotY: stage1Hinge.rotY + (stage2Hinge.rotY - stage1Hinge.rotY) * t,
+          rotZ: stage1Hinge.rotZ + (stage2Hinge.rotZ - stage1Hinge.rotZ) * t
+        }
+      } else if (progress < STAGE_3_START) {
+        // Stage 2 -> Stage 3: interpolate between stage2 and stage3
+        const t = (progress - STAGE_2_START) / (STAGE_3_START - STAGE_2_START)
+        rootTarget = {
+          x: stage2Root.x + (stage3Root.x - stage2Root.x) * t,
+          y: stage2Root.y + (stage3Root.y - stage2Root.y) * t,
+          z: stage2Root.z + (stage3Root.z - stage2Root.z) * t,
+          rotX: stage2Root.rotX + (stage3Root.rotX - stage2Root.rotX) * t,
+          rotY: stage2Root.rotY + (stage3Root.rotY - stage2Root.rotY) * t,
+          rotZ: stage2Root.rotZ + (stage3Root.rotZ - stage2Root.rotZ) * t
+        }
+        hingeTarget = {
+          x: stage2Hinge.x + (stage3Hinge.x - stage2Hinge.x) * t,
+          y: stage2Hinge.y + (stage3Hinge.y - stage2Hinge.y) * t,
+          z: stage2Hinge.z + (stage3Hinge.z - stage2Hinge.z) * t,
+          rotX: stage2Hinge.rotX + (stage3Hinge.rotX - stage2Hinge.rotX) * t,
+          rotY: stage2Hinge.rotY + (stage3Hinge.rotY - stage2Hinge.rotY) * t,
+          rotZ: stage2Hinge.rotZ + (stage3Hinge.rotZ - stage2Hinge.rotZ) * t
+        }
+      } else {
+        // Stage 3: stay at stage3 values
+        rootTarget = stage3Root
+        hingeTarget = stage3Hinge
       }
-    })
+
+      return { rootTarget, hingeTarget }
+    }
+
+    // Use GSAP to smoothly animate Three.js objects directly when scroll changes
+    useEffect(() => {
+      if (!rootRef.current || !laptopHingeRef.current) return
+
+      const { rootTarget, hingeTarget } = getTargetValues(scrollY)
+
+      // Animate root position and rotation directly
+      gsap.to(rootRef.current.position, {
+        x: rootTarget.x,
+        y: rootTarget.y,
+        z: rootTarget.z,
+        duration: 0.2,
+        overwrite: 'auto'
+      })
+
+      gsap.to(rootRef.current.rotation, {
+        x: rootTarget.rotX,
+        y: rootTarget.rotY,
+        z: rootTarget.rotZ,
+        duration: 0.2,
+        overwrite: 'auto'
+      })
+
+      // Animate hinge position and rotation directly
+      gsap.to(laptopHingeRef.current.position, {
+        x: hingeTarget.x,
+        y: hingeTarget.y,
+        z: hingeTarget.z,
+        duration: 0.4,
+        overwrite: 'auto'
+      })
+
+      gsap.to(laptopHingeRef.current.rotation, {
+        x: hingeTarget.rotX,
+        y: hingeTarget.rotY,
+        z: hingeTarget.rotZ,
+        duration: 0.4,
+        overwrite: 'auto'
+      })
+    }, [scrollY])
 
     return (
       <group {...props} dispose={null}>

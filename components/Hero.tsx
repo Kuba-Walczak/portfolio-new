@@ -8,7 +8,7 @@ import { useScroll } from '@/hooks/useScroll'
 
 export default function Hero() {
   const scrollY = useScroll()
-  const translateX = scrollY * 1000
+  const translateX = scrollY * 3000
 
   return (
     <section
@@ -17,9 +17,10 @@ export default function Hero() {
     >
       <div className="absolute inset-0 w-full h-full flex flex-col justify-center">
       <div 
-        className="space-y-6 transition-transform duration-300 ease-out"
+        className="space-y-6 transition-transform duration-100 ease-out"
         style={{
-          transform: `translateX(${translateX}px)`
+          transform: `translateX(${translateX}px)`,
+          opacity: scrollY > 0.185 ? 0 : 1
         }}
       >
         <h1 className="text-5xl md:text-7xl font-bold text-foreground text-balance leading-tight">
@@ -30,9 +31,10 @@ export default function Hero() {
         </p>
       </div>
       <div 
-        className="flex flex-col sm:flex-row gap-4 pt-6 transition-transform duration-300 ease-out"
+        className="flex flex-col sm:flex-row gap-4 pt-6 transition-transform duration-100 ease-out"
         style={{
-          transform: `translateX(${translateX}px)`
+          transform: `translateX(${translateX}px)`,
+          opacity: scrollY > 0.185 ? 0 : 1
         }}
       >
         <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
