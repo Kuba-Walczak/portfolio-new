@@ -62,13 +62,13 @@ function ModelContent(props: any) {
     const stage2Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, Math.PI / 4, 0, 0)
 
     // Stage 3 values
-    const stage3Root: Vector6D = new Vector6D(0, -0.185, -0.4, -185 / 180 * Math.PI, 0, Math.PI)
+    const stage3Root: Vector6D = new Vector6D(0, -0.18, -0.3, -190 / 180 * Math.PI, 0, Math.PI)
     const stage3Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, 0, 0, 0)
 
-    const stage1RootAlt = new Vector6D(0, -0.185, -0.4, -185 / 180 * Math.PI, 0, Math.PI)
+    const stage1RootAlt = new Vector6D(0, -0.15, -0.3, -180 / 180 * Math.PI, 0, Math.PI)
     const stage1HingeAlt = new Vector6D(0, -0.003, -0.009, Math.PI / 2, 0, 0)
 
-    const stage2RootAlt = new Vector6D(0, -0.185, -0.4, -185 / 180 * Math.PI, 0, Math.PI)
+    const stage2RootAlt = new Vector6D(0, -0.18, -0.3, -190 / 180 * Math.PI, 0, Math.PI)
     const stage2HingeAlt = new Vector6D(0, -0.003, -0.009, 0, 0, 0)
 
     // Helper function to get target values based on scroll progress
@@ -153,7 +153,7 @@ function ModelContent(props: any) {
           <mesh geometry={nodes.LaptopBase.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0.024, 0.138]}>
             <group ref={laptopHingeRef} position={[0, -0.003, -0.009]} rotation={[2.007, 0, 0]}>
               <mesh geometry={nodes.LaptopDisplay.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0.003, 0.009]} />
-              <mesh geometry={nodes.LaptopLetterboxing.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0, 0.009]} />
+              <mesh geometry={nodes.LaptopLetterboxing.geometry} material={new THREE.MeshBasicMaterial({ color: 0x000000 })} position={[0, 0, 0.009]} />
             </group>
           </mesh>
         </group>
