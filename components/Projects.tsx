@@ -101,7 +101,7 @@ export default function Projects() {
           <Button
             key={category}
             variant={selectedCategories.includes(category) ? "default" : "outline"}
-            size="vlg"
+            size="filters"
             onClick={() => toggleCategory(category)}
             className="transition-all"
           >

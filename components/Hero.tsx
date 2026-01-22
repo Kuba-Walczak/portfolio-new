@@ -7,16 +7,17 @@ import { Model } from '@/components/Laptop/Model'
 import { useScroll } from '@/hooks/useScroll'
 import { useApp } from '@/contexts/AppContext'
 import { LaptopScreen } from '@/components/Laptop/LaptopScreen'
+import { cn } from '@/lib/utils'
 
 export default function Hero() {
-  const { projectView, setSelectedTab, laptopReady } = useApp()
+  const { projectView, setSelectedTab, laptopReady, selectedTab } = useApp()
   const scrollY = useScroll()
   const translateX = scrollY * 3000
 
   return (
     <section
       id="home"
-      className="relative mx-76 py-156 flex flex-col gap-8 scroll-mt-20"
+      className="relative mx-76 py-164 flex flex-col gap-8 scroll-mt-20"
     >
       <div className="absolute inset-0 w-full h-full flex flex-col justify-center">
       <div 
@@ -60,11 +61,41 @@ export default function Hero() {
       </div>
       <div style={{ opacity: laptopReady ? 1 : 0 }}>
       <div className="absolute flex gap-4 top-10 left-1/2 -translate-x-1/2">
-        <Button variant="secondary" size="vlg" onClick={() => setSelectedTab('Showcase')}>Showcase</Button>
-        <Button variant="secondary" size="vlg" onClick={() => setSelectedTab('Details')}>Details</Button>
-        <Button variant="secondary" size="vlg" onClick={() => setSelectedTab('Gallery')}>Gallery</Button>
+        <Button 
+          variant="default" 
+          size="projectNav" 
+          onClick={() => setSelectedTab('Showcase')}
+          className={cn(
+            selectedTab === 'Showcase' && 'bg-primary text-primary-foreground opacity-100',
+            selectedTab !== 'Showcase' && 'opacity-50'
+          )}
+        >
+          Showcase
+        </Button>
+        <Button 
+          variant="default" 
+          size="projectNav" 
+          onClick={() => setSelectedTab('Details')}
+          className={cn(
+            selectedTab === 'Details' && 'bg-primary text-primary-foreground opacity-100',
+            selectedTab !== 'Details' && 'opacity-50'
+          )}
+        >
+          Details
+        </Button>
+        <Button 
+          variant="default" 
+          size="projectNav" 
+          onClick={() => setSelectedTab('Gallery')}
+          className={cn(
+            selectedTab === 'Gallery' && 'bg-primary text-primary-foreground opacity-100',
+            selectedTab !== 'Gallery' && 'opacity-50'
+          )}
+        >
+          Gallery
+        </Button>
       </div>
-      <div className="absolute inset-0 w-294 h-201 top-146 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-t-4xl">
+      <div className="absolute inset-0 w-310 h-212 top-154 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <LaptopScreen />
       </div>
       </div>
