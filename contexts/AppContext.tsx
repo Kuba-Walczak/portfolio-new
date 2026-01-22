@@ -5,16 +5,21 @@ import { createContext, useContext, useState, ReactNode } from 'react'
 interface AppContextType {
   projectView: boolean
   setProjectView: (projectView: boolean) => void
+  selectedTab: string
+  setSelectedTab: (selectedTab: string) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [projectView, setProjectView] = useState(false)
-
+  const [selectedTab, setSelectedTab] = useState('Showcase')
+  
   const value: AppContextType = {
     projectView,
     setProjectView,
+    selectedTab,
+    setSelectedTab,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

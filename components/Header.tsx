@@ -17,7 +17,6 @@ export default function Header() {
 
     if (href === '#home') {
       setProjectView(false)
-      console.log(projectView)
     }
     
     const targetId = href.replace('#', '')
