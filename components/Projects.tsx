@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react'
 import { useState, useMemo } from 'react'
 import { Separator } from './ui/separator'
 import { gsap } from 'gsap'
-import { Vector6D } from '@/components/Model'
+import { useApp } from '@/contexts/AppContext'
 
 const projects = [
   {
@@ -73,6 +73,7 @@ const projects = [
 ]
 
 export default function Projects() {
+  const { setProjectView } = useApp()
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
   const categories = ['Programming', 'Technical Art', '3D Art']
@@ -115,7 +116,7 @@ export default function Projects() {
             key={project.id}
             className="w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card shadow-sm ring-5 ring-white/20 cursor-pointer"
             onClick={() => {
-              Vector6D.projectPreview = true
+              setProjectView(true)
               const scrollProxy = { y: window.pageYOffset }
               gsap.to(scrollProxy, {
                 y: 0,

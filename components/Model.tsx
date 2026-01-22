@@ -5,6 +5,7 @@ import { TextureLoader } from 'three'
 import { useGLTF } from '@react-three/drei'
 import { gsap } from 'gsap'
 import { useScroll } from '@/hooks/useScroll'
+import { useApp } from '@/contexts/AppContext'
 
 type GLTFResult = {
   nodes: {
@@ -36,10 +37,10 @@ export class Vector6D {
       from.rotZ + (to.rotZ - from.rotZ) * t
     )
   }
-  static projectPreview: boolean = false
 }
 
 function ModelContent(props: any) {
+    const { projectView } = useApp()
     const rootRef = useRef<THREE.Group>(null)
     const laptopHingeRef = useRef<THREE.Group>(null)
     const scrollY = useScroll()
@@ -53,15 +54,12 @@ function ModelContent(props: any) {
     const STAGE_2_START = 0.2
     const STAGE_3_START = 0.4
 
-    // Stage 1 values (initial state)
     const stage1Root: Vector6D = new Vector6D(0.2, -0.15, -1, -160 / 180 * Math.PI, 30 / 180 * Math.PI, Math.PI)
     const stage1Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, 2.007, 0, 0)
 
-    // Stage 2 values
     const stage2Root: Vector6D = new Vector6D(0, -0.2, -0.6, -185 / 180 * Math.PI, 0, Math.PI)
     const stage2Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, Math.PI / 4, 0, 0)
 
-    // Stage 3 values
     const stage3Root: Vector6D = new Vector6D(0, -0.18, -0.3, -190 / 180 * Math.PI, 0, Math.PI)
     const stage3Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, 0, 0, 0)
 
@@ -71,11 +69,10 @@ function ModelContent(props: any) {
     const stage2RootAlt = new Vector6D(0, -0.18, -0.3, -190 / 180 * Math.PI, 0, Math.PI)
     const stage2HingeAlt = new Vector6D(0, -0.003, -0.009, 0, 0, 0)
 
-    // Helper function to get target values based on scroll progress
     const getTargetValues = (progress: number) => {
       let rootTarget, hingeTarget
       let currentStage1Root, currentStage1Hinge, currentStage2Root, currentStage2Hinge
-      if (Vector6D.projectPreview) {
+      if (projectView) {
         currentStage1Root = stage1RootAlt
         currentStage1Hinge = stage1HingeAlt
         currentStage2Root = stage2RootAlt
@@ -106,13 +103,9 @@ function ModelContent(props: any) {
       return { rootTarget: rootTarget!, hingeTarget: hingeTarget! }
     }
 
-    // Use GSAP to smoothly animate Three.js objects directly when scroll changes
     useEffect(() => {
       if (!rootRef.current || !laptopHingeRef.current) return
-
       const { rootTarget, hingeTarget } = getTargetValues(scrollY)
-
-      // Animate root position and rotation directly
       gsap.to(rootRef.current.position, {
         x: rootTarget.x,
         y: rootTarget.y,
@@ -120,7 +113,6 @@ function ModelContent(props: any) {
         duration: 0.2,
         overwrite: 'auto'
       })
-
       gsap.to(rootRef.current.rotation, {
         x: rootTarget.rotX,
         y: rootTarget.rotY,
@@ -128,8 +120,6 @@ function ModelContent(props: any) {
         duration: 0.2,
         overwrite: 'auto'
       })
-
-      // Animate hinge position and rotation directly
       gsap.to(laptopHingeRef.current.position, {
         x: hingeTarget.x,
         y: hingeTarget.y,
@@ -137,7 +127,6 @@ function ModelContent(props: any) {
         duration: 0.4,
         overwrite: 'auto'
       })
-
       gsap.to(laptopHingeRef.current.rotation, {
         x: hingeTarget.rotX,
         y: hingeTarget.rotY,

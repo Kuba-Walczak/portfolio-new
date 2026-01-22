@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Menu, X } from 'lucide-react'
 import { gsap } from 'gsap'
+import { useApp } from '@/contexts/AppContext'
 
 export default function Header() {
+
+  const { setProjectView, projectView } = useApp()
 
   const links = [
     { label: 'Home', href: '#home' },
@@ -14,6 +14,11 @@ export default function Header() {
   ]
 
   const handleScroll = (href: string, e: React.MouseEvent) => {
+
+    if (href === '#home') {
+      setProjectView(false)
+      console.log(projectView)
+    }
     
     const targetId = href.replace('#', '')
     const element = document.getElementById(targetId)

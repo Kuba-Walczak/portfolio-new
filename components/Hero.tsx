@@ -5,9 +5,10 @@ import { ArrowRight } from 'lucide-react'
 import { CustomCanvas } from '@/components/CustomCanvas'
 import { Model } from '@/components/Model'
 import { useScroll } from '@/hooks/useScroll'
-import { Vector6D } from '@/components/Model'
+import { useApp } from '@/contexts/AppContext'
 
 export default function Hero() {
+  const { projectView } = useApp()
   const scrollY = useScroll()
   const translateX = scrollY * 3000
 
@@ -21,7 +22,7 @@ export default function Hero() {
         className="space-y-6 transition-transform duration-100 ease-out"
         style={{
           transform: `translateX(${translateX}px)`,
-          opacity: scrollY > 0.185 || Vector6D.projectPreview ? 0 : 1
+          opacity: scrollY > 0.185 || projectView ? 0 : 1
         }}
       >
         <h1 className="text-5xl md:text-7xl font-bold text-foreground text-balance leading-tight">
@@ -35,7 +36,7 @@ export default function Hero() {
         className="flex flex-col sm:flex-row gap-4 pt-6 transition-transform duration-100 ease-out"
         style={{
           transform: `translateX(${translateX}px)`,
-          opacity: scrollY > 0.185 || Vector6D.projectPreview ? 0 : 1
+          opacity: scrollY > 0.185 || projectView ? 0 : 1
         }}
       >
         <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
