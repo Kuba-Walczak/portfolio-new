@@ -109,25 +109,26 @@ export default function Projects() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-4 gap-6">
+      <div className="grid md:grid-cols-4 gap-6 gap-y-10">
         {filteredProjects.map((project) => (
-          <div key={project.id}>
-            <Card
-              className="bg-card border-border hover:shadow-lg transition-shadow cursor-pointer group overflow-hidden flex flex-col"
-              onClick={() => {
-                Vector6D.projectPreview = true
-                const scrollProxy = { y: window.pageYOffset }
-                gsap.to(scrollProxy, {
-                  y: 0,
-                  duration: 1.5,
-                  overwrite: "auto",
-                  onUpdate: () => {
-                    window.scrollTo(0, scrollProxy.y)
-                  },
-                })
-              }}
+          <div
+            key={project.id}
+            className="w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card shadow-sm ring-5 ring-white/20 cursor-pointer"
+            onClick={() => {
+              Vector6D.projectPreview = true
+              const scrollProxy = { y: window.pageYOffset }
+              gsap.to(scrollProxy, {
+                y: 0,
+                duration: 1.5,
+                overwrite: "auto",
+                onUpdate: () => {
+                  window.scrollTo(0, scrollProxy.y)
+                },
+              })
+            }}
             >
-            <div className="h-64 bg-secondary overflow-hidden">
+          {/* Header placeholder */}
+          <div className="h-64 bg-secondary overflow-hidden">
               <img
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
@@ -142,14 +143,19 @@ export default function Projects() {
                 }}
               />
             </div>
-            <CardHeader>
-              <CardTitle className="text-xl text-foreground group-hover:text-accent transition-colors">
-                {project.title}
-              </CardTitle>
-              <CardDescription className="text-muted-foreground">{project.description}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 flex-grow flex flex-col justify-end">
-              <div className="flex flex-wrap gap-2">
+          {/* Content */}
+          <div className="p-6">
+            <h3 className="text-xl font-semibold text-card-foreground">
+              {project.title}
+            </h3>
+            <p className="mt-2 text-muted-foreground leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+    
+          {/* Footer */}
+          <div className="border-t border-border bg-card px-6 py-4">
+          <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <Badge
                     key={tag}
@@ -160,16 +166,8 @@ export default function Projects() {
                   </Badge>
                 ))}
               </div>
-              <a
-                href={project.link}
-                className="inline-flex items-center gap-2 text-accent hover:gap-3 transition-all font-medium"
-              >
-                View Project
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </CardContent>
-          </Card>
           </div>
+        </div>
         ))}
       </div>
     </section>
