@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import { useState, useMemo } from 'react'
+import { Separator } from './ui/separator'
 
 const projects = [
   {
@@ -90,21 +91,14 @@ export default function Projects() {
   }, [selectedCategories])
 
   return (
-    <section id="projects" className="mx-76 py-24 md:py-32 scroll-mt-20">
-      <div className="space-y-4 mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground">Featured Projects</h2>
-        <p className="text-lg text-muted-foreground">
-          A selection of recent work that showcases my skills and experience
-        </p>
-      </div>
-
-      {/* Category Filter Buttons */}
-      <div className="flex flex-wrap gap-2 mb-8">
+    <section id="projects" className="mx-76 scroll-mt-20">
+      <Separator className="mb-6" />
+      <div className="flex justify-center gap-2 mb-6">
         {categories.map(category => (
           <Button
             key={category}
             variant={selectedCategories.includes(category) ? "default" : "outline"}
-            size="sm"
+            size="vlg"
             onClick={() => toggleCategory(category)}
             className="transition-all"
           >
@@ -113,13 +107,13 @@ export default function Projects() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-4 gap-6">
         {filteredProjects.map((project) => (
-          <Card
-            key={project.id}
-            className="bg-card border-border hover:shadow-lg transition-shadow cursor-pointer group overflow-hidden flex flex-col"
-          >
-            <div className="h-84 bg-secondary overflow-hidden">
+          <div key={project.id}>
+            <Card
+              className="bg-card border-border hover:shadow-lg transition-shadow cursor-pointer group overflow-hidden flex flex-col"
+            >
+            <div className="h-64 bg-secondary overflow-hidden">
               <img
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
@@ -161,6 +155,7 @@ export default function Projects() {
               </a>
             </CardContent>
           </Card>
+          </div>
         ))}
       </div>
     </section>

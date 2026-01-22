@@ -70,7 +70,7 @@ function ModelContent(props: any) {
     // Stage 3 values
     const stage3Root = {
       x: 0,
-      y: -0.175,
+      y: -0.185,
       z: -0.4,
       rotX: -185 / 180 * Math.PI,
       rotY: 0,

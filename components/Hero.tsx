@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative mx-76 py-156 flex flex-col gap-8 scroll-mt-20 bg-red-500"
+      className="relative mx-76 py-156 flex flex-col gap-8 scroll-mt-20"
     >
       <div className="absolute inset-0 w-full h-full flex flex-col justify-center">
       <div 

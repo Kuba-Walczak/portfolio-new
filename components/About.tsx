@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 const skills = [
   { category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
@@ -14,6 +15,7 @@ export default function About() {
       id="about"
       className="mx-76 py-24 md:py-32 scroll-mt-20"
     >
+      <Separator className="mb-12" />
       <div className="grid md:grid-cols-2 gap-12 items-start">
         <div className="space-y-6">
           <div>
@@ -57,7 +59,8 @@ export default function About() {
       </div>
 
       {/* Footer */}
-      <div className="mt-24 pt-12 border-t border-border text-center">
+      <div className="mt-24 pt-12 text-center">
+        <Separator className="mb-12" />
         <p className="text-muted-foreground mb-4">Let's work together</p>
         <div className="flex justify-center gap-6">
           <a href="#" className="text-foreground hover:text-accent transition-colors font-medium">
