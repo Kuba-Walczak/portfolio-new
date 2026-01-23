@@ -60,41 +60,6 @@ export default function Hero() {
       </CustomCanvas>
       </div>
       <div style={{ opacity: laptopReady ? 1 : 0 }}>
-      <div className="absolute flex gap-4 top-10 left-1/2 -translate-x-1/2">
-        <Button 
-          variant="default" 
-          size="projectNav" 
-          onClick={() => setSelectedTab('Showcase')}
-          className={cn(
-            selectedTab === 'Showcase' && 'bg-primary text-primary-foreground opacity-100',
-            selectedTab !== 'Showcase' && 'opacity-50'
-          )}
-        >
-          Showcase
-        </Button>
-        <Button 
-          variant="default" 
-          size="projectNav" 
-          onClick={() => setSelectedTab('Details')}
-          className={cn(
-            selectedTab === 'Details' && 'bg-primary text-primary-foreground opacity-100',
-            selectedTab !== 'Details' && 'opacity-50'
-          )}
-        >
-          Details
-        </Button>
-        <Button 
-          variant="default" 
-          size="projectNav" 
-          onClick={() => setSelectedTab('Gallery')}
-          className={cn(
-            selectedTab === 'Gallery' && 'bg-primary text-primary-foreground opacity-100',
-            selectedTab !== 'Gallery' && 'opacity-50'
-          )}
-        >
-          Gallery
-        </Button>
-      </div>
       <div className="absolute inset-0 w-310 h-212 top-154 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <LaptopScreen />
       </div>

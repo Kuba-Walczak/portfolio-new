@@ -10,7 +10,7 @@ interface GalleryImage {
   caption: string
 }
 
-export default function ProjectGallery() {
+export function ProjectGallery() {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
 
   const images: GalleryImage[] = [

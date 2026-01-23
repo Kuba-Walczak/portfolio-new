@@ -18,7 +18,7 @@ export function ProjectDetails({
   technologies,
 }: ProjectDetailsProps) {
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-12">
+    <div className="w-full max-full mx-auto px-4 py-12">
       <div className="mb-8">
         <h1 className="text-4xl font-semibold mb-2 text-balance">{title}</h1>
       </div>

@@ -51,7 +51,7 @@ export default function Projects() {
         {filteredProjects.map((project) => (
           <div
             key={project.id}
-            className="w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card shadow-sm ring-5 ring-white/20 cursor-pointer"
+            className="w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card shadow-sm ring-5 ring-white/10 cursor-pointer"
             onClick={() => {
               if (!projectView) setProjectView(true)
               if (selectedTab !== 'Showcase') setSelectedTab('Showcase')
