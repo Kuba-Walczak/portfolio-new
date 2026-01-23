@@ -9,71 +9,8 @@ import { Separator } from './ui/separator'
 import { gsap } from 'gsap'
 import { useApp } from '@/contexts/AppContext'
 
-const projects = [
-  {
-    id: 1,
-    title: 'Programming 1',
-    description:
-      'A full-featured e-commerce solution with real-time inventory management and seamless checkout experience.',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
-    category: 'Programming',
-    link: '#',
-    image: '/placeholder-ecommerce.jpg',
-  },
-  {
-    id: 2,
-    title: 'Programming 2',
-    description:
-      'Collaborative task management tool with team collaboration features, real-time updates, and intuitive UI.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    category: 'Programming',
-    link: '#',
-    image: '/placeholder-task.jpg',
-  },
-  {
-    id: 3,
-    title: 'Technical Art 1',
-    description:
-      'Interactive dashboard for data visualization and business intelligence with customizable reports.',
-    tags: ['React', 'D3.js', 'AWS'],
-    category: 'Technical Art',
-    link: '#',
-    image: '/placeholder-analytics.jpg',
-  },
-  {
-    id: 4,
-    title: 'Technical Art 2',
-    description:
-      'Interactive dashboard for data visualization and business intelligence with customizable reports.',
-    tags: ['React', 'D3.js', 'AWS'],
-    category: 'Technical Art',
-    link: '#',
-    image: '/placeholder-analytics.jpg',
-  },
-  {
-    id: 5,
-    title: '3D Art 1',
-    description:
-      'Interactive dashboard for data visualization and business intelligence with customizable reports.',
-    tags: ['React', 'D3.js', 'AWS'],
-    category: '3D Art',
-    link: '#',
-    image: '/placeholder-analytics.jpg',
-  },
-  {
-    id: 6,
-    title: '3D Art 2',
-    description:
-      'Interactive dashboard for data visualization and business intelligence with customizable reports.',
-    tags: ['React', 'D3.js', 'AWS'],
-    category: '3D Art',
-    link: '#',
-    image: '/placeholder-analytics.jpg',
-  }
-]
-
 export default function Projects() {
-  const { projectView, setProjectView, selectedTab, setSelectedTab } = useApp()
+  const { projectView, setProjectView, selectedTab, setSelectedTab, projects, selectedProject, setSelectedProject } = useApp()
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
   const categories = ['Programming', 'Technical Art', '3D Art']
@@ -89,9 +26,9 @@ export default function Projects() {
   const filteredProjects = useMemo(() => {
     if (selectedCategories.length === 0) return projects
     return projects.filter(project =>
-      selectedCategories.includes(project.category)
+      selectedCategories.includes(project.type)
     )
-  }, [selectedCategories])
+  }, [selectedCategories, projects])
 
   return (
     <section id="projects" className="mx-76 scroll-mt-20">
@@ -118,6 +55,7 @@ export default function Projects() {
             onClick={() => {
               if (!projectView) setProjectView(true)
               if (selectedTab !== 'Showcase') setSelectedTab('Showcase')
+              if (selectedProject.id !== project.id) setSelectedProject(project)
               const scrollProxy = { y: window.pageYOffset }
               gsap.to(scrollProxy, {
                 y: 0,
@@ -132,7 +70,7 @@ export default function Projects() {
           {/* Header placeholder */}
           <div className="h-64 bg-secondary overflow-hidden">
               <img
-                src={project.image || "/placeholder.svg"}
+                src={project.media.thumbnail || "/placeholder.svg"}
                 alt={project.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 onError={(e) => {
@@ -151,20 +89,20 @@ export default function Projects() {
               {project.title}
             </h3>
             <p className="mt-2 text-muted-foreground leading-relaxed">
-              {project.description}
+              {project.description.short}
             </p>
           </div>
     
           {/* Footer */}
           <div className="border-t border-border bg-card px-6 py-4">
           <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
+                {project.techStack.map((tech) => (
                   <Badge
-                    key={tag}
+                    key={tech}
                     variant="secondary"
                     className="bg-secondary text-secondary-foreground"
                   >
-                    {tag}
+                    {tech}
                   </Badge>
                 ))}
               </div>

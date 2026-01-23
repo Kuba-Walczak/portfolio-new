@@ -41,7 +41,7 @@ export default function ProjectGallery() {
   ]
 
   return (
-    <section className="space-y-8 bg-secondary">
+    <section className="space-y-8">
       <h2 className="text-2xl font-semibold mb-8">Project Gallery</h2>
 
       {/* Gallery Grid */}

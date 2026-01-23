@@ -1,6 +1,7 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
+import { Project, fetchProjects } from '@/lib/Project'
 
 interface AppContextType {
   projectView: boolean
@@ -9,6 +10,10 @@ interface AppContextType {
   setSelectedTab: (selectedTab: string) => void
   laptopReady: boolean
   setLaptopReady: (laptopReady: boolean) => void
+  projects: Project[]
+  setProjects: (projects: Project[]) => void
+  selectedProject: Project
+  setSelectedProject: (selectedProject: Project) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -17,6 +22,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [projectView, setProjectView] = useState(false)
   const [selectedTab, setSelectedTab] = useState('Showcase')
   const [laptopReady, setLaptopReady] = useState(false)
+  const [projects, setProjects] = useState<Project[]>([])
+  const [selectedProject, setSelectedProject] = useState<Project>({} as Project)
+
+  useEffect(() => {
+    fetchProjects('https://PortfolioPullZone.b-cdn.net/temp-name/projects.json?v=1').then(setProjects).catch(console.error)
+  }, [])
 
   const value: AppContextType = {
     projectView,
@@ -25,6 +36,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSelectedTab,
     laptopReady,
     setLaptopReady,
+    projects,
+    setProjects,
+    selectedProject,
+    setSelectedProject,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
