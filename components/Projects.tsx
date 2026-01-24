@@ -8,6 +8,7 @@ import { useState, useMemo } from 'react'
 import { Separator } from './ui/separator'
 import { gsap } from 'gsap'
 import { useApp } from '@/contexts/AppContext'
+import { Project } from '@/lib/Project'
 
 export default function Projects() {
   const { projectView, setProjectView, selectedTab, setSelectedTab, projects, selectedProject, setSelectedProject } = useApp()
@@ -33,7 +34,7 @@ export default function Projects() {
   return (
     <section id="projects" className="mx-76 scroll-mt-20">
       <Separator className="mb-6" />
-      <div className="flex justify-center gap-2 mb-6">
+      {/* <div className="flex justify-center gap-2 mb-6">
         {categories.map(category => (
           <Button
             key={category}
@@ -45,30 +46,41 @@ export default function Projects() {
             {category}
           </Button>
         ))}
-      </div>
-
+      </div> */}
       <div className="grid md:grid-cols-4 gap-6 gap-y-10">
-        {filteredProjects.map((project) => (
+        {filteredProjects.map((project) => {
+          const isSelected = selectedProject.id === project.id
+          return (
           <div
             key={project.id}
-            className="w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card shadow-sm ring-5 ring-white/10 cursor-pointer"
+            className={`w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card shadow-sm ring-10 cursor-pointer transition-all duration-100 ${
+              isSelected 
+                ? 'ring-primary border-primary' 
+                : 'ring-white/10 hover:ring-primary/50 hover:border-primary/50'
+            }`}
             onClick={() => {
-              if (!projectView) setProjectView(true)
-              if (selectedTab !== 'Showcase') setSelectedTab('Showcase')
-              if (selectedProject.id !== project.id) setSelectedProject(project)
-              const scrollProxy = { y: window.pageYOffset }
-              gsap.to(scrollProxy, {
-                y: 0,
-                duration: 1.5,
-                overwrite: "auto",
-                onUpdate: () => {
-                  window.scrollTo(0, scrollProxy.y)
-                },
-              })
+              if (isSelected) {
+                // Toggle off: deselect
+                setSelectedProject({} as Project)
+              } else {
+                // Toggle on: select
+                if (!projectView) setProjectView(true)
+                if (selectedTab !== 'Showcase') setSelectedTab('Showcase')
+                setSelectedProject(project)
+                const scrollProxy = { y: window.pageYOffset }
+                gsap.to(scrollProxy, {
+                  y: 0,
+                  duration: 1.5,
+                  overwrite: "auto",
+                  onUpdate: () => {
+                    window.scrollTo(0, scrollProxy.y)
+                  },
+                })
+              }
             }}
             >
-          {/* Header placeholder */}
-          <div className="h-64 bg-secondary overflow-hidden">
+          {/* Header */}
+          <div className="h-58 bg-secondary overflow-hidden">
               <img
                 src={project.media.thumbnail || "/placeholder.svg"}
                 alt={project.title}
@@ -92,10 +104,9 @@ export default function Projects() {
               {project.description.short}
             </p>
           </div>
-    
           {/* Footer */}
           <div className="border-t border-border bg-card px-6 py-4">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2">
                 {project.techStack.map((tech) => (
                   <Badge
                     key={tech}
@@ -105,10 +116,18 @@ export default function Projects() {
                     {tech}
                   </Badge>
                 ))}
+                <Badge
+                    key={project.type}
+                    variant={project.type === "Programming" ? "programming" : project.type === "Technical Art" ? "technicalArt" : "threeDArt"}
+                    className="bg-secondary text-secondary-foreground ml-auto"
+                  >
+                    {project.type}
+                  </Badge>
               </div>
           </div>
         </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )

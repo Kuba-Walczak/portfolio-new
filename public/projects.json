@@ -1,17 +1,38 @@
 [
   {
-    "id": "community-challenges",
-    "type": "Programming",
-    "title": "Community Challenges",
+    "id": "kinetic-rush",
+    "type": "3D Art",
+    "title": "Kinetic Rush",
     "description": {
       "short": "A series of challenges organized for 3D generalists by a popular 3D Artist.",
       "long": "well"
     },
-    "techStack": ["Node.js", "Express", "Socket.IO", "TypeScript", "React"],
+    "techStack": ["Blender"],
 "startDate": "",
 	"duration": "",
     "media": {
-      "thumbnail": "/images/projects/chat/thumb.webp",
+      "thumbnail": "https://PortfolioPullZone.b-cdn.net/projects/temp-kinetic-rush/1114.png",
+      "showcase": "/images/projects/chat/showcase.webp",
+      "gallery": [
+        "/images/projects/chat/1.webp",
+        "/images/projects/chat/2.webp",
+        "/images/projects/chat/3.webp"
+      ]
+    }
+  },
+  {
+    "id": "chasms-call",
+    "type": "3D Art",
+    "title": "Chasm's Call",
+    "description": {
+      "short": "A series of challenges organized for 3D generalists by a popular 3D Artist.",
+      "long": "well"
+    },
+    "techStack": ["Blender"],
+"startDate": "",
+	"duration": "",
+    "media": {
+      "thumbnail": "https://PortfolioPullZone.b-cdn.net/projects/temp-chasms-call/chasms-call-thumbnail.png",
       "showcase": "/images/projects/chat/showcase.webp",
       "gallery": [
         "/images/projects/chat/1.webp",
@@ -28,7 +49,7 @@
       "short": "A cinematic experience enhanced by heavy usage of visual effects.",
       "long": "I, along with two friends of mine, created a 20 minute short film shot entirely inside of Minecraft. I was in charge of planning, editing and creating all VFX shots in the film. There are a total of XXXX VFX shots in the film, ranging from simple enhancements to whole scene replacements."
     },
-    "techStack": ["Blender", "After Effects", "Premiere Pro", "Photoshop"],
+    "techStack": ["Blender", "Compositing"],
 	"startDate": "June 2022",
 	"duration": "1.5 years",
     "media": {
