@@ -26,7 +26,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [selectedProject, setSelectedProject] = useState<Project>({} as Project)
 
   useEffect(() => {
-    fetchProjects('https://PortfolioPullZone.b-cdn.net/temp-name/projects.json?v=1').then(setProjects).catch(console.error)
+    fetchProjects('/projects.json').then(setProjects).catch(console.error)
   }, [])
 
   const value: AppContextType = {

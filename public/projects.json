@@ -1,0 +1,43 @@
+[
+  {
+    "id": "community-challenges",
+    "type": "Programming",
+    "title": "Community Challenges",
+    "description": {
+      "short": "A series of challenges organized for 3D generalists by a popular 3D Artist.",
+      "long": "well"
+    },
+    "techStack": ["Node.js", "Express", "Socket.IO", "TypeScript", "React"],
+"startDate": "",
+	"duration": "",
+    "media": {
+      "thumbnail": "/images/projects/chat/thumb.webp",
+      "showcase": "/images/projects/chat/showcase.webp",
+      "gallery": [
+        "/images/projects/chat/1.webp",
+        "/images/projects/chat/2.webp",
+        "/images/projects/chat/3.webp"
+      ]
+    }
+  },
+  {
+    "id": "a-minecraft-vfx-short-film",
+    "type": "3D Art",
+    "title": "A Minecraft VFX short film",
+    "description": {
+      "short": "A cinematic experience enhanced by heavy usage of visual effects.",
+      "long": "I, along with two friends of mine, created a 20 minute short film shot entirely inside of Minecraft. I was in charge of planning, editing and creating all VFX shots in the film. There are a total of XXXX VFX shots in the film, ranging from simple enhancements to whole scene replacements."
+    },
+    "techStack": ["Blender", "After Effects", "Premiere Pro", "Photoshop"],
+	"startDate": "June 2022",
+	"duration": "1.5 years",
+    "media": {
+      "thumbnail": "https://PortfolioPullZone.b-cdn.net/projects/temp-minecraft/minecraft-thumbnail.png",
+      "showcase": "/images/projects/shaders/showcase.webp",
+      "gallery": [
+        "/images/projects/shaders/1.webp",
+        "/images/projects/shaders/2.webp"
+      ]
+    }
+  }
+]

@@ -7,6 +7,8 @@ export interface Project {
       long: string;
     };
     techStack: string[];
+    startDate: string;
+	  duration: string;
     media: {
       thumbnail: string;
       showcase: string;
