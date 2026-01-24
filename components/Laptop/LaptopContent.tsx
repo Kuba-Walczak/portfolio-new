@@ -9,11 +9,10 @@ export function LaptopContent() {
             <div className="w-full h-full">
                 {selectedTab === 'Showcase' && <ProjectShowcase />}
                 {selectedTab === 'Details' && <ProjectDetails
-            title={selectedProject.title}
-            date={selectedProject.title}
-            duration={selectedProject.title}
-        description={selectedProject.description.long}
-        technologies={selectedProject.techStack}
+            startDate={selectedProject.startDate}
+            duration={selectedProject.duration}
+            description={selectedProject.description.long}
+            techStack={selectedProject.techStack}
       />}
                 {selectedTab === 'Gallery' && <ProjectGallery />}
         </div>

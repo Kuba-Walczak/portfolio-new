@@ -3,26 +3,20 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
 interface ProjectDetailsProps {
-  title: string
-  date: string
+  startDate: string
   duration: string
   description: string
-  technologies: string[]
+  techStack: string[]
 }
 
 export function ProjectDetails({
-  title,
-  date,
+  startDate,
   duration,
   description,
-  technologies,
+  techStack,
 }: ProjectDetailsProps) {
   return (
     <div className="w-full max-full mx-auto px-4 py-12">
-      <div className="mb-8">
-        <h1 className="text-4xl font-semibold mb-2 text-balance">{title}</h1>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <Card className="p-6 border-border/50">
           <div className="flex items-start gap-4">
@@ -33,11 +27,10 @@ export function ProjectDetails({
               <h3 className="text-sm font-medium text-muted-foreground mb-1">
                 Date
               </h3>
-              <p className="text-lg font-medium">{date}</p>
+              <p className="text-lg font-medium">{startDate}</p>
             </div>
           </div>
         </Card>
-
         <Card className="p-6 border-border/50">
           <div className="flex items-start gap-4">
             <div className="p-3 bg-muted rounded-lg">
@@ -52,7 +45,6 @@ export function ProjectDetails({
           </div>
         </Card>
       </div>
-
       <Card className="p-6 border-border/50 mb-8">
         <div className="flex items-start gap-4">
           <div className="p-3 bg-muted rounded-lg">
@@ -68,7 +60,6 @@ export function ProjectDetails({
           </div>
         </div>
       </Card>
-
       <Card className="p-6 border-border/50">
         <div className="flex items-start gap-4">
           <div className="p-3 bg-muted rounded-lg">
@@ -79,7 +70,7 @@ export function ProjectDetails({
               Tech Stack
             </h3>
             <div className="flex flex-wrap gap-2">
-              {technologies.map((tech) => (
+              {techStack.map((tech: string) => (
                 <Badge
                   key={tech}
                   variant="secondary"
