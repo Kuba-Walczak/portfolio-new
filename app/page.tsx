@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
-import Projects from '@/components/Projects'
+import Projects from '@/components/Projects/index'
 import About from '@/components/About'
 
 export default function Home() {
