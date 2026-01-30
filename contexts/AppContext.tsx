@@ -27,7 +27,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     fetchProjects('/projects.json').then(setProjects).catch(console.error)
-  }, [])
+  }, [projects])
 
   const value: AppContextType = {
     projectView,
