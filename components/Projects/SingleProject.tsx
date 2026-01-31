@@ -1,7 +1,8 @@
-import { Project } from "@/lib/Project"
+import { Project } from "@/types/project"
 import { useApp } from "@/contexts/AppContext"
 import { Badge } from "../ui/badge"
 import { gsap } from "gsap"
+import { getTag, Tag } from "@/types/tag"
 
 export function SingleProject({ project }: { project: Project }) {
     const { projectView, setProjectView, selectedTab, setSelectedTab, projects, selectedProject, setSelectedProject } = useApp()
@@ -57,13 +58,19 @@ export function SingleProject({ project }: { project: Project }) {
           <h3 className="text-xl font-semibold text-card-foreground">
             {project.title}
           </h3>
-            <Badge
-                  key={project.type}
-                  variant={project.type === "Programming" ? "programming" : project.type === "Technical Art" ? "technicalArt" : "threeDArt"}
+            {
+            project.tags.map((tag) => {
+              const tagObject = getTag(tag)
+              return (
+                <Badge
+                  key={tagObject.id}
+                  variant={tagObject.style as "programming" | "technicalArt" | "art"}
                   className="bg-secondary text-secondary-foreground"
                 >
-                  {project.type}
-            </Badge>
+                  {tagObject.title}
+                </Badge>
+              )
+            })}
           </div>
           <p className="mt-2 text-muted-foreground leading-relaxed">
             {project.description.short}

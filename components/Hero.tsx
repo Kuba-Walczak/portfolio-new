@@ -31,7 +31,7 @@ export default function Hero() {
           Welcome to My Portfolio
         </h1>
         <p className="text-xl text-muted-foreground text-pretty">
-          Programming student by day, 3D artist by night.
+          Computer Science Student with a passion for 3D Art.
         </p>
       </div>
       <div 

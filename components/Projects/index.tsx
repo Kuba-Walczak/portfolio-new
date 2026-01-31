@@ -14,8 +14,6 @@ export default function Projects() {
   const { projects } = useApp()
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
-  const categories = ['Programming', 'Technical Art', '3D Art']
-
   const toggleCategory = (category: string) => {
     setSelectedCategories(prev =>
       prev.includes(category)
@@ -27,7 +25,7 @@ export default function Projects() {
   const filteredProjects = useMemo(() => {
     if (selectedCategories.length === 0) return projects
     return projects.filter(project =>
-      selectedCategories.includes(project.type)
+      selectedCategories.some(category => project.tags.includes(category))
     )
   }, [selectedCategories, projects])
 

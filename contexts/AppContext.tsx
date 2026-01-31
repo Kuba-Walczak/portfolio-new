@@ -1,7 +1,8 @@
 'use client'
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
-import { Project, fetchProjects } from '@/lib/Project'
+import { Project } from '@/types/project'
+import { fetchProjects } from '@/lib/utils'
 
 interface AppContextType {
   projectView: boolean
