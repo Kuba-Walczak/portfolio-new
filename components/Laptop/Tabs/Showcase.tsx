@@ -1,12 +1,11 @@
-import { Card } from "../ui/card";
 import { useApp } from "@/contexts/AppContext";
 
 export function ProjectShowcase() {
     const { selectedProject } = useApp()
     return (
-        <div className="w-full h-full flex flex-col items-center relative">
+        <div className="w-full h-full flex items-center relative">
             <video
-                src="https://PortfolioPullZone.b-cdn.net/LandingPage/Reel/ChasmsCall2.webm"
+                src={selectedProject?.laptop?.showcase}
                 autoPlay
                 loop
                 muted

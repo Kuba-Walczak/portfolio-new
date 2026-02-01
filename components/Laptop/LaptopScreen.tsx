@@ -1,4 +1,3 @@
-import { useApp } from "@/contexts/AppContext";
 import { LaptopHeader } from "./LaptopHeader";
 import { LaptopContent } from "./LaptopContent";
 

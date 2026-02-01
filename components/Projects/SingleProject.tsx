@@ -6,7 +6,7 @@ import { getTag, Tag } from "@/types/tag"
 
 export function SingleProject({ project }: { project: Project }) {
     const { projectView, setProjectView, selectedTab, setSelectedTab, projects, selectedProject, setSelectedProject } = useApp()
-    const isSelected = selectedProject.id === project.id
+    const isSelected = selectedProject?.id === project.id
   return (
         <div
           key={project.id}
@@ -17,10 +17,8 @@ export function SingleProject({ project }: { project: Project }) {
           }`}
           onClick={() => {
             if (isSelected) {
-              // Toggle off: deselect
-              setSelectedProject({} as Project)
+              setSelectedProject(null)
             } else {
-              // Toggle on: select
               if (!projectView) setProjectView(true)
               if (selectedTab !== 'Showcase') setSelectedTab('Showcase')
               setSelectedProject(project)
@@ -39,7 +37,7 @@ export function SingleProject({ project }: { project: Project }) {
         {/* Header */}
         <div className="h-58 bg-secondary overflow-hidden">
             <img
-              src={project.media.thumbnail || "/placeholder.svg"}
+              src={project.card.thumbnail || "/placeholder.svg"}
               alt={project.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               onError={(e) => {
@@ -59,7 +57,7 @@ export function SingleProject({ project }: { project: Project }) {
             {project.title}
           </h3>
             {
-            project.tags.map((tag) => {
+            project.card.tags.map((tag) => {
               const tagObject = getTag(tag)
               return (
                 <Badge
@@ -73,12 +71,12 @@ export function SingleProject({ project }: { project: Project }) {
             })}
           </div>
           <p className="mt-2 text-muted-foreground leading-relaxed">
-            {project.description.short}
+            {project.card.description}
           </p>
         </div>
         {/* Footer */}
         <div className="flex gap-2 border-t border-border bg-card px-6 py-4">
-        {project.techStack.map((tech) => (
+        {project.laptop.techStack.map((tech) => (
                 <Badge
                   key={tech}
                   variant="secondary"
