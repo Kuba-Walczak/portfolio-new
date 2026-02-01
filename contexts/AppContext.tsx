@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
-import { Project } from '@/types/project'
+import { GalleryImage, Project } from '@/types/project'
 import { fetchProjects } from '@/lib/utils'
 
 interface AppContextType {
@@ -13,8 +13,10 @@ interface AppContextType {
   setLaptopReady: (laptopReady: boolean) => void
   projects: Project[]
   setProjects: (projects: Project[]) => void
-  selectedProject: Project
-  setSelectedProject: (selectedProject: Project) => void
+  selectedProject: Project | null
+  setSelectedProject: (selectedProject: Project | null) => void
+  selectedImage: GalleryImage | null
+  setSelectedImage: (selectedImage: GalleryImage | null) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -24,11 +26,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [selectedTab, setSelectedTab] = useState('Showcase')
   const [laptopReady, setLaptopReady] = useState(false)
   const [projects, setProjects] = useState<Project[]>([])
-  const [selectedProject, setSelectedProject] = useState<Project>({} as Project)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
 
   useEffect(() => {
     fetchProjects('/projects.json').then(setProjects).catch(console.error)
-  }, [projects])
+  }, [])
 
   const value: AppContextType = {
     projectView,
@@ -41,6 +44,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setProjects,
     selectedProject,
     setSelectedProject,
+    selectedImage,
+    setSelectedImage,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

@@ -1,17 +1,28 @@
 export interface Project {
     id: string;
-    tags: string[];
     title: string;
-    description: {
-      short: string;
-      long: string;
-    };
+    card: ProjectCard;
+    laptop: ProjectLaptop;
+}
+
+export interface ProjectCard {
+    tags: string[];
+    description: string;
+    thumbnail: string;
+}
+
+export interface ProjectLaptop {
+    description: string;
     techStack: string[];
     startDate: string;
-	  duration: string;
-    media: {
-      thumbnail: string;
-      showcase: string;
-      gallery: string[];
-    };
+    duration: string;
+    showcase: string;
+    gallery: GalleryImage[];
+}
+
+export interface GalleryImage {
+    src: string;
+    caption: string;
+    width: number;
+    height: number;
 }
