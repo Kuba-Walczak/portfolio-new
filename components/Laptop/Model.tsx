@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { Suspense, useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef, useMemo } from 'react'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
 import { useGLTF } from '@react-three/drei'
@@ -44,7 +44,7 @@ function ModelContent(props: any) {
     const rootRef = useRef<THREE.Group>(null)
     const laptopHingeRef = useRef<THREE.Group>(null)
     const scrollY = useScroll()
-    const { nodes } = useGLTF(`https://PortfolioPullZone.b-cdn.net/temp-name/r3f.glb?t=2`) as unknown as GLTFResult
+    const { nodes } = useGLTF(`https://PortfolioPullZone.b-cdn.net/temp-name/r3f.glb?t=7`) as unknown as GLTFResult
     const texture = useLoader(TextureLoader, 'https://PortfolioPullZone.b-cdn.net/temp-name/Bake.png')
     texture.flipY = false;
     texture.colorSpace = THREE.SRGBColorSpace;
@@ -140,13 +140,58 @@ function ModelContent(props: any) {
       })
     }, [scrollY])
 
+    const shaderTest = useMemo(() => {
+      return new THREE.ShaderMaterial({
+        transparent: true,
+        uniforms: {
+          uTexture: { value: texture },
+          opacity: { value: 0 }
+        },
+        vertexShader: `
+          varying vec2 vUv;
+          void main() {
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            vUv = uv;
+          }
+        `,
+        fragmentShader: `
+          uniform sampler2D uTexture;
+          uniform float opacity;
+          varying vec2 vUv;
+          void main() { 
+            vec4 texColor = texture2D(uTexture, vUv);
+            //gl_FragColor = texColor;
+            gl_FragColor = vec4(1, 1, 1, opacity);
+          }
+        `,
+      })
+    }, [texture])
+
+    useEffect(() => {
+      if (shaderTest) {
+        if (scrollY > 0.125) {
+          gsap.to(shaderTest.uniforms.opacity, {
+            value: 0,
+            duration: 0.5,
+            overwrite: 'auto'
+          })
+        } else {
+          gsap.to(shaderTest.uniforms.opacity, {
+            value: 1,
+            duration: 0.5,
+            overwrite: 'auto'
+          })
+        }
+      }
+    }, [scrollY, shaderTest])
+
     return (
       <group {...props} dispose={null}>
         <group ref={rootRef} position={[0.2, -0.125, -0.6]} rotation={[-160 / 180 * Math.PI, 30 / 180 * Math.PI, Math.PI]}>
           <mesh geometry={nodes.LaptopBase.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0.024, 0.138]}>
             <group ref={laptopHingeRef} position={[0, -0.003, -0.009]} rotation={[2.007, 0, 0]}>
               <mesh geometry={nodes.LaptopDisplay.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0.003, 0.009]} />
-              <mesh geometry={nodes.LaptopLetterboxing.geometry} material={new THREE.MeshBasicMaterial({ color: 0x000000 })} position={[0, 0, 0.009]} />
+              <mesh geometry={nodes.LaptopLetterboxing.geometry} material={shaderTest} position={[0, 0, 0.009]} />
             </group>
           </mesh>
         </group>
