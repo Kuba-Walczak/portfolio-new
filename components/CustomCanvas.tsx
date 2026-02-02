@@ -14,10 +14,10 @@ export function CustomCanvas({ children }: { children: React.ReactNode }) {
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI}/>
         <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI}/>
         {children}
-        <EffectComposer>
+        {/* <EffectComposer>
         <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.5} radius={0.25}/>
         <Vignette eskil={false} offset={0.1} darkness={0.75} />
-      </EffectComposer>
+      </EffectComposer> */}
     </Canvas>
   )
 }
