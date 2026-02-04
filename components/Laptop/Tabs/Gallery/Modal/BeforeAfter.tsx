@@ -4,7 +4,7 @@ export function BeforeAfter({ content }: { content: GalleryContent }) {
     return (
         <>
         <p className="text-white text-2xl text-center mb-2">{content?.caption}</p>
-        <div className="flex border-1 border-white/50 rounded-lg">
+        <div className="flex border rounded-lg">
         <div className="relative overflow-hidden rounded-l-lg">
             <video
             src={content?.media[0]?.src}

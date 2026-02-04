@@ -4,7 +4,7 @@ export function Video({ content }: { content: GalleryContent }) {
     return (
         <>
         <p className="text-white text-2xl text-center mb-2">{content?.caption}</p>
-        <div className="relative overflow-hidden border-1 border-white/50 rounded-lg">
+        <div className="relative overflow-hidden border rounded-lg">
             <video
             src={content?.media[0]?.src}
             width={content?.media[0]?.width}

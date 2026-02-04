@@ -7,7 +7,7 @@ import { gsap } from "gsap";
 export function LaptopHeader() {
     const { selectedTab, setSelectedTab } = useApp()
     return (
-      <div className="w-full h-20 border-b border-border rounded-t-4xl bg-secondary">
+      <div className="w-full h-20 border-b rounded-t-4xl bg-secondary">
         <div className="w-full h-full flex gap-4 items-center px-10">
         <Button 
           variant="outline" 
