@@ -24,8 +24,8 @@ export default function Projects() {
 
   const filteredProjects = useMemo(() => {
     if (selectedCategories.length === 0) return projects
-    return projects.filter(project =>
-      selectedCategories.some(category => project.tags.includes(category))
+    return projects?.filter(project =>
+      selectedCategories.some(category => project?.card?.tags?.includes(category))
     )
   }, [selectedCategories, projects])
 
@@ -41,7 +41,7 @@ export default function Projects() {
           </div>
         </div>
       <div className="grid md:grid-cols-4 gap-6 gap-y-10">
-        {filteredProjects.map((project) => (
+        {filteredProjects?.map((project) => (
           <SingleProject key={project.id} project={project}/>
         ))}
       </div>
