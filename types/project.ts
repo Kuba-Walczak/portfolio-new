@@ -17,12 +17,17 @@ export interface ProjectLaptop {
     startDate: string;
     duration: string;
     showcase: string;
-    gallery: GalleryImage[];
+    gallery: GalleryContent[];
 }
 
-export interface GalleryImage {
-    src: string;
+export interface GalleryContent {
+    type: string;
+    media: GalleryMedia[];
     caption: string;
+}
+
+export interface GalleryMedia {
+    src: string;
     width: number;
     height: number;
 }
