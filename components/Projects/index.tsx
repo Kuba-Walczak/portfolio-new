@@ -1,19 +1,14 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
 import { useState, useMemo } from 'react'
-import { Separator } from '../ui/separator'
-import { gsap } from 'gsap'
 import { useApp } from '@/contexts/AppContext'
 import { SingleProject } from './SingleProject'
+import { MinusIcon, PlusIcon } from 'lucide-react'
 
 export default function Projects() {
   const { projects } = useApp()
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
-
+  const [projectsOpen, setProjectsOpen] = useState(true)
   const toggleCategory = (category: string) => {
     setSelectedCategories(prev =>
       prev.includes(category)
@@ -30,21 +25,35 @@ export default function Projects() {
   }, [selectedCategories, projects])
 
   return (
-    <section id="projects" className="mx-76 scroll-mt-20">
-      <Separator className="mb-6" />
-      <div className="space-y-6 mb-6">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Projects</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Here are some of the projects I've worked on.
-            </p>
-          </div>
-        </div>
-      <div className="grid md:grid-cols-4 gap-6 gap-y-10">
+    <section
+    id="projects"
+    className="flex flex-col mx-76 scroll-mt-20">
+      <div className={`flex items-center justify-between bg-card border-t rounded-t-2xl px-4 py-1 ${projectsOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
+        <p className="text-3xl text-muted-foreground font-bold">
+          My Projects
+        </p>
+        {projectsOpen ? (
+          <MinusIcon className="w-16 h-16 text-muted-foreground"
+        onClick={() => {
+          setProjectsOpen(!projectsOpen)
+        }}/>
+        ) : (
+          <PlusIcon className="w-16 h-16 text-muted-foreground"
+        onClick={() => {
+          setProjectsOpen(!projectsOpen)
+        }}/>
+        )}
+      </div>
+    {projectsOpen && (
+    <div
+    className="p-16 border-b border-l border-r rounded-b-2xl bg-black backdrop-blur-sm bg-opacity-50">
+      <div className="grid md:grid-cols-4 gap-8 gap-y-10">
         {filteredProjects?.map((project) => (
           <SingleProject key={project.id} project={project}/>
         ))}
       </div>
+    </div>
+    )}
     </section>
   )
 }

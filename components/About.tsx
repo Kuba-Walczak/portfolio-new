@@ -2,6 +2,9 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import Image from 'next/image'
+import { MinusIcon, PlusIcon } from 'lucide-react'
+import { useState } from 'react'
 
 const skills = [
   { category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
@@ -10,16 +13,30 @@ const skills = [
 ]
 
 export default function About() {
+  const [aboutOpen, setAboutOpen] = useState(true)
   return (
-    <section
-      id="about"
-      className="mx-76 scroll-mt-20 py-6"
-    >
-      <Separator className="mb-6" />
+    <section id="about" className="flex flex-col mx-76 scroll-mt-20">
+      <div className={`flex items-center justify-between bg-card border-t rounded-t-2xl px-4 py-1 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
+        <p className="text-3xl text-muted-foreground font-bold">
+          About Me
+        </p>
+        {aboutOpen ? (
+          <MinusIcon className="w-16 h-16 text-muted-foreground"
+        onClick={() => {
+          setAboutOpen(!aboutOpen)
+        }}/>
+        ) : (
+          <PlusIcon className="w-16 h-16 text-muted-foreground"
+        onClick={() => {
+          setAboutOpen(!aboutOpen)
+        }}/>
+        )}
+      </div>
+      {aboutOpen && (
+      <div className="p-16 border-b border-l border-r rounded-b-2xl bg-black">
       <div className="grid md:grid-cols-2 gap-12 items-start">
         <div className="space-y-6">
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">About Me</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               I'm a passionate full-stack developer with 5+ years of experience building web
               applications. I specialize in creating beautiful, performant, and user-friendly
@@ -31,52 +48,16 @@ export default function About() {
             open-source projects, or sharing knowledge with the developer community.
           </p>
         </div>
-
-        <div className="space-y-4">
-          {skills.map((skillGroup) => (
-            <Card
-              key={skillGroup.category}
-              className="bg-card border-border"
-            >
-              <CardHeader>
-                <CardTitle className="text-lg text-foreground">{skillGroup.category}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {skillGroup.items.map((item) => (
-                    <div
-                      key={item}
-                      className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-sm font-medium"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <Image
+        src="https://PortfolioPullZone.b-cdn.net/PJA%20photoshoot%20(2).webp"
+        alt="About Me"
+        width={4000}
+        height={4000}
+        className="rounded-2xl border"
+        />
         </div>
       </div>
-
-      {/* Footer */}
-      <div className="mt-24 pt-12 text-center">
-        <Separator className="mb-12" />
-        <p className="text-muted-foreground mb-4">Let's work together</p>
-        <div className="flex justify-center gap-6">
-          <a href="#" className="text-foreground hover:text-accent transition-colors font-medium">
-            Email
-          </a>
-          <a href="#" className="text-foreground hover:text-accent transition-colors font-medium">
-            LinkedIn
-          </a>
-          <a href="#" className="text-foreground hover:text-accent transition-colors font-medium">
-            GitHub
-          </a>
-          <a href="#" className="text-foreground hover:text-accent transition-colors font-medium">
-            Twitter
-          </a>
-        </div>
-      </div>
+    )}
     </section>
   )
 }

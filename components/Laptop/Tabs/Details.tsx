@@ -16,57 +16,42 @@ export function ProjectDetails({
   techStack,
 }: ProjectDetailsProps) {
   return (
-    <div className="w-full max-full mx-auto px-4 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div className="flex w-full h-full flex-col justify-center p-4">
+      <div className="grid grid-cols-2 gap-4 mb-4">
         <Card className="p-6 border-border/50">
-          <div className="flex items-start gap-4">
+          <div className="flex items-center gap-4">
             <div className="p-3 bg-muted rounded-lg">
-              <Calendar className="h-8 w-8 text-foreground" />
+              <Calendar className="h-16 w-16 text-foreground" />
             </div>
             <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-1">
+              <h3 className="text-lg font-medium text-muted-foreground mb-1">
                 Date
               </h3>
-              <p className="text-lg font-medium">{startDate}</p>
+              <p className="text-3xl font-medium">{startDate}</p>
             </div>
           </div>
         </Card>
         <Card className="p-6 border-border/50">
-          <div className="flex items-start gap-4">
+          <div className="flex items-center gap-4">
             <div className="p-3 bg-muted rounded-lg">
-              <Clock className="h-8 w-8 text-foreground" />
+              <Clock className="h-16 w-16 text-foreground" />
             </div>
             <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-1">
+              <h3 className="text-lg font-medium text-muted-foreground mb-1">
                 Duration
               </h3>
-              <p className="text-lg font-medium">{duration}</p>
+              <p className="text-3xl font-medium">{duration}</p>
             </div>
           </div>
         </Card>
       </div>
-      <Card className="p-6 border-border/50 mb-8">
-        <div className="flex items-start gap-4">
+      <Card className="p-6 border-border/50 mb-4">
+        <div className="flex items-center gap-4">
           <div className="p-3 bg-muted rounded-lg">
-            <FileText className="h-8 w-8 text-foreground" />
+            <Code2 className="h-16 w-16 text-foreground" />
           </div>
           <div className="flex-1">
-            <h3 className="text-sm font-medium text-muted-foreground mb-2">
-              Description
-            </h3>
-            <p className="text-base leading-relaxed text-foreground/90">
-              {description}
-            </p>
-          </div>
-        </div>
-      </Card>
-      <Card className="p-6 border-border/50">
-        <div className="flex items-start gap-4">
-          <div className="p-3 bg-muted rounded-lg">
-            <Code2 className="h-8 w-8 text-foreground" />
-          </div>
-          <div className="flex-1">
-            <h3 className="text-sm font-medium text-muted-foreground mb-3">
+            <h3 className="text-lg font-medium text-muted-foreground mb-3">
               Tech Stack
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -74,7 +59,7 @@ export function ProjectDetails({
                 <Badge
                   key={tech}
                   variant="secondary"
-                  className="px-3 py-1 text-sm font-medium"
+                  className="px-3 py-1 text-2xl font-medium"
                 >
                   {tech}
                 </Badge>
@@ -83,6 +68,34 @@ export function ProjectDetails({
           </div>
         </div>
       </Card>
+      <div className="grid grid-cols-2 gap-4">
+      <Card className="p-6 border-border/50 mb-8">
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            <h3 className="text-md font-medium text-muted-foreground mb-2">
+              Description
+            </h3>
+            <p className="text-lg leading-relaxed text-justify text-foreground/90">
+              {description}
+            </p>
+          </div>
+        </div>
+      </Card>
+      <Card className="p-6 border-border/50 mb-8">
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            <h3 className="text-md font-medium text-muted-foreground mb-2">
+              Features
+            </h3>
+            <ul className="text-lg leading-relaxed text-justify text-foreground/90 list-disc list-inside">
+              <li>Feature 1</li>
+              <li>Feature 2</li>
+              <li>Feature 3</li>
+            </ul>
+          </div>
+        </div>
+      </Card>
+      </div>
     </div>
   )
 }

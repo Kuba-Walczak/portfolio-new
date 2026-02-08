@@ -7,7 +7,6 @@ import { Model } from '@/components/Laptop/Model'
 import { useScroll } from '@/hooks/useScroll'
 import { useApp } from '@/contexts/AppContext'
 import { LaptopScreen } from '@/components/Laptop/LaptopScreen'
-import { cn } from '@/lib/utils'
 
 export default function Hero() {
   const { projectView, setSelectedTab, laptopReady, selectedTab } = useApp()
