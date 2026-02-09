@@ -56,11 +56,11 @@ export default function Background() {
       <div
         className="absolute rounded-full opacity-32 blur-3xl"
         style={{
-          background: 'radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 0, 0, 1) 0%, transparent 80%)',
           width: '1850px',
           height: '1850px',
-          bottom: '-25%',
-          left: '0%',
+          bottom: '-35%',
+          left: '30%',
           transform: 'translateX(-50%)',
         }}
       />
