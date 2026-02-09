@@ -2,11 +2,11 @@
 
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { CustomCanvas } from '@/components/CustomCanvas'
-import { Model } from '@/components/Laptop/Model'
+import { CustomCanvas } from '@/components/Hero/Laptop/CustomCanvas'
+import { Model } from '@/components/Hero/Laptop/Model'
 import { useScroll } from '@/hooks/useScroll'
 import { useApp } from '@/contexts/AppContext'
-import { LaptopScreen } from '@/components/Laptop/LaptopScreen'
+import { LaptopScreen } from '@/components/Hero/Laptop/LaptopScreen'
 
 export default function Hero() {
   const { projectView, setSelectedTab, laptopReady, selectedTab } = useApp()
@@ -19,7 +19,7 @@ export default function Hero() {
       className="relative mx-76 py-164 flex flex-col gap-8 scroll-mt-20"
     >
       <div className="absolute inset-0 w-full h-full flex flex-col justify-center">
-      <div 
+      {/* <div 
         className="space-y-6 transition-transform duration-100 ease-out"
         style={{
           transform: `translateX(${translateX}px)`,
@@ -51,7 +51,7 @@ export default function Hero() {
           My Projects
           <ArrowRight className="ml-2 w-4 h-4" />
         </Button>
-      </div>
+      </div> */}
       </div>
       <div className="absolute inset-0 w-full h-full pointer-events-none">
       <CustomCanvas>

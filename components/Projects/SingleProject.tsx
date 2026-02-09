@@ -10,7 +10,7 @@ export function SingleProject({ project }: { project: Project }) {
   return (
         <div
           key={project.id}
-          className={`w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-card ring-10 shadow-sm cursor-pointer transition-all duration-100 ${
+          className={`min-w-[350px] max-w-[550px] flex-shrink-0 overflow-hidden rounded-2xl border border-border bg-card ring-10 dark:ring-white/5 shadow-sm cursor-pointer transition-all duration-100 ${
             isSelected 
               ? 'ring-primary border-primary' 
               : 'ring-white/10 hover:ring-primary/50 hover:border-primary/50'

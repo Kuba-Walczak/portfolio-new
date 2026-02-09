@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { useApp } from "@/contexts/AppContext";
 import { X } from "lucide-react";
 import { gsap } from "gsap";

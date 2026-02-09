@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import { useApp } from '@/contexts/AppContext'
 import { SingleProject } from './SingleProject'
-import { MinusIcon, PlusIcon } from 'lucide-react'
+import { MousePointerClickIcon } from 'lucide-react'
 
 export default function Projects() {
   const { projects } = useApp()
@@ -27,27 +27,20 @@ export default function Projects() {
   return (
     <section
     id="projects"
-    className="flex flex-col mx-76 scroll-mt-20">
-      <div className={`flex items-center justify-between bg-card border-t rounded-t-2xl px-4 py-1 ${projectsOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
-        <p className="text-3xl text-muted-foreground font-bold">
-          My Projects
-        </p>
-        {projectsOpen ? (
-          <MinusIcon className="w-16 h-16 text-muted-foreground"
-        onClick={() => {
-          setProjectsOpen(!projectsOpen)
-        }}/>
-        ) : (
-          <PlusIcon className="w-16 h-16 text-muted-foreground"
-        onClick={() => {
-          setProjectsOpen(!projectsOpen)
-        }}/>
-        )}
-      </div>
+    className="max-w-400 mx-auto scroll-mt-20">
     {projectsOpen && (
     <div
-    className="p-16 border-b border-l border-r rounded-b-2xl bg-black backdrop-blur-sm bg-opacity-50">
-      <div className="grid md:grid-cols-4 gap-8 gap-y-10">
+    className="flex flex-col gap-16 p-16 border rounded-2xl backdrop-blur-xl bg-white/5 dark:bg-gradient-to-b from-transparent to-transparent">
+      <div className="relative flex items-center">
+      <h2 className="text-5xl font-semibold opacity-25 text-muted-foreground">
+        Projects
+      </h2>
+      <h1 className="absolute left-1/2 -translate-x-1/2 font-semibold text-muted-foreground text-7xl opacity-10 flex items-center gap-4">
+        Click to view
+        <MousePointerClickIcon size={64}/>
+      </h1>
+      </div>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-8 gap-y-10">
         {filteredProjects?.map((project) => (
           <SingleProject key={project.id} project={project}/>
         ))}

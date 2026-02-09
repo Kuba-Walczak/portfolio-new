@@ -1,56 +1,79 @@
 export default function Background() {
   return (
     <div
-      className="absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-[#140B29]"
+      className="absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-black"
       aria-hidden="true"
     >
-      {/* Primary teal blob - top left area */}
+      {/* Top Left Glow */}
       <div
-        data-blob
-        className="absolute -top-[20%] -left-[15%] w-[70%] h-[60%]"
+        className="absolute rounded-full opacity-40 blur-3xl"
         style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(18, 65, 80, 0.12) 0%, rgba(18, 65, 80, 0.04) 40%, transparent 70%)",
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, transparent 70%)',
+          width: '800px',
+          height: '800px',
+          top: '-20%',
+          left: '5%',
         }}
       />
-
-      {/* Secondary deep blue blob - center right */}
+      
+      {/* Top Right Glow */}
       <div
-        data-blob
-        className="absolute top-[15%] -right-[10%] w-[60%] h-[50%]"
+        className="absolute rounded-full opacity-35 blur-3xl"
         style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(20, 45, 75, 0.1) 0%, rgba(20, 45, 75, 0.03) 45%, transparent 70%)",
+          background: 'radial-gradient(circle, rgba(147, 51, 234, 0.6) 0%, transparent 70%)',
+          width: '1700px',
+          height: '1700px',
+          top: '10%',
+          right: '10%',
         }}
       />
-
-      {/* Tertiary subtle glow - bottom center */}
+      
+      {/* Center Left Glow */}
       <div
-        data-blob
-        className="absolute -bottom-[15%] left-[20%] w-[50%] h-[45%]"
+        className="absolute rounded-full opacity-30 blur-3xl"
         style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(25, 70, 65, 0.08) 0%, rgba(25, 70, 65, 0.02) 40%, transparent 65%)",
+          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, transparent 70%)',
+          width: '900px',
+          height: '900px',
+          top: '35%',
+          left: '-5%',
         }}
       />
-
-      {/* Small accent glow - mid left */}
+      
+      {/* Bottom Right Glow */}
       <div
-        data-blob
-        className="absolute top-[45%] -left-[5%] w-[35%] h-[30%]"
+        className="absolute rounded-full opacity-38 blur-3xl"
         style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(30, 55, 70, 0.6) 0%, transparent 50%)",
+          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, transparent 70%)',
+          width: '750px',
+          height: '750px',
+          bottom: '5%',
+          right: '5%',
         }}
       />
-
-      {/* Tiny accent - top right */}
+      
+      {/* Bottom Center Glow */}
       <div
-        data-blob
-        className="absolute top-[5%] right-[15%] w-[25%] h-[20%]"
+        className="absolute rounded-full opacity-32 blur-3xl"
         style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(15, 50, 60, 0.05) 0%, transparent 55%)",
+          background: 'radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, transparent 70%)',
+          width: '1850px',
+          height: '1850px',
+          bottom: '-25%',
+          left: '0%',
+          transform: 'translateX(-50%)',
+        }}
+      />
+      
+      {/* Center Right Glow */}
+      <div
+        className="absolute rounded-full opacity-35 blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)',
+          width: '650px',
+          height: '650px',
+          top: '55%',
+          right: '20%',
         }}
       />
     </div>
