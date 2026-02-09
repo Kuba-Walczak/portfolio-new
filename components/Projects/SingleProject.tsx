@@ -10,9 +10,9 @@ export function SingleProject({ project }: { project: Project }) {
   return (
         <div
           key={project.id}
-          className={`min-w-[350px] max-w-[550px] flex-shrink-0 overflow-hidden rounded-2xl border border-border bg-card ring-10 dark:ring-white/5 shadow-sm cursor-pointer transition-all duration-100 ${
+          className={`min-w-[350px] max-w-[550px] flex-shrink-0 overflow-hidden rounded-2xl border-1 hover:bg-white/5 cursor-pointer transition-all duration-100 ${
             isSelected 
-              ? 'ring-primary border-primary' 
+              ? 'ring-primary border-primary bg-white/5' 
               : 'ring-white/10 hover:ring-primary/50 hover:border-primary/50'
           }`}
           onClick={() => {
@@ -35,7 +35,7 @@ export function SingleProject({ project }: { project: Project }) {
           }}
           >
         {/* Header */}
-        <div className="h-58 bg-secondary overflow-hidden">
+        <div className="h-58 overflow-hidden">
             <img
               src={project.card.thumbnail || "/placeholder.svg"}
               alt={project.title}
@@ -75,7 +75,7 @@ export function SingleProject({ project }: { project: Project }) {
           </p>
         </div>
         {/* Footer */}
-        <div className="flex gap-2 border-t border-border bg-card px-6 py-4">
+        <div className="flex gap-2 border-t border-border px-6 py-4">
         {project.laptop.techStack.map((tech) => (
                 <Badge
                   key={tech}
