@@ -16,7 +16,10 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative mx-76 py-164 flex flex-col gap-8 scroll-mt-20"
+      className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex flex-col gap-8 scroll-mt-20 z-10"
+      style={{
+        height: 'min(100vh, calc(150vh * 9 / 16))'
+      }}
     >
       <div className="absolute inset-0 w-full h-full flex flex-col justify-center">
       {/* <div 
@@ -59,7 +62,13 @@ export default function Hero() {
       </CustomCanvas>
       </div>
       <div style={{ opacity: laptopReady ? 1 : 0 }}>
-      <div className="absolute inset-0 w-310 h-212 top-154 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div 
+        className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{ 
+          width: 'calc(100vh * 0.94)', 
+          height: 'calc(100vh * 0.64)' 
+        }}
+      >
         <LaptopScreen />
       </div>
       </div>

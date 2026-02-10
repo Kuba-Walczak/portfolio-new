@@ -27,7 +27,8 @@ export default function Projects() {
   return (
     <section
     id="projects"
-    className="max-w-400 mx-auto scroll-mt-20">
+    className="mx-auto scroll-mt-20"
+    style={{ maxWidth: 'calc(100vh * 1.2)' }}>
     {projectsOpen && (
     <div
     className="flex flex-col gap-16 p-16 border rounded-2xl backdrop-blur-xl bg-white/5 dark:bg-gradient-to-b from-transparent to-transparent">

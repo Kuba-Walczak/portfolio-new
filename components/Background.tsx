@@ -20,7 +20,17 @@ export default function Background() {
       <div
         className="absolute rounded-full opacity-35 blur-3xl"
         style={{
-          background: 'radial-gradient(circle, rgba(147, 51, 234, 0.6) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(50, 51, 234, 1) 0%, transparent 70%)',
+          width: '1700px',
+          height: '1700px',
+          top: '-20%',
+          right: '-30%',
+        }}
+      />
+      <div
+        className="absolute rounded-full opacity-35 blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(147, 51, 234, 1) 0%, transparent 70%)',
           width: '1700px',
           height: '1700px',
           top: '10%',

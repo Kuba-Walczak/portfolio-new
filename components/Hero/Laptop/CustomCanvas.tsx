@@ -6,7 +6,7 @@ export function CustomCanvas({ children }: { children: React.ReactNode }) {
     <Canvas
       style={{ pointerEvents: 'none' }}
       gl={{ alpha: true }}
-      camera={{ position: [0, 0, 0.5], fov: 25 }}
+      camera={{ position: [0, 0, 1.6], fov: 10 }}
       onCreated={({ gl }) => {
         gl.setClearColor(0x000000, 0)
       }}>
