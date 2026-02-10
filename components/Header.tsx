@@ -41,8 +41,8 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-background">
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-center">
+    <header className="fixed top-0 left-1/2 -translate-x-1/2 z-50 bg-white/5 backdrop-blur-sm border rounded-b-2xl w-fit">
+      <nav className="px-6 py-4 flex items-center justify-center">
         <div className="flex gap-8">
           {links.map((link) => (
             <button

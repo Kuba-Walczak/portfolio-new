@@ -18,7 +18,7 @@ export default function Hero() {
       id="home"
       className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex flex-col gap-8 scroll-mt-20 z-10"
       style={{
-        height: 'min(100vh, calc(150vh * 9 / 16))'
+        height: 'min(100vh, calc(165vh * 9 / 16))'
       }}
     >
       <div className="absolute inset-0 w-full h-full flex flex-col justify-center">

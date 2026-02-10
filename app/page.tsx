@@ -7,12 +7,12 @@ import Background from '@/components/Background'
 import { Separator } from '@/components/ui/separator'
 
 export default function Home() {
-  const projectsStartTop = 'calc(50vh + min(50vh, calc(150vh * 9 / 32)))'
+  const projectsStartTop = 'calc(50vh + min(50vh, calc(165vh * 9 / 32)))'
   
   return (
     <div className="relative min-h-screen">
         <Background />
-        {/* <Header /> */}
+        <Header />
         <div className="relative h-screen">
           <Hero />
         </div>
