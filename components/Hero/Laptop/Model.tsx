@@ -103,42 +103,67 @@ function ModelContent(props: any) {
       return { rootTarget: rootTarget!, hingeTarget: hingeTarget! }
     }
 
+    const userScrollingRef = useRef(false)
+
     useEffect(() => {
+      const markUser = () => {
+        userScrollingRef.current = true;
+      };
+    
+      window.addEventListener("wheel", markUser, { passive: true });
+      window.addEventListener("touchmove", markUser, { passive: true });
+    
+      return () => {
+        window.removeEventListener("wheel", markUser);
+        window.removeEventListener("touchmove", markUser);
+      };
+    }, []);
+
+    const changeViewRef = useRef(false)
+
+    useEffect(() => {
+      changeViewRef.current = true
+    }, [projectView])
+
+    useEffect(() => {
+      if (userScrollingRef.current && changeViewRef.current) changeViewRef.current = false
+      userScrollingRef.current = false
       if (laptopReady) setLaptopReady(false)
       if (!rootRef.current || !laptopHingeRef.current) return
+      const duration = changeViewRef.current ? 1 : 0.2
       const { rootTarget, hingeTarget } = getTargetValues(scrollY)
       gsap.to(rootRef.current.position, {
         x: rootTarget.x,
         y: rootTarget.y,
         z: rootTarget.z,
-        duration: 0.2,
+        duration: duration,
         overwrite: 'auto'
       })
       gsap.to(rootRef.current.rotation, {
         x: rootTarget.rotX,
         y: rootTarget.rotY,
         z: rootTarget.rotZ,
-        duration: 0.2,
+        duration: duration,
         overwrite: 'auto'
       })
       gsap.to(laptopHingeRef.current.position, {
         x: hingeTarget.x,
         y: hingeTarget.y,
         z: hingeTarget.z,
-        duration: 0.4,
+        duration: duration + 0.2,
         overwrite: 'auto'
       })
       gsap.to(laptopHingeRef.current.rotation, {
         x: hingeTarget.rotX,
         y: hingeTarget.rotY,
         z: hingeTarget.rotZ,
-        duration: 0.4,
+        duration: duration + 0.2,
         overwrite: 'auto',
         onComplete: () => {
           if (scrollY === 0 && projectView) setLaptopReady(true)
         }
       })
-    }, [scrollY])
+    }, [scrollY, projectView])
 
     const shaderTest = useMemo(() => {
       return new THREE.ShaderMaterial({
