@@ -1,12 +1,13 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Link } from 'lucide-react'
 import { CustomCanvas } from '@/components/Hero/Laptop/CustomCanvas'
 import { Model } from '@/components/Hero/Laptop/Model'
 import { useScroll } from '@/hooks/useScroll'
 import { useApp } from '@/contexts/AppContext'
 import { LaptopScreen } from '@/components/Hero/Laptop/LaptopScreen'
+import { FaGithub, FaLinkedin, FaDiscord } from 'react-icons/fa'
 
 export default function Hero() {
   const { projectView, setSelectedTab, laptopReady, selectedTab } = useApp()
@@ -16,45 +17,57 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex flex-col gap-8 scroll-mt-20 z-10"
+      className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex flex-col justify-center gap-8 scroll-mt-20 z-10"
       style={{
         height: 'min(100vh, calc(165vh * 9 / 16))'
       }}
     >
-      <div className="absolute inset-0 w-full h-full flex flex-col justify-center">
-      {/* <div 
-        className="space-y-6 transition-transform duration-100 ease-out"
+      <div
+      className="flex flex-col mx-auto w-fit"
+      style={{
+        width: 'calc(100vh * 1.2)'
+      }}>
+      <div 
+        className={`space-y-6 w-fit transition-transform duration-100 ease-out ${scrollY > 0.17 || projectView ? 'hidden' : ''}`}
         style={{
-          transform: `translateX(${translateX}px)`,
-          opacity: scrollY > 0.185 || projectView ? 0 : 1
+          transform: `translateX(${translateX}px)`
         }}
       >
-        <h1 className="text-5xl md:text-7xl font-bold text-foreground text-balance leading-tight">
-          Welcome to My Portfolio
+        <div className="flex flex-row gap-4">
+        <FaGithub
+          className="w-16 h-16 text-white/20 hover:text-white transition-colors duration-300"
+          onClick={() => window.open('https://github.com/kuba-walczak', '_blank')}
+          />
+          <FaLinkedin
+          className="w-16 h-16 text-white/20 hover:text-white transition-colors duration-300"
+          onClick={() => window.open('https://linkedin.com/in/jakubwalczak', '_blank')}
+          />
+          <FaDiscord
+          className="w-16 h-16 text-white/20 hover:text-white transition-colors duration-300"
+          onClick={() => window.open('https://discord.com/users/1234567890', '_blank')}
+          />
+        </div>
+        <h1 className="text-8xl font-bold text-foreground text-balance leading-tight">
+          JAKUB WALCZAK
         </h1>
-        <p className="text-xl text-muted-foreground text-pretty">
-          Computer Science Student with a passion for 3D Art.
-        </p>
+        <div className="flex flex-col justify-center gap-8">
+          <div className="flex flex-col gap-1">
+            <span className="font-mono text-lg tracking-widest uppercase text-muted-foreground">Role</span>
+            <span className="text-2xl font-medium text-foreground">Programmer & Technical Artist</span>
+          </div>
+          <div className="flex flex-col gap-1">
+            <span className="font-mono text-lg tracking-widest uppercase text-muted-foreground">Focus</span>
+            <span className="text-2xl font-medium text-foreground">Real-time Graphics & Creative Tools</span>
+          </div>
+        </div>
       </div>
       <div 
-        className="flex flex-col sm:flex-row gap-4 pt-6 transition-transform duration-100 ease-out"
+        className={`flex flex-col sm:flex-row gap-4 pt-6 w-fit transition-transform duration-100 ease-out ${scrollY > 0.17 || projectView ? 'hidden' : ''}`}
         style={{
-          transform: `translateX(${translateX}px)`,
-          opacity: scrollY > 0.185 || projectView ? 0 : 1
+          transform: `translateX(${translateX}px)`
         }}
       >
-        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-          Contact Me
-        </Button>
-        <Button
-          size="lg"
-          variant="outline"
-          className="border-foreground text-foreground hover:bg-secondary bg-transparent"
-        >
-          My Projects
-          <ArrowRight className="ml-2 w-4 h-4" />
-        </Button>
-      </div> */}
+      </div>
       </div>
       <div className="absolute inset-0 w-full h-full pointer-events-none">
       <CustomCanvas>
