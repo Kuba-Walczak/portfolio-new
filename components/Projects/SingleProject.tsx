@@ -3,10 +3,29 @@ import { useApp } from "@/contexts/AppContext"
 import { Badge } from "../ui/badge"
 import { gsap } from "gsap"
 import { getTag, Tag } from "@/types/tag"
+import { useRef, useEffect } from "react"
 
 export function SingleProject({ project }: { project: Project }) {
     const { projectView, setProjectView, selectedTab, setSelectedTab, projects, selectedProject, setSelectedProject } = useApp()
     const isSelected = selectedProject?.id === project.id
+    const scrollAnimationRef = useRef<gsap.core.Tween | null>(null)
+
+    useEffect(() => {
+      const handleScroll = () => {
+        if (scrollAnimationRef.current) {
+          scrollAnimationRef.current.kill()
+          scrollAnimationRef.current = null
+        }
+      }
+
+      window.addEventListener('wheel', handleScroll, { passive: true })
+       window.addEventListener('touchstart', handleScroll, { passive: true })
+      return () => {
+        window.removeEventListener('wheel', handleScroll)
+        window.removeEventListener('touchstart', handleScroll)
+      }
+    }, [])
+
   return (
         <div
           key={project.id}
@@ -18,17 +37,21 @@ export function SingleProject({ project }: { project: Project }) {
           onClick={() => {
             if (isSelected) {
               setSelectedProject(null)
+              setProjectView(false)
             } else {
               if (!projectView) setProjectView(true)
               if (selectedTab !== 'Showcase') setSelectedTab('Showcase')
               setSelectedProject(project)
               const scrollProxy = { y: window.pageYOffset }
-              gsap.to(scrollProxy, {
+              scrollAnimationRef.current = gsap.to(scrollProxy, {
                 y: 0,
                 duration: 1.5,
                 overwrite: "auto",
                 onUpdate: () => {
                   window.scrollTo(0, scrollProxy.y)
+                },
+                onComplete: () => {
+                  scrollAnimationRef.current = null
                 },
               })
             }
