@@ -3,8 +3,6 @@ import NextImage from 'next/image'
 
 export function Image({ content }: { content: GalleryContent }) {
     return (
-      <>
-        <p className="text-white text-2xl text-center rounded-t-lg border bg-secondary p-1">{content?.caption}</p>
         <div className="relative overflow-hidden border rounded-b-lg">
           <NextImage
             src={content?.media[0]?.src}
@@ -14,6 +12,5 @@ export function Image({ content }: { content: GalleryContent }) {
             className="object-contain"
           />
         </div>
-      </>
     )
 }

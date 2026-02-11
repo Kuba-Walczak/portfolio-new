@@ -185,8 +185,12 @@ function ModelContent(props: any) {
           varying vec2 vUv;
           void main() { 
             vec4 texColor = texture2D(uTexture, vUv);
-            //gl_FragColor = texColor;
-            gl_FragColor = vec4(0, 0, 0, opacity);
+            gl_FragColor = texColor;
+            if (vUv.x < 0.5) {
+              gl_FragColor = vec4(0.0, 0.0, 0, opacity);
+            } else {
+              gl_FragColor = vec4(0, 0.0, 0.0, opacity);
+            }
           }
         `,
       })

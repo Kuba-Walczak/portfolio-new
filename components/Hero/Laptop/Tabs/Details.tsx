@@ -2,52 +2,20 @@ import { Calendar, Clock, Code2, FileText } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
-interface ProjectDetailsProps {
-  startDate: string
-  duration: string
+interface DetailsProps {
   description: string
   techStack: string[]
 }
 
-export function ProjectDetails({
-  startDate,
-  duration,
+export function Details({
   description,
   techStack,
-}: ProjectDetailsProps) {
+}: DetailsProps) {
   return (
-    <div className="flex w-full h-full flex-col justify-center p-4">
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <Card className="p-6 border-border/50">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-muted rounded-lg">
-              <Calendar className="h-16 w-16 text-foreground" />
-            </div>
-            <div>
-              <h3 className="text-lg font-medium text-muted-foreground mb-1">
-                Date
-              </h3>
-              <p className="text-3xl font-medium">{startDate}</p>
-            </div>
-          </div>
-        </Card>
-        <Card className="p-6 border-border/50">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-muted rounded-lg">
-              <Clock className="h-16 w-16 text-foreground" />
-            </div>
-            <div>
-              <h3 className="text-lg font-medium text-muted-foreground mb-1">
-                Duration
-              </h3>
-              <p className="text-3xl font-medium">{duration}</p>
-            </div>
-          </div>
-        </Card>
-      </div>
-      <Card className="p-6 border-border/50 mb-4">
+    <div className="flex w-full h-full flex-col justify-center">
+      <Card className="p-6 border mb-4">
         <div className="flex items-center gap-4">
-          <div className="p-3 bg-muted rounded-lg">
+          <div className="p-4 border rounded-xl">
             <Code2 className="h-16 w-16 text-foreground" />
           </div>
           <div className="flex-1">
@@ -59,7 +27,7 @@ export function ProjectDetails({
                 <Badge
                   key={tech}
                   variant="secondary"
-                  className="px-3 py-1 text-2xl font-medium"
+                  className="px-3 py-1 text-2xl font-medium bg-transparent backdrop-blur-none border-input"
                 >
                   {tech}
                 </Badge>
@@ -69,7 +37,7 @@ export function ProjectDetails({
         </div>
       </Card>
       <div className="grid grid-cols-2 gap-4">
-      <Card className="p-6 border-border/50 mb-8">
+      <Card className="p-6 border mb-8">
         <div className="flex items-center gap-4">
           <div className="flex-1">
             <h3 className="text-md font-medium text-muted-foreground mb-2">
@@ -81,7 +49,7 @@ export function ProjectDetails({
           </div>
         </div>
       </Card>
-      <Card className="p-6 border-border/50 mb-8">
+      <Card className="p-6 border mb-8">
         <div className="flex items-center gap-4">
           <div className="flex-1">
             <h3 className="text-md font-medium text-muted-foreground mb-2">

@@ -15,8 +15,8 @@ interface AppContextType {
   setProjects: (projects: Project[] | null) => void
   selectedProject: Project | null
   setSelectedProject: (selectedProject: Project | null) => void
-  selectedImage: GalleryContent | null
-  setSelectedImage: (selectedImage: GalleryContent | null) => void
+  selectedContent: GalleryContent | null
+  setSelectedContent: (selectedContent: GalleryContent | null) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -27,7 +27,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [laptopReady, setLaptopReady] = useState(false)
   const [projects, setProjects] = useState<Project[] | null>(null)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const [selectedImage, setSelectedImage] = useState<GalleryContent | null>(null)
+  const [selectedContent, setSelectedContent] = useState<GalleryContent | null>(null)
 
   useEffect(() => {
     fetchProjects('/projects.json').then(setProjects).catch(console.error)
@@ -44,8 +44,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setProjects,
     selectedProject,
     setSelectedProject,
-    selectedImage,
-    setSelectedImage,
+    selectedContent,
+    setSelectedContent,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

@@ -1,16 +1,14 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { ArrowRight, Link } from 'lucide-react'
 import { CustomCanvas } from '@/components/Hero/Laptop/CustomCanvas'
 import { Model } from '@/components/Hero/Laptop/Model'
 import { useScroll } from '@/hooks/useScroll'
 import { useApp } from '@/contexts/AppContext'
-import { LaptopScreen } from '@/components/Hero/Laptop/LaptopScreen'
+import { Screen } from '@/components/Hero/Laptop/Screen'
 import { FaGithub, FaLinkedin, FaDiscord } from 'react-icons/fa'
 
 export default function Hero() {
-  const { projectView, setSelectedTab, laptopReady, selectedTab } = useApp()
+  const { projectView, laptopReady } = useApp()
   const scrollY = useScroll()
   const translateX = scrollY * 3000
 
@@ -76,13 +74,13 @@ export default function Hero() {
       </div>
       <div style={{ opacity: laptopReady ? 1 : 0 }}>
       <div 
-        className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
         style={{ 
-          width: 'calc(100vh * 0.94)', 
-          height: 'calc(100vh * 0.64)' 
+          width: 'calc(100vh * 1.018)', 
+          height: 'calc(100vh * 0.696)' 
         }}
       >
-        <LaptopScreen />
+        <Screen />
       </div>
       </div>
     </section>

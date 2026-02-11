@@ -2,8 +2,6 @@ import { GalleryContent } from "@/types/project";
 
 export function BeforeAfter({ content }: { content: GalleryContent }) {
     return (
-        <>
-        <p className="text-white text-2xl text-center rounded-t-lg border bg-secondary p-1">{content?.caption}</p>
         <div className="flex border rounded-b-lg">
         <div className="relative overflow-hidden rounded-bl-lg">
             <video
@@ -26,6 +24,5 @@ export function BeforeAfter({ content }: { content: GalleryContent }) {
             loop />
         </div>
         </div>
-        </>
     )
 }
