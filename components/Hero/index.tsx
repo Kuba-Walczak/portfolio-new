@@ -87,19 +87,18 @@ export default function Hero() {
         <div className="flex flex-col justify-center gap-8">
           <div className="flex flex-col gap-1">
             <span className="font-mono text-lg tracking-widest uppercase text-muted-foreground">Role</span>
-            <span className="text-2xl font-medium text-foreground">Programmer & Technical Artist</span>
+            <span className="text-2xl font-medium text-foreground">Programmer<span className="mx-2">•</span>Technical Artist</span>
           </div>
           <div className="flex flex-col gap-1">
             <span className="font-mono text-lg tracking-widest uppercase text-muted-foreground">Focus</span>
-            <span className="text-2xl font-medium text-foreground">Real-time Graphics & Creative Tools</span>
+            <span className="text-2xl font-medium text-foreground">Real-time Graphics<span className="mx-2">•</span>Creative Tools</span>
           </div>
-          <span className="font-mono text-lg tracking-widest uppercase text-muted-foreground">Based in Warsaw, Poland</span>
+          <span className="font-mono text-lg tracking-widest uppercase text-muted-foreground">Based in Warsaw<span className="mx-2">•</span>Poland</span>
           <Card
         className="w-fit flex flex-row items-center gap-4 p-8 hover:bg-white/10 hover:cursor-pointer text-muted-foreground hover:text-white transition-colors duration-300"
         onClick={() => handleScroll('projects')}
         >
-          <LayoutGrid className="w-12 h-12"/>
-          <p className="text-5xl font-medium">My Work</p>
+          <p className="text-5xl font-medium">View Selected Work</p>
           <ArrowRight className="w-12 h-12"/>
         </Card>
         </div>
