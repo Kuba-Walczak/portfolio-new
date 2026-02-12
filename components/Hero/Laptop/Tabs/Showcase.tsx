@@ -61,10 +61,8 @@ export function Showcase({ title, date, duration }: ShowcaseProps) {
                 className="border rounded-xl"
             />
             <div className="flex gap-8">
-            <Card className="flex flex-row items-center justify-center p-4 bg-transparent backdrop-blur-none">
-            <div className="pr-4">
-              <FileText className="h-12 w-12 text-foreground" />
-            </div>
+            <Card className="flex flex-row items-center justify-center gap-4 p-4 bg-transparent backdrop-blur-none">
+            <FileText className="h-12 w-12 text-foreground" />
             <div>
               <h3 className="text-lg font-medium text-muted-foreground">
                 Title
@@ -72,10 +70,8 @@ export function Showcase({ title, date, duration }: ShowcaseProps) {
               <p className="text-3xl font-medium">{title}</p>
             </div>
         </Card>
-        <Card className="flex flex-row items-center justify-center p-4 bg-transparent backdrop-blur-none">
-            <div className="pr-4">
-              <Calendar className="h-12 w-12 text-foreground" />
-            </div>
+        <Card className="flex flex-row items-center justify-center gap-4 p-4 bg-transparent backdrop-blur-none">
+            <Calendar className="h-12 w-12 text-foreground" />
             <div>
               <h3 className="text-lg font-medium text-muted-foreground">
                 Date
@@ -83,10 +79,8 @@ export function Showcase({ title, date, duration }: ShowcaseProps) {
               <p className="text-3xl font-medium">{date}</p>
             </div>
         </Card>
-        <Card className="flex flex-row items-center justify-center p-4 bg-transparent backdrop-blur-none">
-            <div className="pr-4">
-              <Clock className="h-12 w-12 text-foreground" />
-            </div>
+        <Card className="flex flex-row items-center justify-center gap-4 p-4 bg-transparent backdrop-blur-none">
+            <Clock className="h-12 w-12 text-foreground" />
             <div>
               <h3 className="text-lg font-medium text-muted-foreground">
                 Duration

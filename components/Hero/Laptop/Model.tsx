@@ -57,7 +57,7 @@ function ModelContent(props: any) {
     const stage1Root: Vector6D = new Vector6D(0.2, -0.15, -2, -160 / 180 * Math.PI, 30 / 180 * Math.PI, Math.PI)
     const stage1Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, 2.007, 0, 0)
 
-    const stage2Root: Vector6D = new Vector6D(0, -0.2, -1, -185 / 180 * Math.PI, 0, Math.PI)
+    const stage2Root: Vector6D = new Vector6D(0, -0.2, -1, -180 / 180 * Math.PI, 0, Math.PI)
     const stage2Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, Math.PI / 4, 0, 0)
 
     const stage3Root: Vector6D = new Vector6D(0, -0.17, -0.2, -185 / 180 * Math.PI, 0, Math.PI)
@@ -126,10 +126,20 @@ function ModelContent(props: any) {
     }, [projectView])
 
     useEffect(() => {
+      console.log(scrollY)
+      if (!rootRef.current || !laptopHingeRef.current) return
+      if (scrollY === 0 && !projectView) {
+        setTimeout(() => {
+          if (!rootRef.current) return
+          gsap.to(rootRef.current.position, {y: "+=0.03", duration: 10, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+          gsap.to(rootRef.current.rotation, {x: `+=${Math.PI * -5 / 180}`, duration: 10, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+          gsap.to(rootRef.current.rotation, {y: `+=${Math.PI * 5 / 180}`, duration: 20, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+          gsap.to(rootRef.current.rotation, {z: `+=${Math.PI * 3 / 180}`, duration: 30, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+        }, 400)
+      }
       if (userScrollingRef.current && changeViewRef.current) changeViewRef.current = false
       userScrollingRef.current = false
       if (laptopReady) setLaptopReady(false)
-      if (!rootRef.current || !laptopHingeRef.current) return
       const duration = changeViewRef.current ? 1 : 0.2
       const { rootTarget, hingeTarget } = getTargetValues(scrollY)
       gsap.to(rootRef.current.position, {
@@ -200,7 +210,7 @@ function ModelContent(props: any) {
       if (shaderTest) {
         if (scrollY > 0.125) {
           gsap.to(shaderTest.uniforms.opacity, {
-            value: 0,
+            value: 1,
             duration: 0.5,
             overwrite: 'auto'
           })
