@@ -1,11 +1,13 @@
 import * as THREE from 'three'
-import { Suspense, useEffect, useRef, useMemo } from 'react'
-import { useLoader } from '@react-three/fiber'
+import { Suspense, useEffect, useRef, useMemo, useState } from 'react'
+import { useFrame, useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
 import { useGLTF } from '@react-three/drei'
 import { gsap } from 'gsap'
 import { useScroll } from '@/hooks/useScroll'
 import { useApp } from '@/contexts/AppContext'
+import { useVideoTexture } from '@react-three/drei'
+import { useCustomShader } from './CustomShader'
 
 type GLTFResult = {
   nodes: {
@@ -40,21 +42,56 @@ export class Vector6D {
 }
 
 function ModelContent(props: any) {
-    const { projectView, laptopReady, setLaptopReady } = useApp()
+    const { projectView, laptopReady, setLaptopReady, heroVideoGlowRef } = useApp()
+
+    const [videoLooped, setVideoLooped] = useState(false)
+
     const rootRef = useRef<THREE.Group>(null)
     const laptopHingeRef = useRef<THREE.Group>(null)
+    
     const scrollY = useScroll()
-    const { nodes } = useGLTF(`https://PortfolioPullZone.b-cdn.net/temp-name/r3f.glb?t=7`) as unknown as GLTFResult
-    const texture = useLoader(TextureLoader, 'https://PortfolioPullZone.b-cdn.net/temp-name/Bake.png')
-    texture.flipY = false;
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.minFilter = THREE.LinearFilter;
-    texture.magFilter = THREE.LinearFilter;
 
+    const { nodes } = useGLTF(`https://PortfolioPullZone.b-cdn.net/temp-name/r3f.glb?t=7`) as unknown as GLTFResult
+
+    const texture = useLoader(TextureLoader, 'https://PortfolioPullZone.b-cdn.net/temp-name/Bake.png')
+    texture.flipY = false
+    texture.colorSpace = THREE.SRGBColorSpace
+    texture.minFilter = THREE.LinearFilter
+    texture.magFilter = THREE.LinearFilter
+
+    const laptopScreenTexture = useVideoTexture("https://PortfolioPullZone.b-cdn.net/output.webm")
+    laptopScreenTexture.flipY = false
+    laptopScreenTexture.colorSpace = THREE.SRGBColorSpace
+    laptopScreenTexture.minFilter = THREE.LinearFilter
+    laptopScreenTexture.magFilter = THREE.LinearFilter
+
+    // laptop glow sequence is activated once when laptop mounts and each time the video loops
+    useEffect(() => {
+      if (heroVideoGlowRef) {
+        gsap.killTweensOf(heroVideoGlowRef)
+        const tl = gsap.timeline()
+        tl.to(heroVideoGlowRef, { background: 'radial-gradient(circle,rgb(255, 251, 0) 0%, transparent 75%)',
+          duration: 0.5,
+        })
+        tl.to({}, { duration: 4.8, })
+        tl.to(heroVideoGlowRef, {
+          background: 'radial-gradient(circle,rgb(0, 225, 255) 0%, transparent 75%)',
+          duration: 0.5,
+        })
+        tl.to({}, { duration: 4.5, })
+        tl.to(heroVideoGlowRef, {
+          background: 'radial-gradient(circle,rgb(255, 0, 0) 0%, transparent 75%)',
+          duration: 0.5,
+        })
+        tl.play();
+      }
+    }, [laptopScreenTexture, videoLooped])
+
+    const laptopScreenRef = useRef<THREE.Mesh>(null)
     const STAGE_2_START = 0.2
     const STAGE_3_START = 0.4
 
-    const stage1Root: Vector6D = new Vector6D(0.2, -0.15, -2, -160 / 180 * Math.PI, 30 / 180 * Math.PI, Math.PI)
+    const stage1Root: Vector6D = new Vector6D(0.25, -0.15, -2, -160 / 180 * Math.PI, 20 / 180 * Math.PI, Math.PI)
     const stage1Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, 2.007, 0, 0)
 
     const stage2Root: Vector6D = new Vector6D(0, -0.2, -1, -180 / 180 * Math.PI, 0, Math.PI)
@@ -104,18 +141,28 @@ function ModelContent(props: any) {
     }
 
     const userScrollingRef = useRef(false)
+    const lastTime = useRef(0);
 
     useEffect(() => {
       const markUser = () => {
         userScrollingRef.current = true;
       };
+
+      const loopDetection = () => {
+        if (laptopScreenTexture.image.currentTime < lastTime.current) {
+          setVideoLooped(prev => !prev)
+        }
+        lastTime.current = laptopScreenTexture.image.currentTime;
+      };
     
+      laptopScreenTexture.image.addEventListener("timeupdate", loopDetection);
       window.addEventListener("wheel", markUser, { passive: true });
       window.addEventListener("touchmove", markUser, { passive: true });
     
       return () => {
         window.removeEventListener("wheel", markUser);
         window.removeEventListener("touchmove", markUser);
+        laptopScreenTexture.image.removeEventListener("timeupdate", markUser);
       };
     }, []);
 
@@ -126,17 +173,30 @@ function ModelContent(props: any) {
     }, [projectView])
 
     useEffect(() => {
-      console.log(scrollY)
       if (!rootRef.current || !laptopHingeRef.current) return
-      if (scrollY === 0 && !projectView) {
-        setTimeout(() => {
-          if (!rootRef.current) return
-          gsap.to(rootRef.current.position, {y: "+=0.03", duration: 10, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
-          gsap.to(rootRef.current.rotation, {x: `+=${Math.PI * -5 / 180}`, duration: 10, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
-          gsap.to(rootRef.current.rotation, {y: `+=${Math.PI * 5 / 180}`, duration: 20, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
-          gsap.to(rootRef.current.rotation, {z: `+=${Math.PI * 3 / 180}`, duration: 30, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
-        }, 400)
+      if (!projectView) {
+        if (scrollY === 0) {
+          gsap.to(heroVideoGlowRef, {
+            opacity: 0.35,
+            duration: 0.5,
+            overwrite: "auto"
+          })
+          setTimeout(() => {
+            if (!rootRef.current) return
+            gsap.to(rootRef.current.position, {y: "+=0.03", duration: 10, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+            gsap.to(rootRef.current.rotation, {x: `+=${Math.PI * -5 / 180}`, duration: 10, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+            gsap.to(rootRef.current.rotation, {y: `+=${Math.PI * 5 / 180}`, duration: 20, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+            gsap.to(rootRef.current.rotation, {z: `+=${Math.PI * 3 / 180}`, duration: 30, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+          }, 400)
+        } else {
+          gsap.to(heroVideoGlowRef, {
+            opacity: 0,
+            duration: 0.5,
+            overwrite: "auto"
+          })
+        }
       }
+
       if (userScrollingRef.current && changeViewRef.current) changeViewRef.current = false
       userScrollingRef.current = false
       if (laptopReady) setLaptopReady(false)
@@ -175,54 +235,7 @@ function ModelContent(props: any) {
       })
     }, [scrollY, projectView])
 
-    const shaderTest = useMemo(() => {
-      return new THREE.ShaderMaterial({
-        transparent: true,
-        uniforms: {
-          uTexture: { value: texture },
-          opacity: { value: 0 }
-        },
-        vertexShader: `
-          varying vec2 vUv;
-          void main() {
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            vUv = uv;
-          }
-        `,
-        fragmentShader: `
-          uniform sampler2D uTexture;
-          uniform float opacity;
-          varying vec2 vUv;
-          void main() { 
-            vec4 texColor = texture2D(uTexture, vUv);
-            gl_FragColor = texColor;
-            if (vUv.x < 0.5) {
-              gl_FragColor = vec4(0.0, 0.0, 0, opacity);
-            } else {
-              gl_FragColor = vec4(0, 0.0, 0.0, opacity);
-            }
-          }
-        `,
-      })
-    }, [texture])
-
-    useEffect(() => {
-      if (shaderTest) {
-        if (scrollY > 0.125) {
-          gsap.to(shaderTest.uniforms.opacity, {
-            value: 1,
-            duration: 0.5,
-            overwrite: 'auto'
-          })
-        } else {
-          gsap.to(shaderTest.uniforms.opacity, {
-            value: 1,
-            duration: 0.5,
-            overwrite: 'auto'
-          })
-        }
-      }
-    }, [scrollY, shaderTest])
+    const shaderTest = useCustomShader(texture)
 
     return (
       <group {...props} dispose={null}>
@@ -230,7 +243,7 @@ function ModelContent(props: any) {
           <mesh geometry={nodes.LaptopBase.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0.024, 0.138]}>
             <group ref={laptopHingeRef} position={[0, -0.003, -0.009]} rotation={[2.007, 0, 0]}>
               <mesh geometry={nodes.LaptopDisplay.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0.003, 0.009]} />
-              <mesh geometry={nodes.LaptopLetterboxing.geometry} material={shaderTest} position={[0, 0, 0.009]} />
+              <mesh ref={laptopScreenRef} geometry={nodes.LaptopLetterboxing.geometry} material={new THREE.MeshBasicMaterial({ map: laptopScreenTexture, toneMapped: false })} position={[0, 0, 0.009]} />
             </group>
           </mesh>
         </group>

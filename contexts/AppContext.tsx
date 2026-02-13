@@ -17,6 +17,8 @@ interface AppContextType {
   setSelectedProject: (selectedProject: Project | null) => void
   selectedContent: GalleryContent | null
   setSelectedContent: (selectedContent: GalleryContent | null) => void
+  heroVideoGlowRef: HTMLDivElement | null
+  setHeroVideoGlowRef: (heroVideoGlowRef: HTMLDivElement | null) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -28,7 +30,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [projects, setProjects] = useState<Project[] | null>(null)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [selectedContent, setSelectedContent] = useState<GalleryContent | null>(null)
-
+  const [heroVideoGlowRef, setHeroVideoGlowRef] = useState<HTMLDivElement | null>(null)
   useEffect(() => {
     fetchProjects('/projects.json').then(setProjects).catch(console.error)
   }, [])
@@ -46,6 +48,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSelectedProject,
     selectedContent,
     setSelectedContent,
+    heroVideoGlowRef,
+    setHeroVideoGlowRef,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

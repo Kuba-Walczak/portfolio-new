@@ -15,6 +15,8 @@ export function CustomCanvas({ children }: { children: React.ReactNode }) {
         <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI}/>
         {children}
         {/* <EffectComposer>
+          <DepthOfField focusDistance={4} focalLength={0.75}/>
+          <Noise opacity={0.03} />
         <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.5} radius={0.25}/>
         <Vignette eskil={false} offset={0.1} darkness={0.75} />
       </EffectComposer> */}

@@ -1,9 +1,25 @@
+import { useApp } from '@/contexts/AppContext'
+import { useScroll } from '@/hooks/useScroll'
+import { useRef } from 'react'
+
 export default function Background() {
+  const { setHeroVideoGlowRef } = useApp()
   return (
     <div
-      className="absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-black"
+      className={`absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-black`}
       aria-hidden="true"
     >
+      <div
+        ref={setHeroVideoGlowRef}
+        className="absolute rounded-full opacity-35 blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(50, 51, 234, 1) 0%, transparent 50%)',
+          width: '1700px',
+          height: '1700px',
+          top: '-5%',
+          right: '-9%',
+        }}
+      />
       {/* Top Left Glow */}
       <div
         className="absolute rounded-full opacity-40 blur-3xl"
@@ -25,6 +41,16 @@ export default function Background() {
           height: '1700px',
           top: '-20%',
           right: '-30%',
+        }}
+      />
+      <div
+        className="absolute rounded-full opacity-35 blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(50, 51, 234, 1) 0%, transparent 70%)',
+          width: '1700px',
+          height: '1700px',
+          top: '-10%',
+          left: '-10%',
         }}
       />
       <div
