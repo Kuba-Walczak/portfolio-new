@@ -13,7 +13,7 @@ export function Details({
 }: DetailsProps) {
   return (
     <div className="flex w-full h-full flex-col justify-center">
-      <Card className="p-6 border mb-4">
+      <Card className="p-4 border mb-4">
         <div className="flex items-center gap-4">
           <div className="p-4 border rounded-xl">
             <Code2 className="h-16 w-16 text-foreground" />
@@ -37,7 +37,7 @@ export function Details({
         </div>
       </Card>
       <div className="grid grid-cols-2 gap-4">
-      <Card className="p-6 border mb-8">
+      <Card className="p-4 border">
         <div className="flex items-center gap-4">
           <div className="flex-1">
             <h3 className="text-md font-medium text-muted-foreground mb-2">
@@ -49,7 +49,7 @@ export function Details({
           </div>
         </div>
       </Card>
-      <Card className="p-6 border mb-8">
+      <Card className="p-4 border">
         <div className="flex items-center gap-4">
           <div className="flex-1">
             <h3 className="text-md font-medium text-muted-foreground mb-2">

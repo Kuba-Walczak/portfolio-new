@@ -10,8 +10,8 @@ export function Gallery() {
 
   return (
     <div className="relative w-full h-full">
-      <div className="flex flex-col justify-center gap-8 p-8 border bg-white/5 backdrop-blur-sm rounded-xl">
-        <div className={`grid grid-cols-2 gap-8 ${selectedContent ? 'opacity-0' : ''}`}>
+      <div className={`flex flex-col justify-center p-4 border bg-white/5 backdrop-blur-sm rounded-xl ${selectedContent ? 'hidden' : ''}`}>
+        <div className="grid grid-cols-2 gap-4">
           {selectedProject?.laptop?.gallery.map((content: GalleryContent) => (
               <div key={content.caption} className="flex flex-col">
                 <div className="flex items-center justify-center p-1 border rounded-t-xl">
@@ -67,7 +67,10 @@ export function Gallery() {
             ))}
           </div>
         </div>
-      {selectedContent && <Modal />}
+        {selectedContent && 
+          <div className="flex flex-col justify-center p-4 border bg-white/5 backdrop-blur-sm rounded-xl">
+            <Modal />
+          </div>}
     </div>
   )
 }

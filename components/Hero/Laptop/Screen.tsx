@@ -13,7 +13,7 @@ export function Screen() {
     if (!selectedProject) return null
     return (
             <div className="w-full h-full flex flex-col bg-gradient-to-t from-blue-900/25 via-black to-blue-900/25 rounded-t-4xl"> {/* inset-shadow-pseudo */}
-                <div className="p-8">
+                <div className="p-4">
         <Tabs defaultValue="showcase" className="w-full h-full">
           <div className="flex items-center justify-between w-full">
             <TabsList>

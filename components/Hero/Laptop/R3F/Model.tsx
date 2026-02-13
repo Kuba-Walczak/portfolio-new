@@ -65,6 +65,8 @@ function ModelContent(props: any) {
     laptopScreenTexture.minFilter = THREE.LinearFilter
     laptopScreenTexture.magFilter = THREE.LinearFilter
 
+    const laptopScreenMaterial = useMemo(() => new THREE.MeshBasicMaterial({ map: laptopScreenTexture, toneMapped: false }), [laptopScreenTexture])
+
     // laptop glow sequence is activated once when laptop mounts and each time the video loops
     useEffect(() => {
       if (heroVideoGlowRef) {
@@ -176,6 +178,15 @@ function ModelContent(props: any) {
       if (!rootRef.current || !laptopHingeRef.current) return
       if (!projectView) {
         if (scrollY === 0) {
+          if (laptopScreenRef.current) {
+            gsap.to(laptopScreenMaterial.color, {
+              r: 1,
+              g: 1,
+              b: 1,
+              duration: 0.25,
+              overwrite: "auto"
+            })
+          }
           gsap.to(heroVideoGlowRef, {
             opacity: 0.35,
             duration: 0.5,
@@ -189,6 +200,15 @@ function ModelContent(props: any) {
             gsap.to(rootRef.current.rotation, {z: `+=${Math.PI * 3 / 180}`, duration: 30, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
           }, 400)
         } else {
+          if (laptopScreenRef.current) {
+            gsap.to(laptopScreenMaterial.color, {
+              r: 0,
+              g: 0,
+              b: 0,
+              duration: 0.25,
+              overwrite: "auto"
+            })
+          }
           gsap.to(heroVideoGlowRef, {
             opacity: 0,
             duration: 0.5,
@@ -243,7 +263,7 @@ function ModelContent(props: any) {
           <mesh geometry={nodes.LaptopBase.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0.024, 0.138]}>
             <group ref={laptopHingeRef} position={[0, -0.003, -0.009]} rotation={[2.007, 0, 0]}>
               <mesh geometry={nodes.LaptopDisplay.geometry} material={new THREE.MeshBasicMaterial({ map: texture })} position={[0, 0.003, 0.009]} />
-              <mesh ref={laptopScreenRef} geometry={nodes.LaptopLetterboxing.geometry} material={new THREE.MeshBasicMaterial({ map: laptopScreenTexture, toneMapped: false })} position={[0, 0, 0.009]} />
+              <mesh ref={laptopScreenRef} geometry={nodes.LaptopLetterboxing.geometry} material={laptopScreenMaterial} position={[0, 0, 0.009]} />
             </group>
           </mesh>
         </group>

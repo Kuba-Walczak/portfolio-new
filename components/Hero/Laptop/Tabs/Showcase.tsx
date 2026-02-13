@@ -51,7 +51,7 @@ export function Showcase({ title, date, duration }: ShowcaseProps) {
     const { selectedProject } = useApp()
     return (
         <div className="w-full h-full flex">
-            <div className="flex flex-col justify-center gap-8 p-8 border bg-white/5 backdrop-blur-sm rounded-xl">
+            <div className="flex flex-col justify-center gap-4 p-4 border bg-white/5 backdrop-blur-sm rounded-xl">
             <video
                 ref={videoRef}
                 src={selectedProject?.laptop?.showcase}
@@ -60,7 +60,7 @@ export function Showcase({ title, date, duration }: ShowcaseProps) {
                 playsInline
                 className="border rounded-xl"
             />
-            <div className="flex gap-8">
+            <div className="flex gap-4">
             <Card className="flex flex-row items-center justify-center gap-4 p-4 bg-transparent backdrop-blur-none">
             <FileText className="h-12 w-12 text-foreground" />
             <div>

@@ -121,7 +121,7 @@ export default function Hero() {
           className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
           style={{ 
             width: 'calc(100vh * 1.018)', 
-            height: 'calc(100vh * 0.696)' 
+            height: 'calc(100vh * 0.76)' //previously 0.696
           }}
         >
           <Screen />
