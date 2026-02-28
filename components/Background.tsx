@@ -1,115 +1,34 @@
 import { useApp } from '@/contexts/AppContext'
-import { useScroll } from '@/hooks/useScroll'
-import { useRef } from 'react'
 
 export default function Background() {
   const { setHeroVideoGlowRef } = useApp()
   return (
     <div
-      className={`absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-black`}
+      className="absolute inset-0 overflow-hidden pointer-events-none -z-10"
       aria-hidden="true"
+      style={{
+        background: `
+          radial-gradient(circle 500px at 20% -8%, rgba(59, 130, 246, 0.24) 0%, transparent 70%),
+          radial-gradient(circle 850px at 105% -18%, rgba(50, 51, 234, 0.35) 0%, transparent 70%),
+          radial-gradient(circle 850px at -5% -5%, rgba(50, 51, 234, 0.35) 0%, transparent 70%),
+          radial-gradient(circle 850px at 92% 10%, rgba(147, 51, 234, 0.35) 0%, transparent 70%),
+          radial-gradient(circle 450px at -5% 38%, rgba(99, 102, 241, 0.15) 0%, transparent 70%),
+          radial-gradient(circle 925px at 25% 105%, rgba(255, 0, 0, 0.32) 0%, transparent 80%),
+          radial-gradient(circle 925px at 108% 105%, rgba(127, 90, 187, 0.32) 0%, transparent 80%),
+          radial-gradient(circle 325px at 98% 56%, rgba(168, 85, 247, 0.175) 0%, transparent 70%),
+          black
+        `,
+      }}
     >
       <div
         ref={setHeroVideoGlowRef}
-        className="absolute rounded-full opacity-35 blur-3xl"
+        className="absolute rounded-full opacity-35"
         style={{
           background: 'radial-gradient(circle, rgba(50, 51, 234, 1) 0%, transparent 50%)',
           width: '1700px',
           height: '1700px',
           top: '-5%',
           right: '-9%',
-        }}
-      />
-      {/* Top Left Glow */}
-      <div
-        className="absolute rounded-full opacity-40 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, transparent 70%)',
-          width: '800px',
-          height: '800px',
-          top: '-20%',
-          left: '5%',
-        }}
-      />
-      
-      {/* Top Right Glow */}
-      <div
-        className="absolute rounded-full opacity-35 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(50, 51, 234, 1) 0%, transparent 70%)',
-          width: '1700px',
-          height: '1700px',
-          top: '-20%',
-          right: '-30%',
-        }}
-      />
-      <div
-        className="absolute rounded-full opacity-35 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(50, 51, 234, 1) 0%, transparent 70%)',
-          width: '1700px',
-          height: '1700px',
-          top: '-10%',
-          left: '-10%',
-        }}
-      />
-      <div
-        className="absolute rounded-full opacity-35 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(147, 51, 234, 1) 0%, transparent 70%)',
-          width: '1700px',
-          height: '1700px',
-          top: '10%',
-          right: '10%',
-        }}
-      />
-      
-      {/* Center Left Glow */}
-      <div
-        className="absolute rounded-full opacity-30 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, transparent 70%)',
-          width: '900px',
-          height: '900px',
-          top: '35%',
-          left: '-5%',
-        }}
-      />
-      
-      {/* Bottom Right Glow */}
-      <div
-        className="absolute rounded-full opacity-38 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, transparent 70%)',
-          width: '750px',
-          height: '750px',
-          bottom: '5%',
-          right: '5%',
-        }}
-      />
-      
-      {/* Bottom Center Glow */}
-      <div
-        className="absolute rounded-full opacity-32 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(255, 0, 0, 1) 0%, transparent 80%)',
-          width: '1850px',
-          height: '1850px',
-          bottom: '-35%',
-          left: '30%',
-          transform: 'translateX(-50%)',
-        }}
-      />
-      
-      {/* Center Right Glow */}
-      <div
-        className="absolute rounded-full opacity-35 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)',
-          width: '650px',
-          height: '650px',
-          top: '55%',
-          right: '20%',
         }}
       />
     </div>
