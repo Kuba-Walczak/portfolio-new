@@ -5,8 +5,7 @@ import { Model } from '@/components/Hero/Laptop/R3F/Model'
 import { useScroll } from '@/hooks/useScroll'
 import { useApp } from '@/contexts/AppContext'
 import { Screen } from '@/components/Hero/Laptop/Screen'
-import { FaGithub, FaLinkedin, FaDiscord} from 'react-icons/fa'
-import { ArrowRight, FileUser, LayoutGrid, User } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Card } from '../ui/card'
 import { gsap } from 'gsap'
 
@@ -14,6 +13,7 @@ export default function Hero() {
   const { projectView, laptopReady } = useApp()
   const scrollY = useScroll()
   const translateX = scrollY * 4000
+  const scale = 1 - scrollY * 2
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id)
@@ -44,41 +44,15 @@ export default function Hero() {
       <div
       className="flex flex-col mx-auto w-fit"
       style={{
-        width: 'calc(100vh * 1.4)'
+        width: 'calc(100vh * 1.2)'
       }}>
       <div 
         className={`w-fit transition-transform duration-100 ease-out ${scrollY > 0.19 || projectView ? 'hidden' : ''}`}
         style={{
-          transform: `translateX(${translateX}px)`,
+          transform: `translateX(${translateX}px) translateY(${translateX / 2}px)`,
+          scale: scale
         }}
       >
-        <div className="flex flex-row gap-8">
-        <Card className="flex flex-row gap-4 p-4">
-        <FaGithub
-          className="w-12 h-12 text-muted-foreground hover:text-white transition-colors duration-300 cursor-pointer"
-          onClick={() => window.open('https://github.com/kuba-walczak', '_blank')}
-          />
-          <FaLinkedin
-          className="w-12 h-12 text-muted-foreground hover:text-white transition-colors duration-300 cursor-pointer"
-          onClick={() => window.open('https://linkedin.com/in/jakubwalczak', '_blank')}
-          />
-          <FaDiscord
-          className="w-12 h-12 text-muted-foreground hover:text-white transition-colors duration-300 cursor-pointer"
-          onClick={() => window.open('https://discord.com/users/1234567890', '_blank')}
-          />
-        </Card>
-        <Card className="flex flex-row items-center gap-4 p-4 hover:bg-white/10 hover:cursor-pointer text-muted-foreground hover:text-white transition-colors duration-300">
-          <FileUser className="w-12 h-12"/>
-          <p className="text-3xl font-medium">My Resume</p>
-        </Card>
-        <Card
-        className="flex flex-row items-center gap-4 p-4 hover:bg-white/10 hover:cursor-pointer text-muted-foreground hover:text-white transition-colors duration-300"
-        onClick={() => handleScroll('about')}
-        >
-          <User className="w-12 h-12"/>
-          <p className="text-3xl font-medium">About Me</p>
-        </Card>
-        </div>
         <h1 className="text-9xl font-bold text-foreground text-balance leading-tight -ml-2">
           KUBA WALCZAK
         </h1>
@@ -96,8 +70,8 @@ export default function Hero() {
         className="w-fit flex flex-row items-center gap-4 p-8 hover:bg-white/10 hover:cursor-pointer text-muted-foreground hover:text-white transition-colors duration-300"
         onClick={() => handleScroll('projects')}
         >
-          <p className="text-5xl font-medium">View Selected Work</p>
-          <ArrowRight className="w-12 h-12"/>
+          <p className="text-4xl font-medium">View Selected Work</p>
+          <ArrowRight className="w-8 h-8"/>
         </Card>
         </div>
       </div>
