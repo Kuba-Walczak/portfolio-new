@@ -51,51 +51,51 @@ export function Showcase({ title, date, duration }: ShowcaseProps) {
     const { selectedProject } = useApp()
     return (
         <div className="w-full h-full flex">
-            <div className="flex flex-col justify-center gap-4 p-4 border bg-white/5 backdrop-blur-sm rounded-xl">
+            <div className="flex flex-col justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4">
             <video
                 ref={videoRef}
                 src={selectedProject?.laptop?.showcase}
                 loop
                 muted
                 playsInline
-                className="border rounded-xl"
+                className="border-2 rounded-xl"
             />
-            <div className="flex gap-4">
-            <Card className="flex flex-row items-center justify-center gap-4 p-4 bg-transparent backdrop-blur-none">
-            <FileText className="h-12 w-12 text-foreground" />
+            <div className="flex gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4">
+            <Card className="flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 bg-transparent backdrop-blur-none">
+            <FileText className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
             <div>
-              <h3 className="text-lg font-medium text-muted-foreground">
+              <h3 className="text-xs vmd:text-sm vlg:text-lg font-medium text-muted-foreground">
                 Title
               </h3>
-              <p className="text-3xl font-medium">{title}</p>
+              <p className="text-sm vsm:text-base vmd:text-xl vlg:text-3xl font-medium">{title}</p>
             </div>
         </Card>
-        <Card className="flex flex-row items-center justify-center gap-4 p-4 bg-transparent backdrop-blur-none">
-            <Calendar className="h-12 w-12 text-foreground" />
+        <Card className="flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 bg-transparent backdrop-blur-none">
+            <Calendar className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
             <div>
-              <h3 className="text-lg font-medium text-muted-foreground">
+              <h3 className="text-xs vmd:text-sm vlg:text-lg font-medium text-muted-foreground">
                 Date
               </h3>
-              <p className="text-3xl font-medium">{date}</p>
+              <p className="text-sm vsm:text-base vmd:text-xl vlg:text-3xl font-medium">{date}</p>
             </div>
         </Card>
-        <Card className="flex flex-row items-center justify-center gap-4 p-4 bg-transparent backdrop-blur-none">
-            <Clock className="h-12 w-12 text-foreground" />
+        <Card className="flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 bg-transparent backdrop-blur-none">
+            <Clock className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
             <div>
-              <h3 className="text-lg font-medium text-muted-foreground">
+              <h3 className="text-xs vmd:text-sm vlg:text-lg font-medium text-muted-foreground">
                 Duration
               </h3>
-              <p className="text-3xl font-medium">{duration}</p>
+              <p className="text-sm vsm:text-base vmd:text-xl vlg:text-3xl font-medium">{duration}</p>
             </div>
         </Card>
         <Card 
-          className="flex flex-1 flex-row items-center justify-center p-6 backdrop-blur-none cursor-pointer hover:bg-white/10 transition-colors"
+          className="flex flex-1 flex-row items-center justify-center p-2 vsm:p-3 vmd:p-4 vlg:p-6 backdrop-blur-none cursor-pointer hover:bg-white/10 transition-colors"
           onClick={togglePlayPause}
         >
             {isPlaying ? (
-                <Pause className="h-12 w-12 text-foreground" />
+                <Pause className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
               ) : (
-                <Play className="h-12 w-12 text-foreground" />
+                <Play className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
               )}
         </Card>
       </div>
