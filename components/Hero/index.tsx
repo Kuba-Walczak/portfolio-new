@@ -23,13 +23,13 @@ export default function Hero() {
   useEffect(() => {
     if (!contentRef.current) return
 
-    if (scrollY >= 0.1 && !hasAnimatedRef.current) {
+    if (scrollY >= 0.15 && !hasAnimatedRef.current) {
       hasAnimatedRef.current = true
       gsap.to(contentRef.current, {
         x: '+=100%',
         duration: 1
       })
-    } else if (scrollY < 0.1 && hasAnimatedRef.current) {
+    } else if (scrollY < 0.15 && hasAnimatedRef.current) {
       hasAnimatedRef.current = false
       gsap.to(contentRef.current, {
         x: '0%',
@@ -42,7 +42,9 @@ export default function Hero() {
     const element = document.getElementById(id)
     if (element) {  
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-      const targetPosition = elementPosition + 200
+      console.log('elementPosition', elementPosition)
+      console.log('window.pageYOffset', window.pageYOffset)
+      const targetPosition = elementPosition
       const scrollProxy = { y: window.pageYOffset }
       gsap.to(scrollProxy, {
         y: targetPosition,
@@ -65,10 +67,10 @@ export default function Hero() {
         }}
       >
       <div
-      className={`flex flex-col mx-auto w-fit transition-opacity duration-500 ${projectView || scrollY > 0.2 ? 'hidden' : ''}`}
+      className={`flex flex-col mx-auto w-fit transition-opacity duration-500 ${projectView || scrollY > 0.4 ? 'hidden' : ''}`}
       style={{
         width: 'calc(100vh * 1.2)',
-        clipPath: scrollY > 0.2 ? 'inset(-40px 75% -40px -40px)' : scrollY > 0.1 ? 'inset(-40px 50% -40px -40px)' : 'inset(-40px 25% -40px -40px)',
+        clipPath: scrollY > 0.3 ? 'inset(-40px 75% -40px -40px)' : scrollY > 0.2 ? 'inset(-40px 50% -40px -40px)' : 'inset(-40px 25% -40px -40px)',
     
       }}>
       <div 

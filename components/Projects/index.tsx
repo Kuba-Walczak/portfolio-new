@@ -30,8 +30,8 @@ export default function Projects() {
     style={{ maxWidth: 'calc(100vh * 1.2)' }}>
     <div
     className="flex flex-col gap-16 p-8 pt-16 border rounded-2xl backdrop-blur-xl bg-white/3 dark:bg-gradient-to-b from-transparent to-transparent">
-      <div className="relative items-center hidden md:flex">
-      <h1 className="absolute left-1/2 -translate-x-1/2 font-semibold text-muted-foreground text-4xl lg:text-7xl opacity-10 flex items-center gap-4 whitespace-nowrap">
+      <div className="relative items-center justify-center hidden md:flex">
+      <h1 className="font-mono text-muted-foreground text-4xl lg:text-7xl opacity-10 flex items-center gap-4 whitespace-nowrap">
         Click to view
         <MousePointerClickIcon className="w-8 h-8 lg:w-16 lg:h-16"/>
       </h1>

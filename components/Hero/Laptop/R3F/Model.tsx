@@ -141,7 +141,7 @@ function ModelContent(props: any) {
     }, [nodes])
 
     const STAGE_2_START = 0.2
-    const STAGE_3_START = 0.4
+    const STAGE_3_START = 0.5
 
     const stage1Root: Vector6D = new Vector6D(0.25, -0.15, -3, -160 / 180 * Math.PI, 20 / 180 * Math.PI, Math.PI)
     const stage1Hinge: Vector6D = new Vector6D(0, -0.003, -0.009, 2.007, 0, 0)
