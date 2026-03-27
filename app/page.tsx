@@ -56,11 +56,12 @@ export default function Home() {
       })
     }
     simulateResize()
-
-    window.scrollTo(0, 1000)
-    setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 1000)
+    document.body.style.overflow = "hidden"
+    window.scrollTo({ top: 0 })
+    // window.scrollTo(0, 1000)
+    // setTimeout(() => {
+    //   window.scrollTo(0, 0)
+    // }, 1000)
 
     return () => {
       scrollTrigger.kill()

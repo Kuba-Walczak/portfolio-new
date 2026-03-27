@@ -80,14 +80,12 @@ export default function Hero() {
         </h1>
         <div className="flex flex-col justify-center gap-4 vsm:gap-5 vmd:gap-6 vlg:gap-7 vxl:gap-8 v2xl:gap-10">
           <div className="flex flex-col gap-1.5 vsm:gap-2">
-            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground/60 vsm:text-sm vmd:text-base vlg:text-base vxl:text-lg v2xl:text-lg">Role</h3>
-            <h2 className="text-lg font-medium tracking-tight text-foreground vsm:text-xl vmd:text-3xl vlg:text-3xl vxl:text-4xl v2xl:text-5xl">Programmer<span className="mx-2 text-muted-foreground/40 vsm:mx-3">•</span>Technical Artist</h2>
+            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground/60 vsm:text-sm vmd:text-base vlg:text-base vxl:text-2xl v2xl:text-lg">Technical Artist<span className="mx-2 text-muted-foreground/40 vsm:mx-3">•</span>Warsaw, Poland</h2>
           </div>
           <div className="flex flex-col gap-1.5 vsm:gap-2">
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground/60 vsm:text-sm vmd:text-base vlg:text-base vxl:text-lg v2xl:text-lg">Focus</h3>
             <h2 className="text-lg font-medium tracking-tight text-foreground vsm:text-xl vmd:text-3xl vlg:text-3xl vxl:text-4xl v2xl:text-5xl">Real-time Graphics<span className="mx-2 text-muted-foreground/40 vsm:mx-3">•</span>Creative Tools</h2>
           </div>
-          <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground/60 vsm:text-sm vmd:text-base vlg:text-base vxl:text-lg v2xl:text-lg">Based in Warsaw<span className="mx-2 text-muted-foreground/40 vsm:mx-3">•</span>Poland</h3>
           <Card
             className="flex w-fit flex-row items-center gap-2.5 p-3 text-muted-foreground transition-colors duration-300 hover:cursor-pointer hover:bg-white/5 hover:text-white vsm:gap-3 vsm:p-4 vmd:gap-4 vmd:p-5 vlg:gap-5 vlg:p-6 vxl:gap-6 vxl:p-7 v2xl:gap-8 v2xl:p-10"
             onClick={() => handleScroll('projects')}

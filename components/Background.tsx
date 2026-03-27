@@ -21,7 +21,7 @@ export default function Background() {
     >
       <div
         ref={setHeroVideoGlowRef}
-        className="absolute rounded-full"
+        className="absolute rounded-full opacity-0"
         style={{
           width: '200vw',
           height: '200vw',

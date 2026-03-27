@@ -46,6 +46,7 @@ function ModelContent(props: any) {
     const { projectView, laptopReady, setLaptopReady, heroVideoGlowRef } = useApp()
 
     const [videoLooped, setVideoLooped] = useState(false)
+    const isModelLoadedRef = useRef(false)
 
     const rootRef = useRef<THREE.Group>(null)
     const laptopHingeRef = useRef<THREE.Group>(null)
@@ -92,6 +93,53 @@ function ModelContent(props: any) {
     }, [laptopScreenTexture, videoLooped])
 
     const laptopScreenRef = useRef<THREE.Mesh>(null)
+
+    useEffect(() => {
+      if (isModelLoadedRef.current) return
+      if (!nodes?.Root) return
+      if (!rootRef.current || !laptopHingeRef.current || !laptopScreenRef.current) return
+
+      requestAnimationFrame(() => {
+        if (isModelLoadedRef.current) return
+        const root = rootRef.current
+        const hinge = laptopHingeRef.current
+        if (!root || !hinge || !laptopScreenRef.current) return
+        setTimeout(() => {
+          gsap.to(root.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 1,
+            overwrite: 'auto',
+            ease: "power2.inOut"
+          })
+          gsap.to(root.rotation, {
+            x: -160 / 180 * Math.PI,
+            duration: 1.5,
+            overwrite: 'auto'
+          })
+          gsap.to(root.rotation, {
+            y: 20 / 180 * Math.PI,
+            duration: 2,
+            overwrite: 'auto'
+          })
+          gsap.to(hinge.rotation, {
+            x: Math.PI * 115 / 180,
+            y: 0,
+            z: 0,
+            duration: 2,
+            overwrite: 'auto',
+            ease: "power2.inOut"
+          })
+        }, 500)
+        setTimeout(() => {
+          isModelLoadedRef.current = true
+          document.body.style.overflowY = ""
+          document.body.style.overflowX = "hidden"
+        }, 2000)
+      })
+    }, [nodes])
+
     const STAGE_2_START = 0.2
     const STAGE_3_START = 0.4
 
@@ -177,6 +225,7 @@ function ModelContent(props: any) {
     }, [projectView])
 
     useEffect(() => {
+      if (!isModelLoadedRef.current) return
       if (!rootRef.current || !laptopHingeRef.current) return
       if (!projectView) {
         if (scrollY === 0) {
@@ -195,11 +244,12 @@ function ModelContent(props: any) {
             overwrite: "auto"
           })
           setTimeout(() => {
-            if (!rootRef.current) return
+            if (!rootRef.current || !laptopHingeRef.current) return
             gsap.to(rootRef.current.position, {y: "+=0.03", duration: 10, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
             gsap.to(rootRef.current.rotation, {x: `+=${Math.PI * -5 / 180}`, duration: 10, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
             gsap.to(rootRef.current.rotation, {y: `+=${Math.PI * 5 / 180}`, duration: 20, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
             gsap.to(rootRef.current.rotation, {z: `+=${Math.PI * 3 / 180}`, duration: 30, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
+            gsap.to(laptopHingeRef.current.rotation, {x: `+=${Math.PI * -15 / 180}`, duration: 5, yoyo: true, repeat: -1, ease: "sine.inOut", overwrite: "auto"});
           }, 400)
         } else {
           if (laptopScreenRef.current) {
@@ -255,7 +305,7 @@ function ModelContent(props: any) {
           if (scrollY === 0 && projectView) setLaptopReady(true)
         }
       })
-    }, [scrollY, projectView])
+    }, [scrollY, projectView, isModelLoadedRef.current])
 
     const shaderTest = useCustomShader(texture)
 
@@ -264,7 +314,8 @@ function ModelContent(props: any) {
   <group
     ref={rootRef}
     position={[0.25, -0.15, -3]}
-    rotation={[-160 / 180 * Math.PI, 20 / 180 * Math.PI, Math.PI]}
+    rotation={[-140 / 180 * Math.PI, Math.PI * 50 / 180, Math.PI]}
+    scale={0}
   >
     <mesh
       geometry={nodes.LaptopBase.geometry}
@@ -274,7 +325,6 @@ function ModelContent(props: any) {
       <group
         ref={laptopHingeRef}
         position={[0, -0.003, -0.009]}
-        rotation={[Math.PI / 2, 0, 0]}
       >
         <mesh
           geometry={nodes.LaptopDisplay.geometry}
