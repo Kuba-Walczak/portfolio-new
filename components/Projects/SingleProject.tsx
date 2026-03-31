@@ -30,7 +30,7 @@ export function SingleProject({ project }: { project: Project }) {
   return (
         <div
           key={project.id}
-          className={`relative min-w-[350px] h-[420px] flex flex-col flex-shrink-0 overflow-hidden rounded-2xl border-ui-glass transition-all duration-100 ${
+          className={`relative min-w-[350px] h-[420px] flex flex-col flex-shrink-0 overflow-hidden rounded-2xl border-ui-glass bg-glass transition-all duration-100 ${
             project.status === 'coming-soon'
               ? 'pointer-events-none'
               : isSelected

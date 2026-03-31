@@ -81,7 +81,7 @@ export default function Hero() {
           <div className="flex flex-col gap-1.5 vsm:gap-2">
             <h2 className="type-h2">
               Technical Artist
-              <span className="mx-2 text-muted-foreground/40 vsm:mx-3">•</span>
+              <span className="mx-2 type-h2">•</span>
               Warsaw, Poland
             </h2>
           </div>
@@ -90,11 +90,11 @@ export default function Hero() {
           </h1>
           <div className="flex flex-col gap-1.5 vsm:gap-2">
             <h2 className="type-h3">
-              Bridging the gap between design and development<br/>through arts and technology
+              Bridging the gap between design and<br/>development through arts and technology
             </h2>
           </div>
           <Card
-            className="flex w-fit flex-row items-center gap-2.5 p-3 text-muted-foreground transition-colors duration-300 hover:cursor-pointer hover:bg-white/5 hover:text-white vsm:gap-3 vsm:p-4 vmd:gap-4 vmd:p-5 vlg:gap-5 vlg:p-6 vxl:gap-6 vxl:p-7 v2xl:gap-8 v2xl:p-10"
+            className="bg-glass flex w-fit flex-row items-center gap-2.5 p-3 text-muted-foreground transition-colors duration-300 hover:cursor-pointer hover:bg-white/5 hover:text-white vsm:gap-3 vsm:p-4 vmd:gap-4 vmd:p-5 vlg:gap-5 vlg:p-6 vxl:gap-6 vxl:p-7 v2xl:gap-8 v2xl:p-10"
             onClick={() => handleScroll('projects')}
           >
             <p className="type-h2">View Selected Work</p>
