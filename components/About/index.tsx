@@ -15,7 +15,7 @@ export default function About() {
     id="about"
     className="mx-auto scroll-mt-20"
     style={{ maxWidth: 'calc(100vh * 1.1)' }}>
-      <div className="flex justify-center gap-16 p-8 py-32 bg-white/3">
+      <div className="flex justify-center gap-16 p-8 py-32 bg-white/3 backdrop-blur-xl">
       <div className="flex flex-col gap-6 w-2/3">
             <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
@@ -49,7 +49,7 @@ export default function About() {
             </Tooltip>
             </div>
             <h2 className="type-h1">
-              Hi, I'm Jacob
+              Hi, I'm Kuba
             </h2>
             </div>
             <div className="flex flex-col gap-1">

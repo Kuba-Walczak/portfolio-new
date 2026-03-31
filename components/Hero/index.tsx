@@ -85,7 +85,7 @@ export default function Hero() {
               Warsaw, Poland
             </h2>
           </div>
-          <h1 className="type-h1">
+          <h1 className="type-h1 bg-gradient-to-b from-white/40 to-white bg-clip-text !text-transparent">
             KUBA WALCZAK
           </h1>
           <div className="flex flex-col gap-1.5 vsm:gap-2">
