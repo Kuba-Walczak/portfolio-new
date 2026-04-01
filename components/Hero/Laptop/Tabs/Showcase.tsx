@@ -1,7 +1,9 @@
 import { useApp } from "@/contexts/AppContext";
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { FileText, Calendar, Clock, Play, Pause } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { FileText, Calendar, Clock } from "lucide-react";
+import { gsap } from "gsap";
 
 interface ShowcaseProps {
     title: string
@@ -11,93 +13,136 @@ interface ShowcaseProps {
 
 export function Showcase({ title, date, duration }: ShowcaseProps) {
 
-    const { laptopReady } = useApp()
+    const { laptopReady, selectedProject } = useApp()
 
     const videoRef = useRef<HTMLVideoElement>(null)
-    const [isPlaying, setIsPlaying] = useState(false)
-    
+    const [videoProgress, setVideoProgress] = useState(0)
+
     useEffect(() => {
         if (laptopReady) {
             videoRef.current?.play()
-            setIsPlaying(true)
         }
     }, [laptopReady])
 
     useEffect(() => {
-        const video = videoRef.current
-        if (!video) return
+        const v = videoRef.current
+        if (!v) return
 
-        const handlePlay = () => setIsPlaying(true)
-        const handlePause = () => setIsPlaying(false)
+        /** Last `timeupdate` t — detects loop wrap (with `loop`, `ended` often does not fire). */
+        let lastVideoTime = 0
 
-        video.addEventListener('play', handlePlay)
-        video.addEventListener('pause', handlePause)
+        let tweenTarget: { videoProgress: number } | null = null
+
+        function kickProgressTween(d: number) {
+            if (!Number.isFinite(d) || d <= 0) return
+
+            if (tweenTarget) gsap.killTweensOf(tweenTarget)
+            const target = { videoProgress: 0 }
+            tweenTarget = target
+            setVideoProgress(0)
+
+            gsap.to(target, {
+                videoProgress: 100,
+                duration: d,
+                ease: "none",
+                overwrite: "auto",
+                onUpdate: () => setVideoProgress(target.videoProgress),
+            })
+        }
+
+        function startProgressLoop() {
+            const el = videoRef.current
+            if (!el || !laptopReady) return
+            const d = el.duration
+            if (!Number.isFinite(d) || d <= 0) return
+            if (el.paused) return
+
+            kickProgressTween(d)
+        }
+
+        function onTimeUpdate() {
+            const el = videoRef.current
+            if (!el || !laptopReady) return
+            const t = el.currentTime
+            const last = lastVideoTime
+            if (last > 0.25 && t < last - 0.25) {
+                lastVideoTime = t
+                kickProgressTween(el.duration)
+                return
+            }
+            lastVideoTime = t
+        }
+
+        function onEnded() {
+            const el = videoRef.current
+            if (!el || !laptopReady) return
+            const d = el.duration
+            if (!Number.isFinite(d) || d <= 0) return
+            lastVideoTime = 0
+            kickProgressTween(d)
+        }
+
+        v.addEventListener("loadedmetadata", startProgressLoop)
+        v.addEventListener("play", startProgressLoop)
+        v.addEventListener("timeupdate", onTimeUpdate)
+        v.addEventListener("ended", onEnded)
+
+        lastVideoTime = 0
+        startProgressLoop()
 
         return () => {
-            video.removeEventListener('play', handlePlay)
-            video.removeEventListener('pause', handlePause)
+            if (tweenTarget) gsap.killTweensOf(tweenTarget)
+            tweenTarget = null
+            v.removeEventListener("loadedmetadata", startProgressLoop)
+            v.removeEventListener("play", startProgressLoop)
+            v.removeEventListener("timeupdate", onTimeUpdate)
+            v.removeEventListener("ended", onEnded)
+            setVideoProgress(0)
         }
-    }, [])
-
-    const togglePlayPause = () => {
-        if (videoRef.current) {
-            if (isPlaying) {
-                videoRef.current.pause()
-            } else {
-                videoRef.current.play()
-            }
-        }
-    }
-    const { selectedProject } = useApp()
+    }, [selectedProject?.laptop?.showcase, laptopReady])
     return (
         <div className="w-full h-full flex">
-            <div className="flex flex-col justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4">
-            <div className="flex gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4">
-            <Card className="flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 bg-transparent backdrop-blur-ui-none">
+            <div className="flex h-full w-full min-h-0 min-w-0 flex-col justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4">
+            <div className="grid w-full grid-cols-3 gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4">
+            <Card className="min-w-0 flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 [font-family:var(--font-manrope)]">
             <FileText className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
             <div>
               <h3 className="text-[10px] vmd:text-xs vlg:text-base font-medium text-muted-foreground">
                 Title
               </h3>
-              <p className="text-xs vsm:text-sm vmd:text-lg vlg:text-2xl font-medium">{title}</p>
+              <p className="type-h5">{title}</p>
             </div>
         </Card>
-        <Card className="flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 bg-transparent backdrop-blur-ui-none">
+            <Card className="min-w-0 flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 [font-family:var(--font-manrope)]">
             <Calendar className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
             <div>
               <h3 className="text-[10px] vmd:text-xs vlg:text-base font-medium text-muted-foreground">
                 Date
               </h3>
-              <p className="text-xs vsm:text-sm vmd:text-lg vlg:text-2xl font-medium">{date}</p>
+              <p className="type-h5">{date}</p>
             </div>
         </Card>
-        <Card className="flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 bg-transparent backdrop-blur-ui-none">
+        <Card className="min-w-0 flex flex-row items-center justify-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4 p-1 vsm:p-2 vmd:p-3 vlg:p-4 [font-family:var(--font-manrope)]">
             <Clock className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
             <div>
               <h3 className="text-[10px] vmd:text-xs vlg:text-base font-medium text-muted-foreground">
                 Duration
               </h3>
-              <p className="text-xs vsm:text-sm vmd:text-lg vlg:text-2xl font-medium">{duration}</p>
+              <p className="type-h5">{duration}</p>
             </div>
         </Card>
-        <Card 
-          className="flex flex-1 flex-row items-center justify-center p-2 vsm:p-3 vmd:p-4 vlg:p-6 backdrop-blur-ui-none cursor-pointer hover:bg-white/10 transition-colors"
-          onClick={togglePlayPause}
-        >
-            {isPlaying ? (
-                <Pause className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
-              ) : (
-                <Play className="h-6 w-6 vsm:h-8 vsm:w-8 vmd:h-10 vmd:w-10 vlg:h-12 vlg:w-12 text-foreground" />
-              )}
-        </Card>
       </div>
+      <Progress
+                value={videoProgress}
+                className="h-1.5 vsm:h-2 shrink-0 bg-muted/40"
+            />
             <video
                 ref={videoRef}
                 src={selectedProject?.laptop?.showcase}
                 loop
                 muted
                 playsInline
-                className="border-ui-glass rounded-xl"
+                className="h-full w-full min-h-0 min-w-0 flex-1 object-cover rounded-xl"
             />
             </div>
         </div>

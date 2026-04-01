@@ -1,13 +1,18 @@
+ 'use client'
+
 import { useApp } from '@/contexts/AppContext'
 import { useMemo } from 'react'
+import { useScroll } from '@/hooks/useScroll'
 
 export default function Background() {
-  const { setHeroVideoGlowRef } = useApp()
+  const { projectView, setHeroVideoGlowRef } = useApp()
+  const scrollY = useScroll()
+  const backgroundOpacity = projectView ? Math.max(0, Math.min(1, scrollY / 0.2)) : 1
   const tiledJapaneseChar = useMemo(() => {
     const glyphs = ['未', '来', '日', '月', '火', '水', '木', '金', '土']
-    const cols = 4
-    const rows = 2
-    const cell = 96
+    const cols = 6
+    const rows = 3
+    const cell = 72
     const width = cols * cell
     const height = rows * cell
 
@@ -74,8 +79,8 @@ export default function Background() {
         style={{
           backgroundImage: tiledJapaneseChar,
           backgroundRepeat: 'repeat',
-          backgroundSize: '384px 192px',
-          mixBlendMode: 'soft-light',
+          backgroundSize: '432px 216px',
+          opacity: 0.06,
         }}
       />
       </div>

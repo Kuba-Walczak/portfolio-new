@@ -13,7 +13,7 @@ export function Details({
 }: DetailsProps) {
   return (
     <div className="flex w-full h-full flex-col justify-center">
-      <Card className="p-1 vsm:p-2 vmd:p-3 vlg:p-4 mb-1 vsm:mb-2 vmd:mb-3 vlg:mb-4">
+      <Card className="p-1 vsm:p-2 vmd:p-3 vlg:p-4 mb-1 vsm:mb-2 vmd:mb-3 vlg:mb-4 [font-family:var(--font-manrope)]">
         <div className="flex items-center gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4">
           <div className="border-ui-glass p-1 vsm:p-2 vmd:p-3 vlg:p-4 rounded-xl">
             <Code2 className="h-8 w-8 vsm:h-10 vsm:w-10 vmd:h-12 vmd:w-12 vlg:h-16 vlg:w-16 text-foreground" />
@@ -37,7 +37,7 @@ export function Details({
         </div>
       </Card>
       <div className="grid grid-cols-2 gap-1 vsm:gap-2 vmd:gap-3 vlg:gap-4">
-      <Card className="p-1 vsm:p-2 vmd:p-3 vlg:p-4">
+      <Card className="p-1 vsm:p-2 vmd:p-3 vlg:p-4 [font-family:var(--font-manrope)]">
         <div className="flex items-center gap-1 vsm:gap-2 vlg:gap-4">
             <div className="flex-1">
             <h3 className="text-[10px] vmd:text-xs vlg:text-sm font-medium text-muted-foreground mb-0.5 vsm:mb-1 vlg:mb-2">
@@ -49,7 +49,7 @@ export function Details({
           </div>
         </div>
       </Card>
-      <Card className="p-1 vsm:p-2 vmd:p-3 vlg:p-4">
+      <Card className="p-1 vsm:p-2 vmd:p-3 vlg:p-4 [font-family:var(--font-manrope)]">
         <div className="flex items-center gap-1 vsm:gap-2 vlg:gap-4">
             <div className="flex-1">
             <h3 className="text-[10px] vmd:text-xs vlg:text-sm font-medium text-muted-foreground mb-0.5 vsm:mb-1 vlg:mb-2">

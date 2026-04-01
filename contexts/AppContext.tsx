@@ -32,11 +32,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [selectedContent, setSelectedContent] = useState<GalleryContent | null>(null)
   const [heroVideoGlowRef, setHeroVideoGlowRef] = useState<HTMLDivElement | null>(null)
   useEffect(() => {
-    const fetchAndUpdate = () => {
-      fetchProjects('/projects.json').then(setProjects).catch(console.error)
+    const fetchAndUpdate = async () => {
+      try {
+        const next = await fetchProjects('/projects.json')
+        setProjects(next)
+        setSelectedProject((prev) => {
+          if (!prev) return null
+          return next.find((p) => p.id === prev.id) ?? null
+        })
+      } catch (e) {
+        console.error(e)
+      }
     }
-    fetchAndUpdate()
-    const interval = setInterval(fetchAndUpdate, 1000)
+    void fetchAndUpdate()
+    const interval = setInterval(() => void fetchAndUpdate(), 1000)
     return () => clearInterval(interval)
   }, [])
 

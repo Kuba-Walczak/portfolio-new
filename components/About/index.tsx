@@ -15,8 +15,8 @@ export default function About() {
     id="about"
     className="mx-auto scroll-mt-20"
     style={{ maxWidth: 'calc(100vh * 1.1)' }}>
-      <div className="flex justify-center gap-8 py-16">
-      <div className="flex flex-col gap-6 w-2/3 bg-simple-background rounded-2xl p-8">
+      <div className="flex justify-center gap-8 py-17">
+      <div className="flex flex-col gap-6 w-2/3 bg-glass border-ui-glass rounded-2xl p-8">
             <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
             <Tooltip>
@@ -26,7 +26,7 @@ export default function About() {
                   alt="PJAIT Logo"
                   width={500}
                   height={500}
-                  className="border-ui-glass rounded-xl bg-glass w-14 h-14 p-1 vsm:w-16 vsm:h-16 vsm:p-1.5 vmd:w-20 vmd:h-20 vmd:p-2 vlg:w-22 vlg:h-22 vxl:w-24 vxl:h-24"
+                  className="rounded-xl bg-glass border-ui-glass w-14 h-14 p-1 vsm:w-16 vsm:h-16 vsm:p-1.5 vmd:w-20 vmd:h-20 vmd:p-2 vlg:w-22 vlg:h-22 vxl:w-24 vxl:h-24"
                 />
               </TooltipTrigger>
               <TooltipContent>
@@ -40,7 +40,7 @@ export default function About() {
                   alt="Mirai Logo"
                   width={500}
                   height={500}
-                  className="border-ui-glass rounded-xl bg-glass w-10 h-14 vsm:w-12 vsm:h-16 vmd:w-14 vmd:h-20 vlg:w-15 vlg:h-22 vxl:w-16 vxl:h-24 object-contain"
+                  className="rounded-xl bg-glass border-ui-glass w-10 h-14 vsm:w-12 vsm:h-16 vmd:w-14 vmd:h-20 vlg:w-15 vlg:h-22 vxl:w-16 vxl:h-24 object-contain"
                 />
               </TooltipTrigger>
               <TooltipContent>
@@ -69,7 +69,7 @@ export default function About() {
             <span className="type-h4">Warsaw<span className="mx-2 type-h4">•</span>Poland</span>
           </div>
           </div>
-        <div className="relative w-1/2 flex bg-simple-background rounded-2xl overflow-hidden">
+        <div className="relative w-1/2 flex bg-glass border-ui-glass rounded-2xl overflow-hidden">
         <p className="absolute top-1/2 left-1/2 text-center text-foreground/20 z-[-10] opacity-15 text-[16rem] vsm:text-[20rem] vmd:text-[24rem] vlg:text-[28rem] vxl:text-[32rem]" style={{ fontFamily: 'var(--font-wdxl-lubrifont-sc)', lineHeight: 1, transform: 'translate(-5%, -67%)', transformOrigin: 'center' }}>
             未<br/>来
           </p>

@@ -9,7 +9,7 @@ import { ArrowRight } from 'lucide-react'
 import { Card } from '../ui/card'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -17,6 +17,9 @@ export default function Hero() {
   const { projectView, laptopReady } = useApp()
   const scrollY = useScroll()
   const contentRef = useRef<HTMLDivElement>(null)
+  const [isScreenMounted, setIsScreenMounted] = useState(laptopReady)
+  const [isScreenVisible, setIsScreenVisible] = useState(laptopReady)
+  const [isScreenFadingOut, setIsScreenFadingOut] = useState(false)
 
   const hasAnimatedRef = useRef(false)
 
@@ -27,7 +30,7 @@ export default function Hero() {
       hasAnimatedRef.current = true
       gsap.to(contentRef.current, {
         x: '+=100%',
-        duration: 1.5
+        duration: 2
       })
     } else if (scrollY < 0.15 && hasAnimatedRef.current) {
       hasAnimatedRef.current = false
@@ -38,10 +41,23 @@ export default function Hero() {
     }
   }, [scrollY])
 
+  useEffect(() => {
+    if (laptopReady) {
+      setIsScreenMounted(true)
+      setIsScreenFadingOut(false)
+      requestAnimationFrame(() => setIsScreenVisible(true))
+    } else {
+      // Default behavior: immediate hide unless Screen explicitly triggers fade-out.
+      setIsScreenFadingOut(false)
+      setIsScreenVisible(false)
+      setIsScreenMounted(false)
+    }
+  }, [laptopReady])
+
   const handleScroll = (id: string) => {
     const element = document.getElementById(id)
     if (element) {  
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const elementPosition = element.getBoundingClientRect().top + window.innerHeight * 0.25
       console.log('elementPosition', elementPosition)
       console.log('window.pageYOffset', window.pageYOffset)
       const targetPosition = elementPosition
@@ -75,7 +91,7 @@ export default function Hero() {
       }}>
       <div 
         ref={contentRef}
-        className={`w-fit transition-transform duration-100 ease-out relative rounded-2xl w-full`}
+        className={`w-fit transition-transform duration-100 ease-out relative rounded-2xl w-full origin-center scale-[1.12] vsm:scale-[1.14] vmd:scale-[1.1] vlg:scale-[1.06] vxl:scale-100`}
       >
         <div className="flex flex-col justify-center gap-4 vsm:gap-5 vmd:gap-6 vlg:gap-7 vxl:gap-8 v2xl:gap-10">
           <div className="flex flex-col gap-1.5 vsm:gap-2 -mb-2 vsm:-mb-2 vmd:-mb-2.5 vlg:-mb-3">
@@ -85,7 +101,7 @@ export default function Hero() {
               Warsaw, Poland
             </h2>
           </div>
-          <h1 className="type-h1 -ml-[0.012em] vsm:-ml-[0.015em] vmd:-ml-[0.02em] vlg:-ml-[0.022em] vxl:-ml-[0.025em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1">
+          <h1 className="type-h1 -ml-[0.024em] vsm:-ml-[0.03em] vmd:-ml-[0.04em] vlg:-ml-[0.044em] vxl:-ml-[0.05em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1">
             KUBA WALCZAK
           </h1>
           <div className="flex flex-col gap-1.5 vsm:gap-2">
@@ -97,8 +113,8 @@ export default function Hero() {
             className="bg-button !rounded-full !border-0 border-transparent backdrop-blur-ui-none overflow-hidden flex w-fit flex-row items-center gap-1.5 p-3 text-muted-foreground transition-colors duration-300 hover:cursor-pointer hover:bg-white/5 hover:text-white vsm:gap-2 vsm:p-4 vmd:gap-2.5 vmd:p-5 vlg:gap-3 vlg:p-6 vxl:gap-3.5 vxl:p-7 v2xl:gap-4 v2xl:p-10"
             onClick={() => handleScroll('projects')}
           >
-            <p className="type-h2 !text-background/80 !font-black">View Portfolio</p>
-            <ArrowRight className="h-3.5 w-3.5 vsm:h-4 vsm:w-4 vmd:h-5 vmd:w-5 vlg:h-6 vlg:w-6 vxl:h-7 vxl:w-7 v2xl:h-8 v2xl:w-8 !text-background/80"/>
+            <p className="type-h2 !font-black">View Portfolio</p>
+            <ArrowRight strokeWidth={2.75} className="h-3.5 w-3.5 vsm:h-4 vsm:w-4 vmd:h-5 vmd:w-5 vlg:h-6 vlg:w-6 vxl:h-7 vxl:w-7 v2xl:h-8 v2xl:w-8 !text-foreground"/>
           </Card>
         </div>
       </div>
@@ -108,15 +124,25 @@ export default function Hero() {
         <Model/>
       </CustomCanvas>
       </div>
-      {laptopReady && (
+      {isScreenMounted && (
         <div 
-          className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden opacity-0 animate-glyph-fade"
+          className={`absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden ${
+            isScreenVisible
+              ? 'opacity-0 animate-glyph-fade'
+              : isScreenFadingOut
+                ? 'opacity-100 animate-glyph-fade-out'
+                : 'opacity-0'
+          }`}
           style={{ 
             width: 'calc(100vh * 0.93)', //previously 1.018
-            height: 'calc(100vh * 0.71)' //previously 0.76
+            height: 'calc(100vh * 0.707)' //previously 0.76
           }}
         >
-          <Screen />
+          <Screen
+            setIsScreenMounted={setIsScreenMounted}
+            setIsScreenVisible={setIsScreenVisible}
+            setIsScreenFadingOut={setIsScreenFadingOut}
+          />
         </div>
       )}
     </section>

@@ -319,6 +319,14 @@
     font-family: var(--font-manrope);
   }
 
+  .type-h5 {
+    @apply text-xs font-medium
+      vsm:text-sm
+      vmd:text-lg
+      vlg:text-2xl;
+    font-family: var(--font-space-grotesk);
+  }
+
   /** Aurora background — slow drift (see components/Background.tsx) */
   .animate-aurora-1 {
     animation: aurora-drift-1 78s ease-in-out infinite;
@@ -338,6 +346,10 @@
 
   .animate-glyph-fade {
     animation: glyph-fade 220ms ease-out forwards;
+  }
+
+  .animate-glyph-fade-out {
+    animation: glyph-fade-out 220ms ease-out forwards;
   }
 }
 
@@ -406,5 +418,14 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes glyph-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

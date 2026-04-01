@@ -13,6 +13,7 @@ export interface ProjectCard {
 }
 
 export interface ProjectLaptop {
+    colors: string[];
     description: string;
     techStack: string[];
     startDate: string;

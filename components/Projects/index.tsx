@@ -28,7 +28,7 @@ export default function Projects() {
     className="mx-auto scroll-mt-20"
     style={{ maxWidth: 'calc(100vh * 1.1)' }}>
     <div
-    className="flex flex-col gap-16 p-8 rounded-2xl bg-simple-background backdrop-blur-xl">
+    className="flex flex-col gap-16 p-8 rounded-2xl bg-glass border-ui-glass backdrop-blur-xl">
       <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
         {filteredProjects?.map((project) => (
           <SingleProject key={project.id} project={project}/>
