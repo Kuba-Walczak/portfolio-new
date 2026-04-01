@@ -76,14 +76,6 @@ export function SingleProject({ project }: { project: Project }) {
                 e.currentTarget.parentElement!.appendChild(placeholder)
               }}
             />
-            {project.status !== 'coming-soon' && (
-              <div
-                className="pointer-events-none absolute top-3 right-3 z-[25] text-white/50 lg:top-4 lg:right-4"
-                aria-hidden
-              >
-                <MousePointerClickIcon className="w-8 h-8 lg:w-16 lg:h-16" />
-              </div>
-            )}
             {project.status === 'coming-soon' && (
               <>
                 <div className="absolute inset-0 z-10 bg-gray-900/95 opacity-90 grayscale" />
@@ -117,10 +109,25 @@ export function SingleProject({ project }: { project: Project }) {
           </p>
         </div>
         {/* Footer */}
-        <div className="flex gap-2 border-ui-t-glass px-6 py-4 shrink-0">
+        <div className="flex items-center gap-2 border-ui-t-glass px-6 py-4 shrink-0">
           {project.laptop.techStack.map((tech) => (
             <Badge key={tech} variant="secondary">{tech}</Badge>
           ))}
+          {project.status !== 'coming-soon' && (
+            <div className="pointer-events-none ml-auto" aria-hidden>
+              <MousePointerClickIcon
+                className="h-6 w-6"
+                color={`url(#click-icon-gradient-${project.id})`}
+              >
+                <defs>
+                  <linearGradient id={`click-icon-gradient-${project.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#BA9EFF" />
+                    <stop offset="100%" stopColor="#8455ED" />
+                  </linearGradient>
+                </defs>
+              </MousePointerClickIcon>
+            </div>
+          )}
         </div>
       </div>
   )

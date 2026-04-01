@@ -97,7 +97,7 @@ export default function Hero() {
             className="bg-button !rounded-full !border-0 border-transparent backdrop-blur-ui-none overflow-hidden flex w-fit flex-row items-center gap-1.5 p-3 text-muted-foreground transition-colors duration-300 hover:cursor-pointer hover:bg-white/5 hover:text-white vsm:gap-2 vsm:p-4 vmd:gap-2.5 vmd:p-5 vlg:gap-3 vlg:p-6 vxl:gap-3.5 vxl:p-7 v2xl:gap-4 v2xl:p-10"
             onClick={() => handleScroll('projects')}
           >
-            <p className="type-h2 !text-background/80 !font-extrabold">View Selected Work</p>
+            <p className="type-h2 !text-background/80 !font-extrabold">View Portfolio</p>
             <ArrowRight className="h-3.5 w-3.5 vsm:h-4 vsm:w-4 vmd:h-5 vmd:w-5 vlg:h-6 vlg:w-6 vxl:h-7 vxl:w-7 v2xl:h-8 v2xl:w-8 !text-background/80"/>
           </Card>
         </div>
@@ -110,7 +110,7 @@ export default function Hero() {
       </div>
       {laptopReady && (
         <div 
-          className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+          className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden opacity-0 animate-glyph-fade"
           style={{ 
             width: 'calc(100vh * 1.04)', //previously 1.018
             height: 'calc(100vh * 0.78)' //previously 0.76

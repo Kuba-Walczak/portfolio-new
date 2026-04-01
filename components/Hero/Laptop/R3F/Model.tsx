@@ -239,7 +239,7 @@ function ModelContent(props: any) {
             })
           }
           gsap.to(heroVideoGlowRef, {
-            opacity: 0.15,
+            opacity: 0.1,
             duration: 0.5,
             overwrite: "auto"
           })
