@@ -15,53 +15,23 @@
 
   --primary: hsl(255, 83%, 58%);
   --secondary: hsl(255, 79%, 65%);
-  --accent: hsl(238, 100%, 78%);
+  --accent: hsla(238, 100%, 78%, 0.5);
 
   --text-primary: hsl(0, 0%, 100%);
   --text-secondary: hsl(0, 0%, 70%);
 
   --glass: rgb(255 255 255 / 0.03);
   --simple-background: rgb(30 30 46 / 0.3);
+  --simple-background-solid: rgb(30 30 46);
 
   --card-background: hsl(240, 25%, 10%);
   --card-border: hsl(240, 21%, 12%);
 
-
-  /*
-   * Controllable UI borders — toggle site-wide from here.
-   * Set --ui-border-width to 1px (or 2px) to show borders; keep 0px to hide.
-   */
   --ui-border-width: 1px;
   --ui-border-style: solid;
-  --ui-border-color: var(--border);
-  --ui-border-width-strong: calc(var(--ui-border-width) * 2);
   --ui-border-glass-color: rgb(255 255 255 / 0.05);
-  /** Laptop tab “active” rim; default matches frosted chrome */
-  --ui-tabs-active-border: var(--ui-border-glass-color);
-  /**
-   * Site-wide frosted-glass backdrop blur (see .backdrop-blur-ui).
-   * Use 0 to disable; e.g. 16px for stronger glass. .backdrop-blur-ui-none turns blur off per element.
-   */
+
   --ui-backdrop-blur: 12px;
-  /**
-   * Dual radial wash — top-left and bottom-right.
-   * Uses white/5 for both corners, fading to transparent.
-   */
-  --ui-radial-ellipse: 85% 75%;
-  --ui-radial-fade-stop: 65%;
-  --ui-radial-bg:
-    radial-gradient(
-      ellipse var(--ui-radial-ellipse) at 100% 100%,
-      rgb(255 255 255 / 0.05),
-      transparent var(--ui-radial-fade-stop)
-    );
-  /** Linear UI wash from white/3 to white/5. */
-  --ui-linear-bg: linear-gradient(
-    180deg,
-    rgb(255 255 255 / 0.03) 0%,
-    rgb(255 255 255 / 0.08) 100%
-  );
-  --bg-button: linear-gradient(135deg, #ba9eff 0%, #8455ed 100%);
 }
 
 @theme {
@@ -135,28 +105,6 @@
 }
 
 @layer utilities {
-  /** Full box — uses --ui-border-width / --ui-border-color */
-  .border-ui {
-    border-width: var(--ui-border-width);
-    border-style: var(--ui-border-style);
-    border-color: var(--ui-border-color);
-  }
-  /** Thicker frame (e.g. hero video) — uses --ui-border-width-strong */
-  .border-ui-strong {
-    border-width: var(--ui-border-width-strong);
-    border-style: var(--ui-border-style);
-    border-color: var(--ui-border-color);
-  }
-  .border-ui-strong-glass {
-    border-width: var(--ui-border-width-strong);
-    border-style: var(--ui-border-style);
-    border-color: var(--ui-border-glass-color);
-  }
-  .border-ui-t {
-    border-top-width: var(--ui-border-width);
-    border-top-style: var(--ui-border-style);
-    border-top-color: var(--ui-border-color);
-  }
   .border-ui-t-glass {
     border-top-width: var(--ui-border-width);
     border-top-style: var(--ui-border-style);
@@ -167,25 +115,7 @@
     border-style: var(--ui-border-style);
     border-color: var(--ui-border-glass-color);
   }
-  .border-ui-input {
-    border-width: var(--ui-border-width);
-    border-style: var(--ui-border-style);
-    border-color: var(--input);
-  }
-  .border-ui-color-primary {
-    border-color: var(--primary);
-  }
-  @media (hover: hover) {
-    .border-ui-hover-primary\/50:hover {
-      border-color: color-mix(in srgb, var(--primary) 50%, transparent);
-    }
-  }
-  /** Vertical dividers (replaces divide-x) */
-  .divide-ui-x > * + * {
-    border-left-width: var(--ui-border-width);
-    border-left-style: var(--ui-border-style);
-    border-left-color: var(--ui-border-color);
-  }
+  /** Vertical dividers between siblings (glass border) */
   .divide-ui-x-glass > * + * {
     border-left-width: var(--ui-border-width);
     border-left-style: var(--ui-border-style);
@@ -194,24 +124,6 @@
   .backdrop-blur-ui {
     -webkit-backdrop-filter: blur(var(--ui-backdrop-blur));
     backdrop-filter: blur(var(--ui-backdrop-blur));
-  }
-  .backdrop-blur-ui-none {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-  /** Radial UI wash utility. */
-  .bg-radial-ui {
-    background-color: rgb(255 255 255 / 0.03);
-    background-image: var(--ui-radial-bg);
-    background-repeat: no-repeat, no-repeat;
-    background-size: 100% 100%, 100% 100%;
-  }
-  /** Linear UI wash utility. */
-  .bg-linear-ui {
-    background-image: var(--ui-linear-bg);
-  }
-  .bg-button {
-    background-image: var(--bg-button);
   }
   .bg-simple-background {
     background-color: var(--simple-background);
@@ -232,21 +144,10 @@
     height: 100%;
     background-color: var(--ui-border-color);
   }
-  .inset-shadow-pseudo::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 10;
-    box-shadow: inset 0 0px 50px 0px rgba(0, 0, 0, 0.75);
-    border-radius: 2rem;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
 
   /** Typography tokens */
   .type-h1 {
-    @apply text-balance text-4xl font-bold leading-[0.9] tracking-[-0.025em] text-foreground
+    @apply text-balance text-4xl font-bold leading-[0.9] tracking-[-0.025em] text-[var(--text-primary)]
       vsm:text-5xl
       vmd:text-6xl
       vlg:text-7xl
@@ -256,7 +157,7 @@
   }
 
   .type-h2 {
-    @apply text-pretty text-xs font-normal uppercase tracking-[0.2em] text-foreground/80
+    @apply text-pretty text-xs font-normal uppercase tracking-[0.2em] text-[var(--text-secondary)]
       vsm:text-base
       vmd:text-lg
       vlg:text-xl
@@ -266,21 +167,17 @@
   }
 
   .type-h25 {
-    @apply text-pretty text-xs font-semibold uppercase tracking-[0.2em]
+    @apply text-pretty text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-primary)]
       vsm:text-base
       vmd:text-lg
       vlg:text-xl
       vxl:text-2xl
       v2xl:text-3xl;
-    background-image: linear-gradient(135deg, #ba9eff 0%, #8455ed 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
     font-family: var(--font-manrope);
   }
 
   .type-h3 {
-    @apply text-pretty text-base font-thin leading-[1.3] tracking-[-0.01em] text-foreground/40
+    @apply text-pretty text-base font-thin leading-[1.3] tracking-[-0.01em] text-[var(--text-secondary)]
       vsm:text-lg
       vmd:text-xl
       vlg:text-2xl
@@ -290,7 +187,7 @@
   }
 
   .type-h4 {
-    @apply text-pretty text-base font-normal leading-[1.85] tracking-[0.05em] text-foreground/60
+    @apply text-pretty text-base font-normal leading-[1.6] tracking-[0.05em] text-[var(--text-secondary)]
       vsm:text-sm
       vmd:text-base
       vlg:text-lg
@@ -300,10 +197,26 @@
   }
 
   .type-h5 {
-    @apply text-xs font-medium
+    @apply text-xs font-medium text-[var(--text-primary)]
       vsm:text-sm
       vmd:text-lg
       vlg:text-2xl;
     font-family: var(--font-space-grotesk);
+  }
+
+  .type-h6 {
+    @apply text-xs font-medium text-[var(--text-primary)]
+      vsm:text-base
+      vmd:text-4xl
+      vlg:text-4xl;
+    font-family: var(--font-space-grotesk);
+  }
+
+  /** Semantic copy — maps to --text-primary / --text-secondary (overrides default palette `text-primary` / `text-secondary`) */
+  .text-primary {
+    color: var(--text-primary);
+  }
+  .text-secondary {
+    color: var(--text-secondary);
   }
 }

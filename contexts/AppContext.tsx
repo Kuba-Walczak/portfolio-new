@@ -1,22 +1,12 @@
 'use client'
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
-import { GalleryContent, Project } from '@/types/project'
+import { Project } from '@/types/project'
 import { fetchProjects } from '@/lib/utils'
 
 interface AppContextType {
-  projectView: boolean
-  setProjectView: (projectView: boolean) => void
-  selectedTab: string
-  setSelectedTab: (selectedTab: string) => void
-  laptopReady: boolean
-  setLaptopReady: (laptopReady: boolean) => void
   projects: Project[] | null
   setProjects: (projects: Project[] | null) => void
-  selectedProject: Project | null
-  setSelectedProject: (selectedProject: Project | null) => void
-  selectedContent: GalleryContent | null
-  setSelectedContent: (selectedContent: GalleryContent | null) => void
   heroVideoGlowRef: HTMLDivElement | null
   setHeroVideoGlowRef: (heroVideoGlowRef: HTMLDivElement | null) => void
 }
@@ -24,22 +14,14 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [projectView, setProjectView] = useState(false)
-  const [selectedTab, setSelectedTab] = useState('Showcase')
-  const [laptopReady, setLaptopReady] = useState(false)
+  const [mainHeader, setMainHeader] = useState(true)
   const [projects, setProjects] = useState<Project[] | null>(null)
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const [selectedContent, setSelectedContent] = useState<GalleryContent | null>(null)
   const [heroVideoGlowRef, setHeroVideoGlowRef] = useState<HTMLDivElement | null>(null)
   useEffect(() => {
     const fetchAndUpdate = async () => {
       try {
         const next = await fetchProjects('/projects.json')
         setProjects(next)
-        setSelectedProject((prev) => {
-          if (!prev) return null
-          return next.find((p) => p.id === prev.id) ?? null
-        })
       } catch (e) {
         console.error(e)
       }
@@ -50,18 +32,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const value: AppContextType = {
-    projectView,
-    setProjectView,
-    selectedTab,
-    setSelectedTab,
-    laptopReady,
-    setLaptopReady,
     projects,
     setProjects,
-    selectedProject,
-    setSelectedProject,
-    selectedContent,
-    setSelectedContent,
     heroVideoGlowRef,
     setHeroVideoGlowRef,
   }

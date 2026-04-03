@@ -16,7 +16,7 @@ export function useScroll(): number {
     ScrollTrigger.refresh()
     const element = document.getElementById('projects');
     if (!element) return
-    const maxScroll = element.getBoundingClientRect().top * 1.75
+    const maxScroll = element.getBoundingClientRect().top
     const updateScroll = () => {
       if (typeof window === 'undefined') return
       const scrollTop = window.scrollY

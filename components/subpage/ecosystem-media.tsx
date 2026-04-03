@@ -121,10 +121,12 @@ export function EcosystemMedia({ project }: { project: Project }) {
   const gallery = project.subpage.gallery
   const [selectedVideo, setSelectedVideo] = useState<Project["subpage"]["gallery"][number] | null>(null)
 
-  return (
-    <section className="relative px-6 py-20 max-w-5xl mx-auto">
+  return (  
+    <section 
+    className="relative px-6 py-20 mx-auto"
+    style={{ maxWidth: "calc(100vh * 1.1)" }}>
       <div className="mb-10">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+        <h2 className="type-h6">
           Gallery
         </h2>
       </div>
@@ -144,10 +146,10 @@ export function EcosystemMedia({ project }: { project: Project }) {
             >
               <MediaPreview content={content} onOpenVideo={setSelectedVideo} />
               <div className="flex items-center gap-3 px-4 py-3">
-                <p className="text-base font-bold text-[var(--text-primary)]">{content.caption}</p>
+                <p className="type-h25">{content.caption}</p>
                 {content.type !== "image" && (
                   <MousePointerClickIcon
-                    className="ml-auto h-6 w-6"
+                    className="ml-auto h-8 w-8"
                     color={`url(#ecosystem-media-icon-gradient-${project.id}-${index})`}
                     aria-hidden="true"
                   >

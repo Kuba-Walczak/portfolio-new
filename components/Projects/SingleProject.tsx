@@ -1,5 +1,4 @@
 import { Project } from "@/types/project"
-import { useApp } from "@/contexts/AppContext"
 import { Badge } from "../ui/badge"
 import { gsap } from "gsap"
 import { getTag, Tag } from "@/types/tag"
@@ -9,8 +8,6 @@ import { useRouter } from "next/navigation"
 
 export function SingleProject({ project }: { project: Project }) {
     const router = useRouter()
-    const { selectedTab, setSelectedTab, selectedProject, setSelectedProject } = useApp()
-    const isSelected = selectedProject?.id === project.id
     const scrollAnimationRef = useRef<gsap.core.Tween | null>(null)
 
     useEffect(() => {
@@ -32,20 +29,11 @@ export function SingleProject({ project }: { project: Project }) {
   return (
         <div
           key={project.id}
-          className={`relative min-w-[350px] h-[240px] vsm:h-[285px] vmd:h-[335px] vlg:h-[375px] vxl:h-[420px] v2xl:h-[460px] flex flex-col flex-shrink-0 overflow-hidden rounded-2xl bg-glass border-ui-glass transition-all duration-100 [font-family:var(--font-manrope)] ${
+          className={`relative min-w-[350px] h-[240px] vsm:h-[285px] vmd:h-[335px] vlg:h-[375px] vxl:h-[420px] v2xl:h-[460px] flex flex-col flex-shrink-0 overflow-hidden rounded-2xl bg-glass border-ui-glass transition-all duration-100 hover:bg-white/10 cursor-pointer [font-family:var(--font-manrope)] ${
             project.status === 'coming-soon'
-              ? 'pointer-events-none'
-              : isSelected
-                ? 'cursor-pointer !bg-[#8455ed]/50 ring-1 ring-primary/50'
-                : 'hover:bg-white/10 cursor-pointer'
-          }`}
+              ? 'pointer-events-none' : ''}`}
           onClick={() => {
             if (project.status === 'coming-soon') return
-            // Keep existing in-app state in sync, then route to the project subpage.
-            if (selectedTab !== 'Showcase') setSelectedTab('Showcase')
-            setSelectedProject(project)
-
-            // Route to `/${project.id}` (e.g. `/traffic-simulation`).
             router.push(`/${project.id}`)
           }}
           >
@@ -59,7 +47,7 @@ export function SingleProject({ project }: { project: Project }) {
                 e.currentTarget.style.display = 'none'
                 e.currentTarget.parentElement!.classList.add('flex', 'items-center', 'justify-center')
                 const placeholder = document.createElement('div')
-                placeholder.className = 'text-muted-foreground text-sm'
+                placeholder.className = 'text-secondary text-sm'
                 placeholder.textContent = 'Project Image'
                 e.currentTarget.parentElement!.appendChild(placeholder)
               }}
@@ -67,7 +55,7 @@ export function SingleProject({ project }: { project: Project }) {
             {project.status === 'coming-soon' && (
               <>
                 <div className="absolute inset-0 z-10 bg-gray-900/95 opacity-90 grayscale" />
-                <p className="absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 text-center text-5xl font-bold opacity-10 text-nowrap">
+                <p className="absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 text-center text-5xl font-bold opacity-10 text-nowrap text-primary">
                   COMING SOON
                 </p>
               </>
@@ -76,7 +64,7 @@ export function SingleProject({ project }: { project: Project }) {
         {/* Content */}
         <div className="p-6 shrink-0">
           <div className="flex items-center gap-2">
-          <h3 className="text-xl font-semibold text-card-foreground">
+          <h3 className="text-xl font-semibold text-primary">
             {project.title}
           </h3>
             {
@@ -92,13 +80,13 @@ export function SingleProject({ project }: { project: Project }) {
               )
             })}
           </div>
-          <p className="mt-2 text-muted-foreground leading-relaxed">
+          <p className="mt-2 text-secondary leading-relaxed">
             {project.card.description}
           </p>
         </div>
         {/* Footer */}
         <div className="flex items-center gap-2 border-ui-t-glass px-6 py-4 shrink-0">
-          {project.laptop.techStack.map((tech) => (
+          {project.subpage.techStack.map((tech) => (
             <Badge key={tech} variant="secondary">{tech}</Badge>
           ))}
           {project.status !== 'coming-soon' && (
@@ -108,10 +96,16 @@ export function SingleProject({ project }: { project: Project }) {
                 color={`url(#click-icon-gradient-${project.id})`}
               >
                 <defs>
-                  <linearGradient id={`click-icon-gradient-${project.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="var(--icon-gradient-start)" />
-                    <stop offset="100%" stopColor="var(--icon-gradient-end)" stopOpacity="var(--icon-gradient-end-opacity)" />
-                  </linearGradient>
+                  <linearGradient
+                        id={`click-icon-gradient-${project.id}`}
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop offset="0%" stopColor="var(--secondary)" />
+                        <stop offset="100%" stopColor="var(--primary)" />
+                      </linearGradient>
                 </defs>
               </MousePointerClickIcon>
             </div>

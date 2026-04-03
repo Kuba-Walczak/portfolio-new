@@ -70,17 +70,18 @@ export function CoreArchitecture({ project }: { project: Project }) {
   const isDense = project.subpage.feature.length > 6
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section 
+    className="px-6 py-20 mx-auto"
+    style={{ maxWidth: "calc(100vh * 1.1)" }}>
       {/* Section header */}
       <div className="mb-10">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+        <h2 className="type-h6">
           Features
         </h2>
-        <div className="mt-2 h-0.5 w-12" style={{ background: "var(--brand-purple)" }} />
       </div>
 
       {/* Responsive feature grid */}
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(340px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(540px,1fr))] gap-4">
         {project.subpage.feature.map((feature) => {
           const Icon = resolveLucideIcon(feature.icon)
 
@@ -94,20 +95,12 @@ export function CoreArchitecture({ project }: { project: Project }) {
                 gradientId={`core-architecture-icon-gradient-${project.id}-${feature.title.toLowerCase().replace(/\s+/g, "-")}`}
               />
               <h3
-                className={
-                  isDense
-                    ? "text-sm font-bold mb-2 text-[var(--text-primary)]"
-                    : "text-base font-bold mb-2 text-[var(--text-primary)]"
-                }
+                className="type-h25"
               >
                 {feature.title}
               </h3>
               <p
-                className={
-                  isDense
-                    ? "text-xs leading-relaxed text-[var(--text-secondary)]"
-                    : "text-sm leading-relaxed text-[var(--text-secondary)]"
-                }
+                className="type-h4"
               >
                 {feature.description}
               </p>

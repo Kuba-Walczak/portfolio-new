@@ -2,12 +2,9 @@
 
 import { useApp } from '@/contexts/AppContext'
 import { useMemo } from 'react'
-import { useScroll } from '@/hooks/useScroll'
 
 export default function Background() {
-  const { projectView, setHeroVideoGlowRef } = useApp()
-  const scrollY = useScroll()
-  const backgroundOpacity = projectView ? Math.max(0, Math.min(1, scrollY / 0.2)) : 1
+  const { setHeroVideoGlowRef } = useApp()
   const tiledJapaneseChar = useMemo(() => {
     const glyphs = ['未', '来', '日', '月', '火', '水', '木', '金', '土']
     const cols = 6
@@ -19,7 +16,9 @@ export default function Background() {
     let texts = ''
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        const char = glyphs[Math.floor(Math.random() * glyphs.length)]
+        // Keep glyph placement deterministic to avoid SSR/CSR hydration mismatches.
+        const glyphIndex = (x * 7 + y * 11 + x * y * 3) % glyphs.length
+        const char = glyphs[glyphIndex]
         const tx = x * cell + 18
         const ty = y * cell + 62
         texts += `<text x="${tx}" y="${ty}" font-size="52" fill="#ffffff" fill-opacity="0.08" font-family="serif">${char}</text>`
@@ -31,7 +30,7 @@ export default function Background() {
   }, [])
   return (
     <div
-      className="absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-[#0D0D19]"
+      className="absolute inset-0 overflow-hidden pointer-events-none -z-10 bg-[var(--background)]"
       aria-hidden="true"
     >
       <div className="absolute inset-0 overflow-hidden">

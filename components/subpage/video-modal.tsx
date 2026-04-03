@@ -49,15 +49,15 @@ export function VideoModal({
         className="relative w-full max-w-5xl"
         onClick={(event) => event.stopPropagation()}
       >
-        <Card className="relative rounded-b-none p-6 pr-32">
-          <h3 className="text-base font-bold mb-2 text-[var(--text-primary)]">{title}</h3>
+        <Card className="relative rounded-b-none p-6 pr-32 bg-background">
+          <h3 className="type-h25 mb-2">{title}</h3>
           {hasInlineMarkup ? (
             <p
-              className="text-sm leading-relaxed text-[var(--text-secondary)]"
+              className="type-h4"
               dangerouslySetInnerHTML={{ __html: modalDescription }}
             />
           ) : (
-            <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
+            <p className="type-h4">
               {modalDescription}
             </p>
           )}

@@ -4,7 +4,7 @@ import { Inter, Geist_Mono, WDXL_Lubrifont_SC, Space_Grotesk, Manrope } from 'ne
 import { Analytics } from '@vercel/analytics/next'
 import { AppProvider } from '@/contexts/AppContext'
 import { TooltipProvider } from '@/components/ui/tooltip'
-import Header from '@/components/Header'
+import { Header } from '@/components/Header'
 import './globals.css'
 import Footer from "@/components/Footer"
 
@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased ${wdxlLubrifontSC.variable} ${spaceGrotesk.variable} ${manrope.variable}`}>
         <AppProvider>
           <TooltipProvider>

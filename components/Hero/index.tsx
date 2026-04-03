@@ -1,58 +1,18 @@
 'use client'
 
-import { HeroCanvas } from '@/components/Hero/Laptop/R3F/HeroCanvas'
-import { Model } from '@/components/Hero/Laptop/R3F/Model'
+import { HeroCanvas } from '@/components/Hero/R3F/HeroCanvas'
+import { Model } from '@/components/Hero/R3F/Model'
 import { useScroll } from '@/hooks/useScroll'
-import { useApp } from '@/contexts/AppContext'
-import { Screen } from '@/components/Hero/Laptop/Screen'
 import { ArrowRight } from 'lucide-react'
 import { Card } from '../ui/card'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useEffect, useRef, useState } from 'react'
+import { Button } from '../ui/button'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
-  const { projectView, laptopReady } = useApp()
   const scrollY = useScroll()
-  const contentRef = useRef<HTMLDivElement>(null)
-  const [isScreenMounted, setIsScreenMounted] = useState(laptopReady)
-  const [isScreenVisible, setIsScreenVisible] = useState(laptopReady)
-  const [isScreenFadingOut, setIsScreenFadingOut] = useState(false)
-
-  const hasAnimatedRef = useRef(false)
-
-  useEffect(() => {
-    if (!contentRef.current) return
-
-    if (scrollY >= 0.15 && !hasAnimatedRef.current) {
-      hasAnimatedRef.current = true
-      gsap.to(contentRef.current, {
-        x: '+=100%',
-        duration: 2
-      })
-    } else if (scrollY < 0.15 && hasAnimatedRef.current) {
-      hasAnimatedRef.current = false
-      gsap.to(contentRef.current, {
-        x: '0%',
-        duration: 1
-      })
-    }
-  }, [scrollY])
-
-  useEffect(() => {
-    if (laptopReady) {
-      setIsScreenMounted(true)
-      setIsScreenFadingOut(false)
-      requestAnimationFrame(() => setIsScreenVisible(true))
-    } else {
-      // Default behavior: immediate hide unless Screen explicitly triggers fade-out.
-      setIsScreenFadingOut(false)
-      setIsScreenVisible(false)
-      setIsScreenMounted(false)
-    }
-  }, [laptopReady])
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id)
@@ -79,20 +39,13 @@ export default function Hero() {
         id="home"
         className="absolute top-1/2 left-0 right-0 z-10 flex -translate-y-1/2 scroll-mt-20 flex-col justify-center gap-5 vsm:gap-7 vmd:gap-8 vlg:gap-9 vxl:gap-10 v2xl:gap-12"
         style={{
-          height: 'min(100vh, calc(165vh * 9 / 16))'
+          height: 'min(100vh, calc(96vh * 9 / 16))'
         }}
       >
       <div
-      className={`rounded-2xl flex flex-col mx-auto w-fit transition-opacity duration-500 ${projectView || scrollY > 0.4 ? 'hidden' : ''}`}
-      style={{
-        width: 'calc(100vh * 1.1)',
-        clipPath: scrollY > 0.3 ? 'inset(-40px 65% -40px -40px)' : scrollY > 0.2 ? 'inset(-40px 50% -40px -40px)' : 'inset(-40px 30% -40px -40px)',
-    
-      }}>
-      <div 
-        ref={contentRef}
-        className={`w-fit transition-transform duration-100 ease-out relative rounded-2xl w-full origin-center scale-[1.12] vsm:scale-[1.14] vmd:scale-[1.1] vlg:scale-[1.06] vxl:scale-100`}
-      >
+      className={`rounded-2xl flex flex-col mx-auto w-fit transition-opacity duration-500`}
+      style={{ width: 'calc(100vh * 1.1)' }}>
+      <div className={`w-fit transition-transform duration-100 ease-out relative rounded-2xl w-full origin-center scale-[1.12] vsm:scale-[1.14] vmd:scale-[1.1] vlg:scale-[1.06] vxl:scale-100`}>
         <div className="flex flex-col justify-center gap-4 vsm:gap-5 vmd:gap-6 vlg:gap-7 vxl:gap-8 v2xl:gap-10">
           <div className="flex flex-col gap-1.5 vsm:gap-2 -mb-2 vsm:-mb-2 vmd:-mb-2.5 vlg:-mb-3">
             <h2 className="type-h2">
@@ -105,17 +58,18 @@ export default function Hero() {
             KUBA WALCZAK
           </h1>
           <div className="flex flex-col gap-1.5 vsm:gap-2">
-            <h2 className="type-h3">
+            <h2 className="type-h4">
               Bridging the gap between design and<br/>development through arts and technology
             </h2>
           </div>
-          <Card
-            className="bg-button !rounded-full !border-0 border-transparent backdrop-blur-ui-none overflow-hidden flex w-fit flex-row items-center gap-1.5 p-3 text-muted-foreground transition-colors duration-300 hover:cursor-pointer hover:bg-white/5 hover:text-white vsm:gap-2 vsm:p-4 vmd:gap-2.5 vmd:p-5 vlg:gap-3 vlg:p-6 vxl:gap-3.5 vxl:p-7 v2xl:gap-4 v2xl:p-10"
-            onClick={() => handleScroll('projects')}
-          >
-            <p className="type-h2 !font-black">View Portfolio</p>
-            <ArrowRight strokeWidth={2.75} className="h-3.5 w-3.5 vsm:h-4 vsm:w-4 vmd:h-5 vmd:w-5 vlg:h-6 vlg:w-6 vxl:h-7 vxl:w-7 v2xl:h-8 v2xl:w-8 !text-foreground"/>
-          </Card>
+          <Button
+              variant="default"
+              className="mt-6 inline-flex cursor-pointer items-center gap-2 px-6 py-2 type-h25"
+              onClick={() => handleScroll('projects')}
+            >
+              View Portfolio
+              <ArrowRight strokeWidth={2.75} className="h-3.5 w-3.5 vsm:h-4 vsm:w-4 vmd:h-5 vmd:w-5 vlg:h-6 vlg:w-6 vxl:h-7 vxl:w-7 v2xl:h-8 v2xl:w-8 !text-secondary"/>
+            </Button>
         </div>
       </div>
       </div>
@@ -124,27 +78,6 @@ export default function Hero() {
         <Model/>
       </HeroCanvas>
       </div>
-      {isScreenMounted && (
-        <div 
-          className={`absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden ${
-            isScreenVisible
-              ? 'opacity-0 animate-glyph-fade'
-              : isScreenFadingOut
-                ? 'opacity-100 animate-glyph-fade-out'
-                : 'opacity-0'
-          }`}
-          style={{ 
-            width: 'calc(100vh * 0.93)', //previously 1.018
-            height: 'calc(100vh * 0.707)' //previously 0.76
-          }}
-        >
-          <Screen
-            setIsScreenMounted={setIsScreenMounted}
-            setIsScreenVisible={setIsScreenVisible}
-            setIsScreenFadingOut={setIsScreenFadingOut}
-          />
-        </div>
-      )}
     </section>
     </div>
   )

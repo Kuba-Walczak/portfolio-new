@@ -8,29 +8,23 @@ export function Technology({ project }: { project: Project }) {
   const isDense = items.length > 6
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto">
+    <section 
+    className="px-6 py-20 mx-auto"
+    style={{ maxWidth: "calc(100vh * 1.1)" }}>
       <div className="mb-10">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+        <h2 className="type-h6">
           Technology
         </h2>
-        <div
-          className="mt-2 h-0.5 w-12"
-          style={{ background: "var(--brand-purple)" }}
-        />
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4 items-stretch">
         {items.map((tech, index) => (
           <Card
             key={`${project.id}-tech-${index}`}
             className={isDense ? "p-4" : "p-6"}
           >
             <p
-              className={
-                isDense
-                  ? "text-sm font-bold text-center text-[var(--text-primary)]"
-                  : "text-base font-bold text-center text-[var(--text-primary)]"
-              }
+              className="type-h2 text-center items-center justify-center flex h-full"
             >
               {tech}
             </p>
