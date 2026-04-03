@@ -19,8 +19,13 @@ export interface ProjectSubpage {
     techStack: string[];
     startDate: string;
     duration: string;
-    showcase: string;
+    showcase: Showcase;
     gallery: GalleryContent[];
+}
+
+export interface Showcase {
+    src: string;
+    caption: string;
 }
 
 export interface GalleryContent {

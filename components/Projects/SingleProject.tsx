@@ -109,8 +109,8 @@ export function SingleProject({ project }: { project: Project }) {
               >
                 <defs>
                   <linearGradient id={`click-icon-gradient-${project.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#BA9EFF" />
-                    <stop offset="100%" stopColor="#8455ED" />
+                    <stop offset="0%" stopColor="var(--icon-gradient-start)" />
+                    <stop offset="100%" stopColor="var(--icon-gradient-end)" stopOpacity="var(--icon-gradient-end-opacity)" />
                   </linearGradient>
                 </defs>
               </MousePointerClickIcon>

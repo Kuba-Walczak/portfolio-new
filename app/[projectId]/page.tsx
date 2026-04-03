@@ -1,6 +1,7 @@
 'use client'
 
 import { HeroSection } from "@/components/subpage/hero-section"
+import { Technology } from "@/components/subpage/technology"
 import { CoreArchitecture } from "@/components/subpage/core-architecture"
 import { EcosystemMedia } from "@/components/subpage/ecosystem-media"
 import { useApp } from "@/contexts/AppContext"
@@ -36,6 +37,7 @@ export default function ProjectSubpage() {
   return (
     <>
       <HeroSection project={project} />
+      <Technology project={project} />
       <CoreArchitecture project={project} />
       <EcosystemMedia project={project} />
     </>

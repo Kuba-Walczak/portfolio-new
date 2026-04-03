@@ -14,11 +14,11 @@
   --background: hsl(240, 32%, 7%);
 
   --primary: hsl(255, 83%, 58%);
-  --secondary: hsl(258, 83%, 64%);
+  --secondary: hsl(255, 79%, 65%);
   --accent: hsl(238, 100%, 78%);
 
-  --text-primary: hsl(240, 25%, 100%);
-  --text-secondary: color-mix(in srgb, var(--text-primary) 60%, transparent);
+  --text-primary: hsl(0, 0%, 100%);
+  --text-secondary: hsl(0, 0%, 70%);
 
   --glass: rgb(255 255 255 / 0.03);
   --simple-background: rgb(30 30 46 / 0.3);

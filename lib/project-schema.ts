@@ -28,7 +28,10 @@ const SubpageSchema = z.object({
   techStack: z.array(NonEmptyString),
   startDate: NonEmptyString,
   duration: NonEmptyString,
-  showcase: NonEmptyString,
+  showcase: z.object({
+    src: NonEmptyString,
+    caption: NonEmptyString,
+  }),
   gallery: z.array(GalleryContentSchema),
 })
 
