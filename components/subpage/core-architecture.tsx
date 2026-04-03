@@ -32,10 +32,7 @@ const features = [
   },
 ]
 
-function FeatureIcon({
-  Icon,
-}: {
-  Icon: React.ElementType<{ className?: string; style?: React.CSSProperties }>
+function FeatureIcon({ Icon }: { Icon: React.ElementType<{ className?: string; style?: React.CSSProperties }>
 }) {
   return (
     <div
@@ -47,7 +44,7 @@ function FeatureIcon({
 }
 
 export function CoreArchitecture({ project }: { project: Project | undefined}) {
-  const isDense = features.length > 6
+  const isDense = project?.subpage?.feature.length && project?.subpage?.feature.length > 6
 
   return (
     <section className="px-6 py-20 max-w-5xl mx-auto">
@@ -61,12 +58,12 @@ export function CoreArchitecture({ project }: { project: Project | undefined}) {
 
       {/* Responsive feature grid */}
       <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4">
-        {features.map((feature) => (
+        {project?.subpage?.feature.map((feature) => (
           <Card
             key={feature.title}
             className={isDense ? "p-4" : "p-6"}
           >
-            <FeatureIcon Icon={feature.icon} />
+            <FeatureIcon Icon={feature.icon as unknown as React.ElementType<{ className?: string; style?: React.CSSProperties }>} />
             <h3
               className={
                 isDense

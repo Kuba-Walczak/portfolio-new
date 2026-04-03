@@ -15,7 +15,7 @@ export interface ProjectCard {
 export interface ProjectSubpage {
     colors: string[];
     description: string;
-    feature: string[];
+    feature: Feature[];
     techStack: string[];
     startDate: string;
     duration: string;
@@ -33,4 +33,10 @@ export interface GalleryMedia {
     src: string;
     width: number;
     height: number;
+}
+
+export interface Feature {
+    icon: string;
+    title: string;
+    description: string;
 }
