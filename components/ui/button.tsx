@@ -13,7 +13,7 @@ const buttonVariants = cva(
         glass: "border-ui-glass bg-glass backdrop-blur-ui hover:bg-white/10 text-4xl",
       },
       size: {
-        default: "h-11 px-6 py-3 has-[>svg]:px-5",
+        default: "h-14 px-6 py-3 has-[>svg]:px-5",
         sm: "h-9 gap-1.5 px-4 has-[>svg]:px-3",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4 w-max",
         filters: "h-16 rounded-md px-20 text-base has-[>svg]:px-5",

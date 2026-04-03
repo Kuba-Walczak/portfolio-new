@@ -75,7 +75,7 @@ export function Header() {
     window.addEventListener("touchstart", onUserInterrupt, { passive: true })
     const element = document.getElementById("projects")
     if (element) {
-      elementTopRef.current = element.getBoundingClientRect().top - element.getBoundingClientRect().height * 2.5
+      elementTopRef.current = element.getBoundingClientRect().top
     }
     return () => {
       window.removeEventListener("wheel", onUserInterrupt)
@@ -133,14 +133,14 @@ export function Header() {
             <DropdownMenuTrigger
               className={cn(
                 navItemClass,
-                "group type-h2 hover:text-[var(--text-primary)] data-[state=open]:text-[var(--text-primary)]"
+                "group type-h2 hover:text-[var(--text-primary)] data-[state=open]:text-[var(--text-primary)] focus:outline-none"
               )}
             >
               Projects
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              align="start"
-              sideOffset={8}
+              align="center"
+              sideOffset={32}
               className={`min-w-[12rem] border-ui-glass backdrop-blur-xl ${scrollY > 0 ? "bg-background" : "bg-glass"}`}
             >
               {projects === null && (
@@ -218,8 +218,8 @@ export function Header() {
             </button>
           </DropdownMenuTrigger>
             <DropdownMenuContent
-              align="start"
-              sideOffset={8}
+              align="center"
+              sideOffset={32}
               className={`min-w-[12rem] border-ui-glass backdrop-blur-xl ${scrollY > 0 ? "bg-background" : "bg-glass"}`}
             >
               <DropdownMenuLabel className="text-[var(--text-secondary)]">Contacts</DropdownMenuLabel>

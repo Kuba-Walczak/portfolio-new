@@ -6,6 +6,7 @@ import { CoreArchitecture } from "@/components/subpage/core-architecture"
 import { EcosystemMedia } from "@/components/subpage/ecosystem-media"
 import { useApp } from "@/contexts/AppContext"
 import { useParams } from "next/navigation"
+import Background from "@/components/Background"
 
 export default function ProjectSubpage() {
   const { projects } = useApp()
@@ -35,11 +36,12 @@ export default function ProjectSubpage() {
   }
 
   return (
-    <>
+    <div className="relative pt-16">
+    <Background />
       <HeroSection project={project} />
       <Technology project={project} />
       <CoreArchitecture project={project} />
       <EcosystemMedia project={project} />
-    </>
+    </div>
   )
 }

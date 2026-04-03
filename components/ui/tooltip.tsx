@@ -43,14 +43,14 @@ function TooltipContent({
         data-slot="tooltip-content"
         sideOffset={sideOffset}
         className={cn(
-          "border-ui-glass mb-2 bg-white/5 text-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-xl px-3 py-1.5 text-md text-balance",
+          "border-ui-glass mb-2 bg-glass backdrop-blur-xl text-[var(--text-primary)] animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-xl px-3 py-1.5 text-md text-balance",
           className
         )}
         {...props}
       >
         <div className="flex items-center gap-1.5">
           {children}
-          <BadgeCheck className="w-5 h-5 text-muted-foreground shrink-0" />
+          <BadgeCheck className="w-5 h-5 text-[var(--text-secondary)] shrink-0" />
         </div>
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>

@@ -13,9 +13,14 @@ export default function About() {
   return (
     <section
     id="about"
-    className="mx-auto scroll-mt-20"
+    className="mx-auto py-20"
     style={{ maxWidth: 'calc(100vh * 1.1)' }}>
-      <div className="flex justify-center gap-8 py-17">
+      <div className="mb-10">
+        <h2 className="type-h6">
+          About Me
+        </h2>
+      </div>
+      <div className="flex justify-center gap-8">
       <div className="flex flex-col gap-6 w-2/3 bg-glass border-ui-glass rounded-2xl p-8">
             <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">

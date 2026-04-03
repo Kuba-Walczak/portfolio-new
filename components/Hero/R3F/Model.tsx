@@ -157,37 +157,14 @@ function ModelContent(props: any) {
             duration: 0.25,
             overwrite: "auto"
           })
-        }, 2000)
-      })
-    }, [nodes])
-
-    useEffect(() => {
-      if (!isModelLoadedRef.current) return
-      if (!rootRef.current || !laptopHingeRef.current) return
-      if (!projectView) {
-        if (scrollY === 0) {
           gsap.to(heroVideoGlowRef, {
             opacity: 0.1,
             duration: 0.5,
             overwrite: "auto"
           })
-          if (laptopScreenRef.current) {
-            gsap.to(laptopScreenMaterial.color, {
-              r: 0,
-              g: 0,
-              b: 0,
-              duration: 0.25,
-              overwrite: "auto"
-            })
-          }
-          gsap.to(heroVideoGlowRef, {
-            opacity: 0,
-            duration: 0.5,
-            overwrite: "auto"
-          })
-        }
-      }
-    }, [scrollY])
+        }, 2000)
+      })
+    }, [nodes])
 
     useEffect(() => {
       if (laptopScreenRef.current) {

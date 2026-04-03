@@ -16,7 +16,6 @@ export default function Background() {
     let texts = ''
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        // Keep glyph placement deterministic to avoid SSR/CSR hydration mismatches.
         const glyphIndex = (x * 7 + y * 11 + x * y * 3) % glyphs.length
         const char = glyphs[glyphIndex]
         const tx = x * cell + 18
@@ -34,45 +33,6 @@ export default function Background() {
       aria-hidden="true"
     >
       <div className="absolute inset-0 overflow-hidden">
-        {/* <p
-          className="absolute uppercase font-bold whitespace-nowrap"
-          style={{
-            top: '-5%',
-            left: '6%',
-            fontSize: 'clamp(2.8rem, 40vmax, 128rem)',
-            color: 'rgba(255, 255, 255, 0.03)',
-            mixBlendMode: 'soft-light',
-            fontFamily: 'var(--font-wdxl-lubrifont-sc)'
-          }}
-        >
-          未
-        </p>
-        <p
-          className="absolute uppercase font-bold whitespace-nowrap"
-          style={{
-            top: '22%',
-            left: '65%',
-            fontSize: 'clamp(2.8rem, 40vmax, 128rem)',
-            color: 'rgba(255, 255, 255, 0.03)',
-            mixBlendMode: 'soft-light',
-            fontFamily: 'var(--font-wdxl-lubrifont-sc)'
-          }}
-        >
-          未
-        </p>
-        <p
-          className="absolute uppercase font-bold whitespace-nowrap"
-          style={{
-            top: '48%',
-            left: '5%',
-            fontSize: 'clamp(2.8rem, 40vmax, 128rem)',
-            color: 'rgba(255, 255, 255, 0.03)',
-            mixBlendMode: 'soft-light',
-            fontFamily: 'var(--font-wdxl-lubrifont-sc)'
-          }}
-        >
-          来
-        </p> */}
         <div
         className="absolute inset-0"
         style={{

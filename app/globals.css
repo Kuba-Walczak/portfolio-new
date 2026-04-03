@@ -25,11 +25,11 @@
   --simple-background-solid: rgb(30 30 46);
 
   --card-background: hsl(240, 25%, 10%);
-  --card-border: hsl(240, 21%, 12%);
+  --card-border: rgb(255 255 255 / 0.02);
 
   --ui-border-width: 1px;
   --ui-border-style: solid;
-  --ui-border-glass-color: rgb(255 255 255 / 0.05);
+  --ui-border-glass-color: rgb(255 255 255 / 0.02);
 
   --ui-backdrop-blur: 12px;
 }

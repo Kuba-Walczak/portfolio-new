@@ -11,22 +11,11 @@ import SectionHeader from '@/components/SectionHeader'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
-  const projectsStartTop = 'calc(50vh + min(50vh, calc(96vh * 9 / 32)))'
-  
   return (
-      <div className="relative min-h-screen text-secondary">
-      <Background />
-        <div className="relative h-screen">
+      <div className="relative pt-16">
+        <Background />
           <Hero />
-        </div>
-        <div
-          className="relative"
-          style={{
-            marginTop: `calc(${projectsStartTop} - 100vh)`
-          }}
-        >
           <Projects />
-        </div>
         <SectionHeader/>
         <About />
         <SectionHeader/>

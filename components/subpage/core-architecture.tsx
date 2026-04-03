@@ -95,7 +95,7 @@ export function CoreArchitecture({ project }: { project: Project }) {
                 gradientId={`core-architecture-icon-gradient-${project.id}-${feature.title.toLowerCase().replace(/\s+/g, "-")}`}
               />
               <h3
-                className="type-h25"
+                className="type-h25 mb-2"
               >
                 {feature.title}
               </h3>

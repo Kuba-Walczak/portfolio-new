@@ -12,13 +12,13 @@ const badgeVariants = cva(
         default:
           "bg-primary [a&]:hover:bg-primary/90",
         secondary:
-          "bg-simple-glass backdrop-blur-ui border-transparent",
+          "bg-glass border-transparent",
         programming:
-          "bg-simple-glass backdrop-blur-ui",
+          "bg-glass",
         technicalArt:
-          "bg-simple-glass backdrop-blur-ui",
+          "bg-glass",
         art:
-          "bg-simple-glass backdrop-blur-ui",
+          "bg-glass",
         outline:
           "[a&]:hover:bg-accent [a&]:hover:text-primary",
       },
