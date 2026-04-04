@@ -5,6 +5,8 @@ import { Project } from '@/types/project'
 import { fetchProjects } from '@/lib/utils'
 
 interface AppContextType {
+  isMobile: boolean
+  setIsMobile: (isMobile: boolean) => void
   projects: Project[] | null
   setProjects: (projects: Project[] | null) => void
   animationReady: boolean
@@ -18,11 +20,16 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
+  const [isMobile, setIsMobile] = useState(false)
   const [projects, setProjects] = useState<Project[] | null>(null)
   const [animationReady, setAnimationReady] = useState(false)
   const [heroVideoGlowRef, setHeroVideoGlowRef] = useState<HTMLDivElement | null>(null)
   const [openContacts, setOpenContacts] = useState(false)
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 1279px)")
+    const update = () => setIsMobile(media.matches)
+    update()
+    media.addEventListener('change', update)
     const fetchAndUpdate = async () => {
       try {
         const next = await fetchProjects('/projects.json')
@@ -33,10 +40,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     void fetchAndUpdate()
     const interval = setInterval(() => void fetchAndUpdate(), 1000)
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      media.removeEventListener('change', update)
+    }
+
   }, [])
 
   const value: AppContextType = {
+    isMobile,
+    setIsMobile,
     projects,
     setProjects,
     animationReady,

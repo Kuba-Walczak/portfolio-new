@@ -148,8 +148,8 @@
   /** Typography tokens */
   .type-h1 {
     @apply text-balance text-4xl font-bold leading-[0.9] tracking-[-0.025em] text-[var(--text-primary)]
-      vsm:text-5xl
-      vmd:text-6xl
+      vsm:text-4xl
+      vmd:text-5xl
       vlg:text-7xl
       vxl:text-[6.5rem]
       v2xl:text-[7.5rem];
@@ -158,8 +158,8 @@
 
   .type-h2 {
     @apply text-pretty text-xs font-normal uppercase tracking-[0.2em] text-[var(--text-secondary)]
-      vsm:text-base
-      vmd:text-lg
+      vsm:text-sm
+      vmd:text-base
       vlg:text-xl
       vxl:text-2xl
       v2xl:text-3xl;

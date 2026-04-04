@@ -13,7 +13,7 @@ import { useApp } from '@/contexts/AppContext'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
-  const { animationReady } = useApp()
+  const { animationReady, isMobile } = useApp()
   const heroContainerRef = useRef<HTMLDivElement>(null)
   const elementTopRef = useRef<number>(0)
   const scrollTweenRef = useRef<gsap.core.Tween | null>(null)
@@ -23,12 +23,16 @@ export default function Hero() {
     if (element) {
       elementTopRef.current = element.getBoundingClientRect().top - element.offsetHeight
     }
-    gsap.set(heroContainerRef.current, {
-      x: "+=150%",
-      duration: 1,
-      ease: "power2.inOut",
-    })
+    if (!isMobile) {
+      gsap.set(heroContainerRef.current, { x: "+=150%", opacity: 1 })
+    }
   }, [])
+
+  useEffect(() => {
+    if (isMobile) {
+      gsap.set(heroContainerRef.current, { x: 0, opacity: 1 })
+    }
+  }, [isMobile])
 
   useEffect(() => {
     if (!animationReady) return
@@ -65,28 +69,31 @@ export default function Hero() {
   return (
       <section
         id="home"
-        className="mx-auto h-[75vh] relative flex flex-col justify-center"
+        className="mx-auto h-[75vh] px-6 relative flex flex-col justify-center items-center xl:items-start"
     style={{ maxWidth: 'calc(100vh * 1.1)' }}
       >
       <div
       className="w-fit relative rounded-2xl origin-center"
-      style={{ clipPath: 'inset(0px -45% 0px 0px)' }}>
+      style={{ clipPath: 'inset(0px -10% 0px 0px)' }}>
         <div
         ref={heroContainerRef}
-        className="flex flex-col justify-center gap-4 vsm:gap-5 vmd:gap-6 vlg:gap-7 vxl:gap-8 v2xl:gap-10">
+        className="flex flex-col justify-center gap-4 vsm:gap-5 vmd:gap-6 vlg:gap-7 vxl:gap-8 v2xl:gap-10 items-center xl:items-start opacity-0">
           <div className="flex flex-col gap-1.5 vsm:gap-2 -mb-2 vsm:-mb-2 vmd:-mb-2.5 vlg:-mb-3">
             <h2 className="type-h2">
               Technical Artist
               <span className="mx-2 type-h2">•</span>
-              Warsaw, Poland
+              Warsaw<span className="hidden sm:inline">, Poland</span>
             </h2>
           </div>
           <h1 className="type-h1 -ml-[0.024em] vsm:-ml-[0.03em] vmd:-ml-[0.04em] vlg:-ml-[0.044em] vxl:-ml-[0.05em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1">
             KUBA WALCZAK
           </h1>
-          <div className="flex flex-col items-start gap-1.5 vsm:gap-2">
-            <h2 className="type-h4">
-              Bridging the gap between design and<br/>development through arts and technology
+          <div className="flex flex-col items-center xl:items-start gap-1.5 vsm:gap-2 text-center xl:text-left">
+            <h2 className="type-h4 block xl:hidden">
+              Bridging the gap between design and development through arts and technology
+            </h2>
+            <h2 className="type-h4 hidden xl:block">
+              Bridging the gap between design and<br></br>development through arts and technology
             </h2>
             <Button
               variant="default"
@@ -99,11 +106,13 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="absolute inset- w-full h-full pointer-events-none">
-      <HeroCanvas>
-        <Model/>
-      </HeroCanvas>
-      </div>
+      {!isMobile && (
+        <div className="absolute inset- w-full h-full pointer-events-none xl:block hidden">
+        <HeroCanvas>
+          <Model/>
+        </HeroCanvas>
+        </div>
+      )}
     </section>
   )
 }

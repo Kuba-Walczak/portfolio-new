@@ -151,7 +151,7 @@ function ModelContent(props: any) {
               ease: "power2.inOut"
             })
             gsap.to(root.position, {
-              x: 0.225,
+              x: 0.2,
               duration: 2.5,
               overwrite: 'auto',
               ease: "power2.inOut"

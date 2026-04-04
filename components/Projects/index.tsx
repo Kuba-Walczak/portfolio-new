@@ -9,7 +9,7 @@ export default function Projects() {
   return (
     <section
     id="projects"
-    className="mx-auto pb-20"
+    className="mx-auto pb-20 px-6"
     style={{ maxWidth: 'calc(100vh * 1.1)' }}>
       <div className="mb-10">
         <h2 className="type-h6">
@@ -18,7 +18,7 @@ export default function Projects() {
       </div>
     <div
     className="flex flex-col gap-16 rounded-2xl">
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-8">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-8">
         {projects?.map((project) => (
           <SingleProject key={project.id} project={project}/>
         ))}

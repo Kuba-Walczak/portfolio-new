@@ -29,7 +29,7 @@ export function SingleProject({ project }: { project: Project }) {
   return (
         <div
           key={project.id}
-          className={`relative min-w-[350px] h-[240px] vsm:h-[285px] vmd:h-[335px] vlg:h-[375px] vxl:h-[420px] v2xl:h-[460px] flex flex-col flex-shrink-0 overflow-hidden rounded-2xl bg-glass border-ui-glass transition duration-200 hover:brightness-110 hover:bg-white/5 cursor-pointer [font-family:var(--font-manrope)] ${
+          className={`relative min-w-[200px] md:min-w-[350px] h-[240px] vsm:h-[285px] vmd:h-[335px] vlg:h-[375px] vxl:h-[420px] v2xl:h-[460px] flex flex-col flex-shrink-0 overflow-hidden rounded-2xl bg-glass border-ui-glass transition duration-200 hover:brightness-110 hover:bg-white/5 cursor-pointer [font-family:var(--font-manrope)] ${
             project.status === 'coming-soon'
               ? 'pointer-events-none' : ''}`}
           onClick={() => {

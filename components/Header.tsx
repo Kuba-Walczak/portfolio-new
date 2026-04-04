@@ -103,7 +103,7 @@ export function Header() {
 
   return (
     <header
-      className={`mx-auto fixed top-0 left-0 right-0 z-50 flex items-center justify-center px-6 rounded-b-2xl border-ui-glass transition-all duration-200 ${scrollY > scrollThresholdRef.current ? "py-2" : "py-6"}`}
+      className={`mx-auto fixed top-0 left-0 right-0 z-50 flex items-center ${isMainPage ? "" : "justify-center"} sm:justify-center px-6 rounded-b-2xl border-ui-glass transition-all duration-200 ${scrollY > scrollThresholdRef.current ? "py-2" : "py-6"}`}
       style={{ maxWidth: "calc(100vh * 1.1)", background: scrollY > scrollThresholdRef.current ? "var(--background)" : "var(--glass)" }}
     >
 
@@ -117,7 +117,7 @@ export function Header() {
       )}
 
       {isMainPage && (
-        <nav className="flex items-center justify-center gap-32">
+        <nav className="flex items-center justify-center gap-2 sm:gap-16 md:gap-32">
           <a
             className={cn(
               navItemClass,
@@ -164,7 +164,9 @@ export function Header() {
                     router.push(`/${project.id}`)
                   }}
                 >
-                  {project.title}
+<span className="block truncate w-64 sm:w-full">
+  {project.title}
+</span>
                 </DropdownMenuItem>
               ))}
               <DropdownMenuSeparator className="bg-[var(--card-border)]" />

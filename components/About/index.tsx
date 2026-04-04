@@ -12,11 +12,11 @@ const skills = [
 ]
 
 export default function About() {
-  const { setOpenContacts } = useApp()
+  const { setOpenContacts, isMobile } = useApp()
   return (
     <section
     id="about"
-    className="mx-auto py-20"
+    className="mx-auto py-20 px-6"
     style={{ maxWidth: 'calc(100vh * 1.1)' }}>
       <div className="mb-10">
         <h2 className="type-h6">
@@ -24,7 +24,7 @@ export default function About() {
         </h2>
       </div>
       <div className="flex justify-center gap-8">
-      <div className="flex flex-col gap-6 w-2/3 bg-glass border-ui-glass rounded-2xl p-8">
+      <div className="flex flex-col gap-6 xl:w-2/3 w-full bg-glass border-ui-glass rounded-2xl p-8">
             <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
             <Tooltip>
@@ -76,7 +76,7 @@ export default function About() {
             <span className="type-h25">Location</span>
             <span className="type-h4">Warsaw<span className="mx-2 type-h4">•</span>Poland</span>
           </div>
-          <div className="flex gap-8">
+          <div className="flex xl:flex-row flex-col gap-8">
           <Button
               variant="default"
               className="mt-6 inline-flex cursor-pointer gap-2 px-6 py-2 type-h25"
@@ -93,17 +93,19 @@ export default function About() {
             </Button>
           </div>
           </div>
-        <div className="relative w-1/2 flex bg-glass border-ui-glass rounded-2xl overflow-hidden">
-        <p className="absolute top-1/2 left-1/2 text-center text-accent z-[-10] opacity-15 text-[16rem] vsm:text-[20rem] vmd:text-[24rem] vlg:text-[28rem] vxl:text-[32rem]" style={{ fontFamily: 'var(--font-wdxl-lubrifont-sc)', lineHeight: 1, transform: 'translate(-5%, -67%)', transformOrigin: 'center' }}>
-            未<br/>来
-          </p>
-          <Image
-            src="https://PortfolioPullZone.b-cdn.net/LandingPage/FaceForeground.webp"
-            alt="About Me"
-            width={500}
-            height={500}
-          />
-        </div>
+        {!isMobile && (
+          <div className="relative w-1/2 flex bg-glass border-ui-glass rounded-2xl overflow-hidden xl:block hidden">
+          <p className="absolute top-1/2 left-1/2 text-center text-accent z-[-10] opacity-15 text-[16rem] vsm:text-[20rem] vmd:text-[24rem] vlg:text-[28rem] vxl:text-[32rem]" style={{ fontFamily: 'var(--font-wdxl-lubrifont-sc)', lineHeight: 1, transform: 'translate(-5%, -67%)', transformOrigin: 'center' }}>
+              未<br/>来
+            </p>
+            <Image
+              src="https://PortfolioPullZone.b-cdn.net/LandingPage/FaceForeground.webp"
+              alt="About Me"
+              width={500}
+              height={500}
+            />
+          </div>
+        )}
       </div>
     </section>
   )
