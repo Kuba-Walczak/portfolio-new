@@ -13,6 +13,36 @@ type VideoModalProps = {
   secondarySrc?: string
 }
 
+const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp", "avif", "svg"]
+
+function getMediaType(src: string): "image" | "video" {
+  const ext = src.split("?")[0].split(".").pop()?.toLowerCase() ?? ""
+  return IMAGE_EXTENSIONS.includes(ext) ? "image" : "video"
+}
+
+function MediaItem({ src, className }: { src: string; className: string }) {
+  if (getMediaType(src) === "image") {
+    return (
+      <img
+        src={src}
+        alt=""
+        className={className}
+      />
+    )
+  }
+
+  return (
+    <video
+      src={src}
+      className={className}
+      controls
+      autoPlay
+      loop
+      playsInline
+    />
+  )
+}
+
 export function VideoModal({
   isOpen,
   onClose,
@@ -36,6 +66,8 @@ export function VideoModal({
   }, [isOpen, onClose])
 
   if (!isOpen || !primarySrc) return null
+
+  const mediaClassName = "max-h-[80vh] w-full rounded-t-none rounded-b-lg bg-black object-contain"
 
   return (
     <div
@@ -68,40 +100,18 @@ export function VideoModal({
             className="absolute right-4 top-4 text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
             aria-label="Close modal"
           >
-            <X className="h-8 w-8 cursor-pointer"/>
+            <X className="h-8 w-8 cursor-pointer" />
           </button>
         </Card>
 
         {secondarySrc ? (
           <div className="grid gap-3 md:grid-cols-2">
-            <video
-              src={primarySrc}
-              className="max-h-[80vh] w-full rounded-t-none rounded-b-lg bg-black object-contain"
-              controls
-              autoPlay
-              loop
-              playsInline
-            />
-            <video
-              src={secondarySrc}
-              className="max-h-[80vh] w-full rounded-t-none rounded-b-lg bg-black object-contain"
-              controls
-              autoPlay
-              loop
-              playsInline
-            />
+            <MediaItem src={primarySrc} className={mediaClassName} />
+            <MediaItem src={secondarySrc} className={mediaClassName} />
           </div>
         ) : (
-          <video
-            src={primarySrc}
-            className="max-h-[80vh] w-full rounded-t-none rounded-b-lg bg-black object-contain"
-            controls
-            autoPlay
-            loop
-            playsInline
-          />
+          <MediaItem src={primarySrc} className={mediaClassName} />
         )}
-
       </div>
     </div>
   )

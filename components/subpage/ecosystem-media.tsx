@@ -19,7 +19,7 @@ function MediaPreview({
 
   if (!firstMedia) {
     return (
-      <div className="flex h-full min-h-44 items-center justify-center bg-[var(--surface-2)] px-4 text-center text-sm text-[var(--text-secondary)] cursor-pointer">
+      <div className="flex h-full min-h-44 items-center justify-center bg-[var(--surface-2)] px-4 text-center text-sm text-[var(--text-secondary)]">
         Media unavailable
       </div>
     )
@@ -27,22 +27,26 @@ function MediaPreview({
 
   if (content.type === "image") {
     return (
-      <div className="relative h-52 w-full md:h-56">
+      <button
+          type="button"
+          onClick={() => onOpenVideo(content)}
+          className="relative block h-52 w-full md:h-56"
+        >
         <Image
           src={firstMedia.src}
           alt={content.title}
           fill
-          className="object-cover"
+          className="object-cover cursor-pointer"
           sizes="(min-width: 1024px) 32vw, (min-width: 768px) 50vw, 100vw"
         />
-      </div>
+      </button>
     )
   }
 
   if (content.type === "before-after") {
     if (!firstMedia.src) {
       return (
-        <div className="flex h-full min-h-44 items-center justify-center bg-[var(--surface-2)] px-4 text-center text-sm text-[var(--text-secondary)] cursor-pointer">
+        <div className="flex h-full min-h-44 items-center justify-center bg-[var(--surface-2)] px-4 text-center text-sm text-[var(--text-secondary)]">
           Media unavailable
         </div>
       )
@@ -53,11 +57,11 @@ function MediaPreview({
         <button
           type="button"
           onClick={() => onOpenVideo(content)}
-          className="relative block h-52 w-full md:h-56 cursor-pointer"
+          className="relative block h-52 w-full md:h-56"
         >
           <video
             src={firstMedia.src}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover cursor-pointer"
             muted
             playsInline
             preload="metadata"
@@ -71,12 +75,12 @@ function MediaPreview({
       <button
         type="button"
         onClick={() => onOpenVideo(content)}
-        className="relative block h-52 w-full overflow-hidden md:h-56 cursor-pointer"
+        className="relative block h-52 w-full overflow-hidden md:h-56"
       >
         <div className="absolute inset-0 h-full w-full overflow-hidden [clip-path:inset(0_50%_0_0)]">
           <video
             src={firstMedia.src}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover cursor-pointer"
             muted
             playsInline
             preload="metadata"
@@ -85,7 +89,7 @@ function MediaPreview({
         <div className="absolute inset-0 h-full w-full overflow-hidden [clip-path:inset(0_0_0_50%)]">
           <video
             src={secondMedia.src}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover cursor-pointer"
             muted
             playsInline
             preload="metadata"
@@ -100,11 +104,11 @@ function MediaPreview({
     <button
       type="button"
       onClick={() => onOpenVideo(content)}
-      className="relative block h-52 w-full md:h-56 cursor-pointer"
+      className="relative block h-52 w-full md:h-56"
     >
       <video
         src={firstMedia.src}
-        className="h-full w-full object-cover"
+        className="h-full w-full object-cover cursor-pointer"
         muted
         playsInline
         preload="metadata"
@@ -117,7 +121,9 @@ function MediaPreview({
 export function EcosystemMedia({ project }: { project: Project }) {
   const gallery = project.subpage.gallery
   const [selectedVideo, setSelectedVideo] = useState<Project["subpage"]["gallery"][number] | null>(null)
-
+  const onOpenVideo = (content: Project["subpage"]["gallery"][number]) => {
+    setSelectedVideo(content)
+  }
   return (  
     <section 
     className="relative px-6 py-20 mx-auto"
@@ -139,7 +145,8 @@ export function EcosystemMedia({ project }: { project: Project }) {
           {gallery.map((content, index) => (
             <Card
               key={`${content.title}-${index}`}
-              className="overflow-hidden rounded-xl p-0 transition duration-200 hover:brightness-110 hover:bg-white/5"
+              className="overflow-hidden rounded-xl p-0 transition duration-200 hover:brightness-110 hover:bg-white/5 cursor-pointer"
+              onClick={() => onOpenVideo(content)}
             >
               <MediaPreview content={content} onOpenVideo={setSelectedVideo} />
               <div className="flex items-center gap-3 px-4 py-3">
