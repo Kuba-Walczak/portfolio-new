@@ -2,7 +2,6 @@
 
 import { HeroCanvas } from '@/components/Hero/R3F/HeroCanvas'
 import { Model } from '@/components/Hero/R3F/Model'
-import { useScroll } from '@/hooks/useScroll'
 import { ArrowRight } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'

@@ -1,6 +1,6 @@
 export interface Project {
     id: string;
-    status: 'ready' | 'coming-soon';
+    status: "ready" | "coming-soon";
     title: string;
     card: ProjectCard;
     subpage: ProjectSubpage;

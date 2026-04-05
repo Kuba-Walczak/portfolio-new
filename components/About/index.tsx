@@ -101,7 +101,7 @@ export default function About() {
           <Button
               variant="default"
               className="mt-6 inline-flex cursor-pointer gap-2 px-6 py-2 type-h25"
-              onClick={() => window.open('resume-pl-04-04-2026.pdf', '_blank')}
+              onClick={() => window.open('https://PortfolioPullZone.b-cdn.net/resume-pl-04-04-2026.pdf', '_blank')}
             >
               Resume
             </Button>

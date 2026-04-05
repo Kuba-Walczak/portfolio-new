@@ -6,24 +6,24 @@ export interface Tag {
 
 export const Tag = {
     PROGRAMMING: {
-        id: '1',
-        style: 'programming',
-        title: 'Programming'
+        id: "1",
+        style: "programming",
+        title: "Programming"
     },
     TECHNICAL_ART: {
-        id: '2',
-        style: 'technicalArt',
-        title: 'Technical Art'
+        id: "2",
+        style: "technicalArt",
+        title: "Technical Art"
     },
     ART: {
-        id: '3',
-        style: 'art',
-        title: '3D Art'
+        id: "3",
+        style: "art",
+        title: "3D Art"
     },
     COMING_SOON: {
-        id: '4',
-        style: 'comingSoon',
-        title: 'Coming Soon'
+        id: "4",
+        style: "comingSoon",
+        title: "Coming Soon"
     }
 } as const satisfies Record<string, Tag>;
 

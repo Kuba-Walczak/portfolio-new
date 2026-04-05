@@ -35,24 +35,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const media = window.matchMedia("(max-width: 1279px)")
     const update = () => setIsMobile(media.matches)
     update()
-    media.addEventListener('change', update)
+    media.addEventListener("change", update)
+  
     const fetchAndUpdate = async () => {
       try {
-        const projects = await fetchProjects('/projects.json')
+        const projects = await fetchProjects("https://PortfolioPullZone.b-cdn.net/projects.json")
         setProjects(projects)
         setIsLoading(false)
-        console.log('Projects loaded')
       } catch (e) {
         console.error(e)
       }
     }
     void fetchAndUpdate()
-    const interval = setInterval(() => void fetchAndUpdate(), 1000)
-    return () => {
-      clearInterval(interval)
-      media.removeEventListener('change', update)
-    }
-
+    return () => media.removeEventListener("change", update)
   }, [])
 
   const value: AppContextType = {

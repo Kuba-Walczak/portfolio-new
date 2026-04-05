@@ -6,7 +6,6 @@ import { useGLTF } from '@react-three/drei'
 import { gsap } from 'gsap'
 import { useApp } from '@/contexts/AppContext'
 import { useVideoTexture } from '@react-three/drei'
-import { useCustomShader } from './CustomShader'
 
 type GLTFResult = {
   nodes: {
@@ -29,15 +28,15 @@ function ModelContent(props: any) {
     const rootRef = useRef<THREE.Group>(null)
     const laptopHingeRef = useRef<THREE.Group>(null)
 
-    const { nodes } = useGLTF(`r3fFinal.glb`) as unknown as GLTFResult
+    const { nodes } = useGLTF("https://PortfolioPullZone.b-cdn.net/laptop.glb") as unknown as GLTFResult
 
-    const texture = useLoader(TextureLoader, 'BakeFinal.png')
+    const texture = useLoader(TextureLoader, "https://PortfolioPullZone.b-cdn.net/bake.webp?t=0")
     texture.flipY = false
     texture.colorSpace = THREE.SRGBColorSpace
     texture.minFilter = THREE.LinearFilter
     texture.magFilter = THREE.LinearFilter
 
-    const laptopScreenTexture = useVideoTexture("showcase.mp4", { loop: true, muted: true, playsInline: true, crossOrigin: 'anonymous', start: false })
+    const laptopScreenTexture = useVideoTexture("https://PortfolioPullZone.b-cdn.net/showcase.webm", { loop: true, muted: true, playsInline: true, crossOrigin: 'anonymous', start: false })
     laptopScreenTexture.flipY = false
     laptopScreenTexture.colorSpace = THREE.SRGBColorSpace
     laptopScreenTexture.minFilter = THREE.LinearFilter

@@ -25,7 +25,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: 'Kuba Walczak | Technical Artist',
   icons: {
-    icon: "/icon.svg",
+    icon: "https://PortfolioPullZone.b-cdn.net/icon.svg?t=5",
   },
 }
 
