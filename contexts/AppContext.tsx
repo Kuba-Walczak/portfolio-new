@@ -5,8 +5,12 @@ import { Project } from '@/types/project'
 import { fetchProjects } from '@/lib/utils'
 
 interface AppContextType {
+  isLoading: boolean
+  setIsLoading: (isLoading: boolean) => void
   isMobile: boolean
   setIsMobile: (isMobile: boolean) => void
+  isLandingPage: boolean
+  setIsLandingPage: (isLandingPage: boolean) => void
   projects: Project[] | null
   setProjects: (projects: Project[] | null) => void
   animationReady: boolean
@@ -20,7 +24,9 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
+  const [isLoading, setIsLoading] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
+  const [isLandingPage, setIsLandingPage] = useState(true)
   const [projects, setProjects] = useState<Project[] | null>(null)
   const [animationReady, setAnimationReady] = useState(false)
   const [heroVideoGlowRef, setHeroVideoGlowRef] = useState<HTMLDivElement | null>(null)
@@ -32,8 +38,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     media.addEventListener('change', update)
     const fetchAndUpdate = async () => {
       try {
-        const next = await fetchProjects('/projects.json')
-        setProjects(next)
+        const projects = await fetchProjects('/projects.json')
+        setProjects(projects)
+        setIsLoading(false)
+        console.log('Projects loaded')
       } catch (e) {
         console.error(e)
       }
@@ -48,8 +56,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const value: AppContextType = {
+    isLoading,
+    setIsLoading,
     isMobile,
     setIsMobile,
+    isLandingPage,
+    setIsLandingPage,
     projects,
     setProjects,
     animationReady,

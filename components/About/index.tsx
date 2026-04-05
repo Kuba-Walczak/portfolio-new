@@ -4,12 +4,39 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import Image from 'next/image'
 import { Button } from '../ui/button'
 import { useApp } from '@/contexts/AppContext'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '../ui/dropdown-menu'
+import { cn } from '@/lib/utils'
+import { Avatar } from '../ui/avatar'
+import { AvatarFallback } from '../ui/avatar'
+import { AvatarBadge } from '../ui/avatar'
+import { FaDiscord, FaGithub, FaLinkedin } from 'react-icons/fa'
 
 const skills = [
   { category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
   { category: 'Backend', items: ['Node.js', 'PostgreSQL', 'REST APIs', 'Authentication'] },
   { category: 'Tools', items: ['Git', 'Figma', 'VS Code', 'AWS'] },
 ]
+
+const contacts = {
+    github: {
+      id: "github",
+      label: "GitHub",
+      icon: <FaGithub className="size-8" />,
+      href: "https://github.com/kuba-walczak",
+    },
+    linkedin: {
+      id: "linkedin",
+      label: "LinkedIn",
+      icon: <FaLinkedin className="size-8" />,
+      href: "https://linkedin.com/in/kuba-walczak-dev",
+    },
+    discord: {
+      id: "discord",
+      label: "Discord",
+      icon: <FaDiscord className="size-8" />,
+      href: "https://discord.com/users/1234567890",
+    },
+  }
 
 export default function About() {
   const { setOpenContacts, isMobile } = useApp()
@@ -63,9 +90,7 @@ export default function About() {
             <div className="flex flex-col gap-1">
             <span className="type-h25">About Me</span>
             <p className="type-h4 text-justify">
-            My name's Jacob and I'm a full-time CS student at PJAIT.
-            Throughout my life I've tinkered with various forms of creative expression, such as video editing, music and animation.
-            Ultimately what I've found to lov
+            I am a full-time CS student at PJAIT. I love creating visuals, whether it's vfx, 3D animations, games or websites. Ultimately what I've found to love most is creating visuals that rely on complex systems to create experiences that don't just look cool, but work in a bigger environment and perform well. I'm always trying to push myself to create better and better work. Thank you for checking out my website!
             </p>
             </div>
             <div className="flex flex-col gap-1">
@@ -80,17 +105,39 @@ export default function About() {
           <Button
               variant="default"
               className="mt-6 inline-flex cursor-pointer gap-2 px-6 py-2 type-h25"
-              onClick={() => setOpenContacts(true)}
+              onClick={() => window.open('resume-pl-04-04-2026.pdf', '_blank')}
             >
-              View Resume
+              Resume
             </Button>
-            <Button
+              <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+          <Button
               variant="default"
               className="mt-6 inline-flex cursor-pointer gap-2 px-6 py-2 type-h25"
-              onClick={() => setOpenContacts(true)}
             >
-              View Contacts
+              Contacts
             </Button>
+          </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="center"
+              sideOffset={8}
+              className={`min-w-[12rem] border-ui-glass backdrop-blur-xl bg-background`}
+            >
+              <DropdownMenuLabel className="text-[var(--text-secondary)]">Contacts</DropdownMenuLabel>
+              {Object.values(contacts).map((contact) => (
+                <DropdownMenuItem
+                  key={contact.id}
+                  className="cursor-pointer text-[var(--text-primary)]"
+                  onSelect={() => {
+                    window.open(contact.href, "_blank")
+                  }}
+                >
+                  {contact.icon}
+                  {contact.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           </div>
         {!isMobile && (
@@ -100,6 +147,7 @@ export default function About() {
             </p>
             <Image
               src="https://PortfolioPullZone.b-cdn.net/LandingPage/FaceForeground.webp"
+              className="absolute bottom-0"
               alt="About Me"
               width={500}
               height={500}

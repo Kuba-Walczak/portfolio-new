@@ -30,7 +30,7 @@ function MediaPreview({
       <div className="relative h-52 w-full md:h-56">
         <Image
           src={firstMedia.src}
-          alt={content.caption}
+          alt={content.title}
           fill
           className="object-cover"
           sizes="(min-width: 1024px) 32vw, (min-width: 768px) 50vw, 100vw"
@@ -54,7 +54,6 @@ function MediaPreview({
           type="button"
           onClick={() => onOpenVideo(content)}
           className="relative block h-52 w-full md:h-56 cursor-pointer"
-          aria-label={`Open ${content.caption} video`}
         >
           <video
             src={firstMedia.src}
@@ -73,7 +72,6 @@ function MediaPreview({
         type="button"
         onClick={() => onOpenVideo(content)}
         className="relative block h-52 w-full overflow-hidden md:h-56 cursor-pointer"
-        aria-label={`Open ${content.caption} video`}
       >
         <div className="absolute inset-0 h-full w-full overflow-hidden [clip-path:inset(0_50%_0_0)]">
           <video
@@ -103,7 +101,6 @@ function MediaPreview({
       type="button"
       onClick={() => onOpenVideo(content)}
       className="relative block h-52 w-full md:h-56 cursor-pointer"
-      aria-label={`Open ${content.caption} video`}
     >
       <video
         src={firstMedia.src}
@@ -141,12 +138,12 @@ export function EcosystemMedia({ project }: { project: Project }) {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {gallery.map((content, index) => (
             <Card
-              key={`${content.caption}-${index}`}
+              key={`${content.title}-${index}`}
               className="overflow-hidden rounded-xl p-0 transition duration-200 hover:brightness-110 hover:bg-white/5"
             >
               <MediaPreview content={content} onOpenVideo={setSelectedVideo} />
               <div className="flex items-center gap-3 px-4 py-3">
-                <p className="type-h25">{content.caption}</p>
+                <p className="type-h25">{content.title}</p>
                 {content.type !== "image" && (
                   <MousePointerClickIcon
                     className="ml-auto h-8 w-8"
@@ -176,12 +173,9 @@ export function EcosystemMedia({ project }: { project: Project }) {
       <VideoModal
         isOpen={Boolean(selectedVideo)}
         onClose={() => setSelectedVideo(null)}
-        title={selectedVideo?.caption ?? "Media preview"}
+        title={selectedVideo?.title ?? ""}
         description={
-          selectedVideo?.type === "before-after"
-            ? "Before-and-after comparison clip."
-            : "Media preview clip."
-        }
+          selectedVideo?.caption ?? "" }
         primarySrc={selectedVideo?.media[0]?.src}
         secondarySrc={selectedVideo?.type === "before-after" ? selectedVideo?.media[1]?.src : undefined}
       />

@@ -31,6 +31,7 @@ export interface Showcase {
 export interface GalleryContent {
     type: string;
     media: GalleryMedia[];
+    title: string;
     caption: string;
 }
 

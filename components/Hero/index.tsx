@@ -21,10 +21,10 @@ export default function Hero() {
   useEffect(() => {
     const element = document.getElementById("projects")
     if (element) {
-      elementTopRef.current = element.getBoundingClientRect().top - element.offsetHeight
+      elementTopRef.current = element.getBoundingClientRect().top + window.scrollY
     }
     if (!isMobile) {
-      gsap.set(heroContainerRef.current, { x: "+=150%", opacity: 1 })
+      gsap.set(heroContainerRef.current, { x: "150%", opacity: 1 })
     }
   }, [])
 
@@ -74,11 +74,11 @@ export default function Hero() {
       >
       <div
       className="w-fit relative rounded-2xl origin-center"
-      style={{ clipPath: 'inset(0px -10% 0px 0px)' }}>
+      style={{ clipPath: 'inset(0px -25% 0px 0px)' }}>
         <div
         ref={heroContainerRef}
         className="flex flex-col justify-center gap-4 vsm:gap-5 vmd:gap-6 vlg:gap-7 vxl:gap-8 v2xl:gap-10 items-center xl:items-start opacity-0">
-          <div className="flex flex-col gap-1.5 vsm:gap-2 -mb-2 vsm:-mb-2 vmd:-mb-2.5 vlg:-mb-3">
+          <div className="flex flex-col gap-1.5 vsm:gap-2 -mb-2 vsm:-mb-2 vmd:-mb-2.5 vlg:-mb-4">
             <h2 className="type-h2">
               Technical Artist
               <span className="mx-2 type-h2">•</span>
@@ -90,10 +90,10 @@ export default function Hero() {
           </h1>
           <div className="flex flex-col items-center xl:items-start gap-1.5 vsm:gap-2 text-center xl:text-left">
             <h2 className="type-h4 block xl:hidden">
-              Bridging the gap between design and development through arts and technology
+            I build scalable procedural systems by combining computer graphics and computer science.
             </h2>
             <h2 className="type-h4 hidden xl:block">
-              Bridging the gap between design and<br></br>development through arts and technology
+              I build scalable procedural systems by combining computer graphics<br></br>and computer science.
             </h2>
             <Button
               variant="default"

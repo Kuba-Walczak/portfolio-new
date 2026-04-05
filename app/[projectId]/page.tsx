@@ -7,8 +7,13 @@ import { EcosystemMedia } from "@/components/subpage/ecosystem-media"
 import { useApp } from "@/contexts/AppContext"
 import { useParams } from "next/navigation"
 import Background from "@/components/Background"
+import { useEffect } from "react"
 
 export default function ProjectSubpage() {
+  const { setAnimationReady } = useApp()
+  useEffect(() => {
+    setAnimationReady(false)
+  }, [])
   const { projects } = useApp()
   const params = useParams<{ projectId: string }>()
 

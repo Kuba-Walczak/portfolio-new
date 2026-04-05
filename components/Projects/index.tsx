@@ -2,9 +2,10 @@
 
 import { useApp } from '@/contexts/AppContext'
 import { SingleProject } from './SingleProject'
+import { Card } from "@/components/ui/card"
 
 export default function Projects() {
-  const { projects } = useApp()
+  const { projects, isLoading } = useApp()
 
   return (
     <section
@@ -19,9 +20,19 @@ export default function Projects() {
     <div
     className="flex flex-col gap-16 rounded-2xl">
       <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-8">
-        {projects?.map((project) => (
-          <SingleProject key={project.id} project={project}/>
-        ))}
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, i) => (
+            <Card
+            key={i}
+            className="w-full animate-pulse h-[240px] vsm:h-[285px] vmd:h-[335px] vlg:h-[375px] vxl:h-[420px] v2xl:h-[460px]"
+            style={{ animationDuration: '0.8s' }}>
+            </Card>
+          ))
+        ) : (
+          projects?.map((project) => (
+            <SingleProject key={project.id} project={project}/>
+          ))
+        )}
       </div>
     </div>
     </section>

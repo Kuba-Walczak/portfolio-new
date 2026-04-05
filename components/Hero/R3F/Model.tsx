@@ -132,6 +132,7 @@ function ModelContent(props: any) {
             overwrite: 'auto'
           })
           setTimeout(() => {
+            laptopScreenTexture.image.currentTime = 0
             laptopScreenTexture.image.play()
           isModelLoadedRef.current = true
           setAnimationReady(true)

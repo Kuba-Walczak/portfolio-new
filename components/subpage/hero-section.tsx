@@ -16,6 +16,19 @@ export function HeroSection({ project }: { project: Project }) {
         className="relative flex flex-col items-center justify-center text-center md:text-left px-6 pt-40 pb-32 overflow-hidden mx-auto"
         style={{ background: "radial-gradient(ellipse 80% 60% at 50% 60%, #1a0a3e 0%, var(--background) 70%)", maxWidth: "calc(100vh * 1.1)" }}
       >
+        <div className="absolute top-0 left-0 w-full h-full">
+  <video
+    src={project.subpage.showcase.src}
+    className="w-full h-full object-cover"
+    autoPlay
+    loop
+    playsInline
+    muted
+  />
+  {/* Gradient overlay */}
+  <div className="absolute inset-0 pointer-events-none
+  bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,var(--background-rgba)_0%,var(--background)_100%)]" />
+</div>
         <div className="relative z-10 w-full flex flex-col md:flex-row items-center md:items-center justify-between gap-12">
           <div className="">
             <h1 className="type-h1 leading-tight whitespace-nowrap relative mb-6">
@@ -28,7 +41,7 @@ export function HeroSection({ project }: { project: Project }) {
             </p>
             <Button
               variant="default"
-              className="mt-6 inline-flex cursor-pointer items-center gap-2 px-6 py-2 type-h25"
+              className="mt-6 inline-flex cursor-pointer items-center gap-16 type-h25"
               onClick={() => setIsPreviewOpen(true)}
             >
               Preview

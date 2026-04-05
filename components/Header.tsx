@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef } from "react"
 import { gsap } from "gsap"
 import { ArrowLeft } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
@@ -103,7 +103,7 @@ export function Header() {
 
   return (
     <header
-      className={`mx-auto fixed top-0 left-0 right-0 z-50 flex items-center ${isMainPage ? "" : "justify-center"} sm:justify-center px-6 rounded-b-2xl border-ui-glass transition-all duration-200 ${scrollY > scrollThresholdRef.current ? "py-2" : "py-6"}`}
+      className={`mx-auto fixed top-0 left-0 right-0 z-50 flex items-center ${isMainPage ? "" : "justify-center"} sm:justify-center px-6 rounded-b-2xl border-ui-glass transition-all duration-200 ${scrollY > scrollThresholdRef.current ? "py-2" : "py-4"}`}
       style={{ maxWidth: "calc(100vh * 1.1)", background: scrollY > scrollThresholdRef.current ? "var(--background)" : "var(--glass)" }}
     >
 
@@ -211,8 +211,8 @@ export function Header() {
                 "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               )}
             >
-              <Avatar className={`border-ui-glass overflow-visible transition-all duration-200 ${scrollY > scrollThresholdRef.current ? "size-9" : "size-12"}`}>
-                <AvatarFallback className={`bg-gradient-to-l from-primary/80 to-secondary/80 transition-colors duration-200 cursor-pointer hover:brightness-120 text-xs transition-all duration-200 font-semibold text-[var(--text-primary)] ${scrollY > scrollThresholdRef.current ? "text-xs" : "text-base"}`}>
+              <Avatar className={`border-ui-glass overflow-visible transition-all duration-200 ${scrollY > scrollThresholdRef.current ? "size-8" : "size-10"}`}>
+                <AvatarFallback className={`bg-gradient-to-r from-primary/80 to-secondary/80 transition-colors duration-200 cursor-pointer hover:brightness-120 text-xs transition-all duration-200 font-semibold text-[var(--text-primary)] ${scrollY > scrollThresholdRef.current ? "text-xs" : "text-sm"}`}>
                   KW
                 </AvatarFallback>
                 <AvatarBadge className="bg-green-600" />
