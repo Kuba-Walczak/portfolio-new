@@ -13,12 +13,12 @@ export const Tag = {
     TECHNICAL_ART: {
         id: "2",
         style: "technicalArt",
-        title: "Technical Art"
+        title: "TA"
     },
     ART: {
         id: "3",
         style: "art",
-        title: "3D Art"
+        title: "3D"
     },
     CONTEST: {
         id: "4",

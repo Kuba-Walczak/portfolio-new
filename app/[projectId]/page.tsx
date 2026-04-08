@@ -8,7 +8,6 @@ import { useApp } from "@/contexts/AppContext"
 import { useParams } from "next/navigation"
 import Background from "@/components/Background"
 import { useEffect } from "react"
-import { Wrench } from "lucide-react"
 
 export default function ProjectSubpage() {
   const { setAnimationReady } = useApp()

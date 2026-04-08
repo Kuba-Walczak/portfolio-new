@@ -11,6 +11,7 @@ const GalleryMediaSchema = z.object({
 
 const GalleryContentSchema = z.object({
   type: NonEmptyString,
+  poster: NonEmptyString.optional(),
   media: z.array(GalleryMediaSchema),
   title: NonEmptyString,
   caption: NonEmptyString,

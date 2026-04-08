@@ -6,7 +6,7 @@ import type { ReactNode } from 'react'
 export function HeroCanvas({ children }: { children: ReactNode }) {
   return (
     <Canvas
-      dpr={[1.5, 2]}
+      dpr={[1.25, 2]}
       style={{ pointerEvents: 'none' }}
       gl={{ alpha: false }}
       camera={{ position: [0, 0, 0], fov: 25 }}

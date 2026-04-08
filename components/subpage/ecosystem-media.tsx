@@ -14,6 +14,16 @@ function MediaPreview({
   content: Project["subpage"]["gallery"][number]
   onOpenVideo: (content: Project["subpage"]["gallery"][number]) => void
 }) {
+  const isSafari = (() => {
+    const ua = navigator.userAgent;
+    const isIOS = /iP(ad|hone|od)/.test(ua);
+    const isMac = /Macintosh/.test(ua);
+    const isWebKit = /AppleWebKit/.test(ua);
+    const isChrome = /CriOS|Chrome/.test(ua);
+    const isEdge = /Edg\//.test(ua);
+  
+    return isWebKit && !isChrome && !isEdge && (isIOS || isMac);
+  })();
   const firstMedia = content.media[0]
   const secondMedia = content.media[1]
 
@@ -105,13 +115,23 @@ function MediaPreview({
       onClick={() => onOpenVideo(content)}
       className="relative block h-52 w-full md:h-56"
     >
-      <video
-        src={firstMedia.src}
-        className="h-full w-full object-cover cursor-pointer"
-        muted
-        playsInline
-        preload="metadata"
+      {isSafari ? (
+       <video
+       src={firstMedia.src}
+       className="h-full w-full object-cover cursor-pointer"
+       muted
+       playsInline
+        poster={content.poster}
       />
+      ) : (
+        <video
+          src={firstMedia.src}
+          className="h-full w-full object-cover cursor-pointer"
+          muted
+          playsInline
+          preload="metadata"
+        />
+      )}
       <div className="pointer-events-none absolute inset-0 bg-black/20" />
     </button>
   )

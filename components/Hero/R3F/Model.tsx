@@ -36,7 +36,8 @@ function ModelContent(props: any) {
     texture.minFilter = THREE.LinearFilter
     texture.magFilter = THREE.LinearFilter
 
-    const laptopScreenTexture = useVideoTexture("https://PortfolioPullZone.b-cdn.net/showcase.webm", { loop: true, muted: true, playsInline: true, crossOrigin: 'anonymous', start: false })
+    const isWebKit = /AppleWebKit/.test(navigator.userAgent)
+    const laptopScreenTexture = useVideoTexture(`https://PortfolioPullZone.b-cdn.net/showcase.${isWebKit ? 'mp4' : 'webm'}`, { loop: true, muted: true, playsInline: true, crossOrigin: 'anonymous', start: false })
     laptopScreenTexture.flipY = false
     laptopScreenTexture.colorSpace = THREE.SRGBColorSpace
     laptopScreenTexture.minFilter = THREE.LinearFilter

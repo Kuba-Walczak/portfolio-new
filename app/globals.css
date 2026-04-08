@@ -149,8 +149,8 @@
   /** Typography tokens */
   .type-h1 {
     @apply text-balance text-4xl font-bold leading-[0.9] tracking-[-0.025em] text-[var(--text-primary)]
-      vsm:text-4xl
-      vmd:text-5xl
+      vsm:text-5xl
+      vmd:text-6xl
       vlg:text-7xl
       vxl:text-[6.5rem]
       v2xl:text-[7.5rem];

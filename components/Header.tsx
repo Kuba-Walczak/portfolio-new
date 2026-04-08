@@ -61,7 +61,7 @@ export function Header() {
         id: "discord",
         label: "kuba.walczak",
         icon: <FaDiscord className="size-8" />,
-        href: "https://discord.com/users/1234567890",
+        href: "https://discord.com/users/347743687838662658",
       }
     }
 

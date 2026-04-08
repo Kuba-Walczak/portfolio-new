@@ -16,6 +16,7 @@ export default function Hero() {
   const heroContainerRef = useRef<HTMLDivElement>(null)
   const elementTopRef = useRef<number>(0)
   const scrollTweenRef = useRef<gsap.core.Tween | null>(null)
+  const isPhone = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
 
   useEffect(() => {
     const element = document.getElementById("projects")
@@ -72,7 +73,7 @@ export default function Hero() {
     style={{ maxWidth: 'calc(100vh * 1.1)' }}
       >
       <div
-      className="w-fit relative rounded-2xl origin-center"
+      className="w-fit relative origin-center overflow-hidden"
       style={{ clipPath: 'inset(0px -25% 0px 0px)' }}>
         <div
         ref={heroContainerRef}
@@ -84,15 +85,12 @@ export default function Hero() {
               Warsaw<span className="hidden sm:inline">, Poland</span>
             </h2>
           </div>
-          <h1 className="type-h1 -ml-[0.024em] vsm:-ml-[0.03em] vmd:-ml-[0.04em] vlg:-ml-[0.044em] vxl:-ml-[0.05em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1">
+          <h1 className={`type-h1 ${isPhone ? '!text-4xl' : ''} -ml-[0.024em] vsm:-ml-[0.03em] vmd:-ml-[0.04em] vlg:-ml-[0.044em] vxl:-ml-[0.05em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1`}>
             KUBA WALCZAK
           </h1>
-          <div className="flex flex-col items-center xl:items-start gap-1.5 vsm:gap-2 text-center xl:text-left">
-            <h2 className="type-h4 block xl:hidden">
+          <div className="flex flex-col items-center xl:items-start gap-1.5 vsm:gap-2 text-center xl:text-left w-full xl:w-3/5">
+            <h2 className="type-h4">
             I build scalable procedural systems by combining computer graphics and computer science.
-            </h2>
-            <h2 className="type-h4 hidden xl:block">
-              I build scalable procedural systems by combining<br></br>computer graphics and computer science.
             </h2>
             <Button
               variant="default"

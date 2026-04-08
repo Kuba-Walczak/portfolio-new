@@ -30,12 +30,13 @@ const contacts = {
     id: "discord",
     label: "kuba.walczak",
     icon: <FaDiscord className="size-8" />,
-    href: "https://discord.com/users/1234567890",
+    href: "https://discord.com/users/347743687838662658",
   }
 }
 
 export default function About() {
   const { isMobile } = useApp()
+  const isPhone = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
   return (
     <section
     id="about"
@@ -79,14 +80,14 @@ export default function About() {
               </TooltipContent>
             </Tooltip>
             </div>
-            <h2 className="type-h1">
+            <h2 className={`type-h1 ${isPhone ? '!text-4xl' : ''}`}>
               Hi, I'm Kuba
             </h2>
             </div>
             <div className="flex flex-col gap-1">
             <span className="type-h25">About Me</span>
             <p className="type-h4 text-justify">
-            I am a full-time CS student at PJAIT. I love creating visuals, whether it's vfx, 3D animations, games or websites. Ultimately what I've found to love most is creating visuals that rely on complex systems to create experiences that don't just look cool, but work in a bigger environment and perform well. I'm always trying to push myself to create better and better work. Thank you for checking out my portfolio!
+            I am a full-time CS student at PJAIT. I love creating visuals, whether it's VFX, 3D animations, games or websites. Ultimately what I've found to love most is creating visuals that rely on complex systems to create experiences that don't just look cool, but work in a bigger environment and perform well. I'm always trying to push myself to create better and better work. Thank you for checking out my portfolio!
             </p>
             </div>
             <div className="flex flex-col gap-1">

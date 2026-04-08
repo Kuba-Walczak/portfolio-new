@@ -24,7 +24,6 @@ export function HeroSection({ project }: { project: Project }) {
     playsInline
     muted
   />
-  {/* Gradient overlay */}
   <div className="absolute inset-0 pointer-events-none
   bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--background-rgba)_0%,var(--background)_100%)]" />
 </div>
@@ -57,19 +56,8 @@ export function HeroSection({ project }: { project: Project }) {
             )}
             </div>
           </div>
-          {/* <div className="flex-1 w-full flex justify-center md:justify-end">
-            <div className="w-[320px] h-[260px] sm:w-[420px] sm:h-[320px] md:w-[440px] md:h-[360px]">
-              <SubpageCanvas>
-                <mesh rotation={[0.25, 0.6, 0]}>
-                  <boxGeometry args={[1, 1, 1]} />
-                  <meshBasicMaterial/>
-                </mesh>
-              </SubpageCanvas>
-            </div>
-          </div> */}
         </div>
       </section>
-
       <VideoModal
         isOpen={isPreviewOpen}
         onClose={() => setIsPreviewOpen(false)}

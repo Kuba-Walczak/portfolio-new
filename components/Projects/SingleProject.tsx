@@ -29,7 +29,7 @@ export function SingleProject({ project }: { project: Project }) {
   return (
         <div
           key={project.id}
-          className={`relative min-w-[200px] md:min-w-[350px] h-[240px] vsm:h-[285px] vmd:h-[335px] vlg:h-[375px] vxl:h-[420px] v2xl:h-[460px] flex flex-col flex-shrink-0 overflow-hidden rounded-2xl bg-glass border-ui-glass transition duration-200 hover:brightness-110 hover:bg-white/5 cursor-pointer [font-family:var(--font-manrope)] ${
+          className={`relative min-w-[200px] md:min-w-[350px] h-[400px] vlg:h-[420px] vxl:h-[440px] v2xl:h-[460px] flex flex-col flex-shrink-0 overflow-hidden rounded-2xl bg-glass border-ui-glass transition duration-200 hover:brightness-110 hover:bg-white/5 cursor-pointer [font-family:var(--font-manrope)] ${
             project.status === 'coming-soon'
               ? 'pointer-events-none' : ''}`}
           onClick={() => {
@@ -55,7 +55,7 @@ export function SingleProject({ project }: { project: Project }) {
             {project.status === 'coming-soon' && (
               <>
                 <div className="absolute inset-0 z-10 bg-gray-900/95 opacity-90 grayscale" />
-                <p className="absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 text-center type-h2 opacity-40">
+                <p className="absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 text-center type-h2 opacity-40 !text-nowrap">
                   COMING SOON
                 </p>
               </>
