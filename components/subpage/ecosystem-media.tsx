@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { VideoModal } from "@/components/subpage/video-modal"
 import { Project } from "@/types/project"
-import { MousePointerClick as MousePointerClickIcon } from "lucide-react"
+import { MousePointerClick as MousePointerClickIcon, Pointer as PointerIcon } from "lucide-react"
 
 function MediaPreview({
   content,
@@ -137,6 +137,7 @@ function MediaPreview({
 }
 
 export function EcosystemMedia({ project }: { project: Project }) {
+  const isPhone = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
   const gallery = project.subpage.gallery
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const selectedVideo = selectedIndex !== null ? gallery[selectedIndex] : null
@@ -183,24 +184,45 @@ export function EcosystemMedia({ project }: { project: Project }) {
               <MediaPreview content={content} onOpenVideo={() => onOpenVideo(index)} />
               <div className="flex items-center gap-3 px-4 py-3">
                 <p className="type-h25">{content.title}</p>
-                  <MousePointerClickIcon
-                    className="ml-auto h-8 w-8"
-                    color={`url(#ecosystem-media-icon-gradient-${project.id}-${index})`}
-                    aria-hidden="true"
-                  >
-                    <defs>
-                      <linearGradient
-                        id={`ecosystem-media-icon-gradient-${project.id}-${index}`}
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="var(--secondary)" />
-                        <stop offset="100%" stopColor="var(--primary)" />
-                      </linearGradient>
-                    </defs>
-                  </MousePointerClickIcon>
+                  {isPhone ? (
+                    <PointerIcon
+                      className="ml-auto h-8 w-8"
+                      color={`url(#ecosystem-media-icon-gradient-${project.id}-${index})`}
+                      aria-hidden="true"
+                    >
+                      <defs>
+                        <linearGradient
+                          id={`ecosystem-media-icon-gradient-${project.id}-${index}`}
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stopColor="var(--secondary)" />
+                          <stop offset="100%" stopColor="var(--primary)" />
+                        </linearGradient>
+                      </defs>
+                    </PointerIcon>
+                  ) : (
+                    <MousePointerClickIcon
+                      className="ml-auto h-8 w-8"
+                      color={`url(#ecosystem-media-icon-gradient-${project.id}-${index})`}
+                      aria-hidden="true"
+                    >
+                      <defs>
+                        <linearGradient
+                          id={`ecosystem-media-icon-gradient-${project.id}-${index}`}
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stopColor="var(--secondary)" />
+                          <stop offset="100%" stopColor="var(--primary)" />
+                        </linearGradient>
+                      </defs>
+                    </MousePointerClickIcon>
+                  )}
               </div>
             </Card>
           ))}

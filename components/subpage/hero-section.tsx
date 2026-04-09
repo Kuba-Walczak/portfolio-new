@@ -37,7 +37,7 @@ export function HeroSection({ project }: { project: Project }) {
             >
               {project.subpage.description}
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 xl:flex-row flex-col px-8">
             <Button
               variant="default"
               className={`mt-6 cursor-pointer items-center flex ${project.subpage.link ? '!px-16' : '!px-32 mx-auto'}`}

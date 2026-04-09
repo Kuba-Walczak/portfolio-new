@@ -47,7 +47,7 @@ export default function About() {
           About Me
         </h2>
       </div>
-      <div className="flex justify-center gap-8">
+      <div className="flex justify-center gap-4">
       <div className="flex flex-col gap-6 xl:w-2/3 w-full bg-glass border-ui-glass rounded-[var(--bevel-2xl)] p-8">
             <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
@@ -85,7 +85,6 @@ export default function About() {
             </h2>
             </div>
             <div className="flex flex-col gap-1">
-            <span className="type-h25">About Me</span>
             <p className="type-h4 text-justify">
             I am a full-time CS student at PJAIT. I love creating visuals, whether it's VFX, 3D animations, games or websites. Ultimately what I've found to love most is creating visuals that rely on complex systems to create experiences that don't just look cool, but work in a bigger environment and perform well. I'm always trying to push myself to create better and better work. Thank you for checking out my portfolio!
             </p>

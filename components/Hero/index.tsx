@@ -85,7 +85,7 @@ export default function Hero() {
               Warsaw<span className="hidden sm:inline">, Poland</span>
             </h2>
           </div>
-          <h1 className={`type-h1 ${isPhone ? '!text-4xl' : ''} -ml-[0.024em] vsm:-ml-[0.03em] vmd:-ml-[0.04em] vlg:-ml-[0.044em] vxl:-ml-[0.05em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1`}>
+          <h1 className={`type-h1 ${isPhone ? '!text-[2.75rem]' : ''} -ml-[0.024em] vsm:-ml-[0.03em] vmd:-ml-[0.04em] vlg:-ml-[0.044em] vxl:-ml-[0.05em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1`}>
             KUBA WALCZAK
           </h1>
           <div className="flex flex-col items-center xl:items-start gap-1.5 vsm:gap-2 text-center xl:text-left w-full xl:w-3/5">

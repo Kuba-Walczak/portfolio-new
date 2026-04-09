@@ -3,12 +3,13 @@ import { Badge } from "../ui/badge"
 import { gsap } from "gsap"
 import { getTag, Tag } from "@/types/tag"
 import { useRef, useEffect } from "react"
-import { MousePointerClickIcon } from "lucide-react"
+import { MousePointerClickIcon, PointerIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export function SingleProject({ project }: { project: Project }) {
     const router = useRouter()
     const scrollAnimationRef = useRef<gsap.core.Tween | null>(null)
+    const isPhone = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
 
     useEffect(() => {
       const handleScroll = () => {
@@ -29,7 +30,7 @@ export function SingleProject({ project }: { project: Project }) {
   return (
         <div
           key={project.id}
-          className={`relative min-w-[200px] md:min-w-[350px] h-[400px] vlg:h-[420px] vxl:h-[440px] v2xl:h-[460px] flex flex-col flex-shrink-0 overflow-hidden rounded-[var(--bevel-2xl)] bg-glass border-ui-glass transition duration-200 hover:brightness-110 hover:bg-white/5 cursor-pointer [font-family:var(--font-manrope)] ${
+          className={`relative min-w-[200px] md:min-w-[350px] h-[400px] vlg:h-[380px] vxl:h-[410px] v2xl:h-[420px] flex flex-col flex-shrink-0 overflow-hidden rounded-[var(--bevel-2xl)] bg-glass border-ui-glass transition duration-200 hover:brightness-110 hover:bg-white/5 cursor-pointer [font-family:var(--font-manrope)] ${
             project.status === 'coming-soon'
               ? 'pointer-events-none' : ''}`}
           onClick={() => {
@@ -91,23 +92,43 @@ export function SingleProject({ project }: { project: Project }) {
           ))}
           {project.status !== 'coming-soon' && (
             <div className="pointer-events-none ml-auto" aria-hidden>
-              <MousePointerClickIcon
-                className="h-6 w-6"
-                color={`url(#click-icon-gradient-${project.id})`}
-              >
-                <defs>
-                  <linearGradient
-                        id={`click-icon-gradient-${project.id}`}
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="var(--secondary)" />
-                        <stop offset="100%" stopColor="var(--primary)" />
-                      </linearGradient>
-                </defs>
-              </MousePointerClickIcon>
+              {isPhone ? (
+                <PointerIcon
+                  className="h-6 w-6"
+                  color={`url(#click-icon-gradient-${project.id})`}
+                >
+                  <defs>
+                    <linearGradient
+                      id={`click-icon-gradient-${project.id}`}
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stopColor="var(--secondary)" />
+                      <stop offset="100%" stopColor="var(--primary)" />
+                    </linearGradient>
+                  </defs>
+                </PointerIcon>
+              ) : (
+                <MousePointerClickIcon
+                  className="h-6 w-6"
+                  color={`url(#click-icon-gradient-${project.id})`}
+                >
+                  <defs>
+                    <linearGradient
+                      id={`click-icon-gradient-${project.id}`}
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stopColor="var(--secondary)" />
+                      <stop offset="100%" stopColor="var(--primary)" />
+                    </linearGradient>
+                  </defs>
+                </MousePointerClickIcon>
+              )}
             </div>
           )}
         </div>

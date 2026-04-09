@@ -234,7 +234,7 @@
 
   .type-h6 {
     @apply text-xs font-medium text-[var(--text-primary)]
-      vsm:text-base
+      vsm:text-4xl
       vmd:text-4xl
       vlg:text-4xl;
     font-family: var(--font-space-grotesk);
