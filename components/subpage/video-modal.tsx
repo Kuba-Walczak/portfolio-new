@@ -36,8 +36,22 @@ function preloadMedia(src: string): Promise<void> {
 
     const video = document.createElement("video")
     video.preload = "metadata"
-    video.onloadeddata = () => resolve()
-    video.onerror = () => resolve()
+
+    let timeout: ReturnType<typeof setTimeout>
+
+    const done = () => {
+      clearTimeout(timeout)
+      resolve()
+    }
+
+    video.onloadedmetadata = done
+    video.onloadeddata = done
+    video.oncanplay = done
+    video.onerror = done
+
+    // Safari fallback: onloadeddata may never fire with preload="metadata"
+    timeout = setTimeout(resolve, 3000)
+
     video.src = src
   })
 }
@@ -138,7 +152,7 @@ export function VideoModal({
         style={{ maxWidth: "calc(100vh * 1.1)" }}
         onClick={(event) => event.stopPropagation()}
       >
-        <Card className="relative rounded-b-none p-6 pr-32 bg-background">
+        <Card className="relative rounded-b-none p-6 bg-background text-justify">
           {isMediaReady ? (
             <>
               <h3 className="type-h25 mb-2">{title}</h3>
