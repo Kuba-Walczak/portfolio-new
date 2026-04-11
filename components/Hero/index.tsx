@@ -12,7 +12,7 @@ import { useApp } from "@/contexts/AppContext"
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
-  const { animationReady, isMobile } = useApp()
+  const { animationReady, isMobile, content } = useApp()
   const heroContainerRef = useRef<HTMLDivElement>(null)
   const elementTopRef = useRef<number>(0)
   const scrollTweenRef = useRef<gsap.core.Tween | null>(null)
@@ -80,17 +80,17 @@ export default function Hero() {
         className="flex flex-col justify-center gap-4 vsm:gap-5 vmd:gap-6 vlg:gap-7 vxl:gap-8 v2xl:gap-10 items-center xl:items-start opacity-0">
           <div className="flex flex-col gap-1.5 vsm:gap-2 -mb-2 vsm:-mb-2 vmd:-mb-2.5 vlg:-mb-4">
             <h2 className="type-h2">
-              Technical Artist
+              {content?.role || "Technical Artist"}
               <span className="mx-2 type-h2">•</span>
               Warsaw<span className="hidden sm:inline">, Poland</span>
             </h2>
           </div>
-          <h1 className={`type-h1 ${isPhone ? '!text-[2.75rem]' : ''} -ml-[0.024em] vsm:-ml-[0.03em] vmd:-ml-[0.04em] vlg:-ml-[0.044em] vxl:-ml-[0.05em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1`}>
+          <h1 className={`type-h1 uppercase ${isPhone ? '!text-[2.75rem]' : ''} -ml-[0.024em] vsm:-ml-[0.03em] vmd:-ml-[0.04em] vlg:-ml-[0.044em] vxl:-ml-[0.05em] -mt-0.5 vsm:-mt-0.5 vmd:-mt-1 vlg:-mt-1`}>
             KUBA WALCZAK
           </h1>
           <div className="flex flex-col items-center xl:items-start gap-1.5 vsm:gap-2 text-center xl:text-left w-full xl:w-3/5">
             <h2 className="type-h4">
-            I build scalable procedural systems by combining computer graphics and computer science.
+            {content?.description || "I build scalable procedural systems by combining computer graphics and computer science."}
             </h2>
             <Button
               variant="default"

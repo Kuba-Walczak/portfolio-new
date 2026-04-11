@@ -1,5 +1,5 @@
 import { z } from "zod"
-import type { Project } from "@/types/project"
+import type { Content, Project } from "@/types/content"
 
 const NonEmptyString = z.string().trim().min(1)
 
@@ -68,8 +68,17 @@ const ProjectInputSchema = z
     }
   })
 
-const ProjectsInputSchema = z.array(ProjectInputSchema)
+const ContentSchema = z.object({
+  role: NonEmptyString,
+  description: NonEmptyString,
+  about: NonEmptyString,
+  projects: z.array(ProjectInputSchema),
+})
+
+export function parseContent(input: unknown): Content {
+  return ContentSchema.parse(input)
+}
 
 export function parseProjects(input: unknown): Project[] {
-  return ProjectsInputSchema.parse(input)
+  return z.array(ProjectInputSchema).parse(input)
 }

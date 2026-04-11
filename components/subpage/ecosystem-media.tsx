@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { VideoModal } from "@/components/subpage/video-modal"
-import { Project } from "@/types/project"
+import { Project } from "@/types/content"
 import { MousePointerClick as MousePointerClickIcon, Pointer as PointerIcon } from "lucide-react"
 
 function MediaPreview({

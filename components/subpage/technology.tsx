@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card"
-import { Project } from "@/types/project"
+import { Project } from "@/types/content"
 
 export function Technology({ project }: { project: Project }) {
   const items = project.subpage.techStack

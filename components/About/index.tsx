@@ -35,7 +35,7 @@ const contacts = {
 }
 
 export default function About() {
-  const { isMobile } = useApp()
+  const { isMobile, content } = useApp()
   const isPhone = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
   return (
     <section
@@ -86,7 +86,7 @@ export default function About() {
             </div>
             <div className="flex flex-col gap-1">
             <p className="type-h4 text-justify">
-            I am a full-time CS student at PJAIT. I love creating visuals, whether it's VFX, 3D animations, games or websites. Ultimately what I've found to love most is creating visuals that rely on complex systems to create experiences that don't just look cool, but work in a bigger environment and perform well. I'm always trying to push myself to create better and better work. Thank you for checking out my portfolio!
+            {content?.about || "I am a full-time CS student at PJAIT. I love creating visuals, whether it's VFX, 3D animations, games or websites. Ultimately what I've found to love most is creating visuals that rely on complex systems to create experiences that don't just look cool, but work in a bigger environment and perform well. I'm always trying to push myself to create better and better work. Thank you for checking out my portfolio!"}
             </p>
             </div>
             <div className="flex flex-col gap-1">

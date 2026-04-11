@@ -1,13 +1,7 @@
 export interface Content {
     role: string;
-    city: string;
-    country: string;
-    name: string;
-    surname: string;
     description: string;
     about: string;
-    major: string;
-    university: string;
     projects: Project[];
 }
 

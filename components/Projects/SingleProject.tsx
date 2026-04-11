@@ -1,4 +1,4 @@
-import { Project } from "@/types/project"
+import { Project } from "@/types/content"
 import { Badge } from "../ui/badge"
 import { gsap } from "gsap"
 import { getTag, Tag } from "@/types/tag"

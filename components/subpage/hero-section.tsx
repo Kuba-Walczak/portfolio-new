@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { VideoModal } from '@/components/subpage/video-modal'
 import { Button } from '@/components/ui/button'
-import { Project } from '@/types/project'
+import { Project } from '@/types/content'
 import { Play } from 'lucide-react'
 
 export function HeroSection({ project }: { project: Project }) {

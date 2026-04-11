@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card"
-import { Project } from "@/types/project"
+import { Project } from "@/types/content"
 import * as LucideIcons from "lucide-react"
 
 function toPascalCaseIconName(value: string) {

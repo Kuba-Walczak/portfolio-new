@@ -1,8 +1,8 @@
 'use client'
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
-import { Project } from '@/types/project'
-import { fetchProjects } from '@/lib/utils'
+import { Content, Project } from '@/types/content'
+import { fetchContent } from '@/lib/utils'
 
 interface AppContextType {
   isLoading: boolean
@@ -13,6 +13,8 @@ interface AppContextType {
   setIsLandingPage: (isLandingPage: boolean) => void
   projects: Project[] | null
   setProjects: (projects: Project[] | null) => void
+  content: Content | null
+  setContent: (content: Content | null) => void
   animationReady: boolean
   setAnimationReady: (animationReady: boolean) => void
   heroVideoGlowRef: HTMLDivElement | null
@@ -28,6 +30,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [isMobile, setIsMobile] = useState(false)
   const [isLandingPage, setIsLandingPage] = useState(true)
   const [projects, setProjects] = useState<Project[] | null>(null)
+  const [content, setContent] = useState<Content | null>(null)
   const [animationReady, setAnimationReady] = useState(false)
   const [heroVideoGlowRef, setHeroVideoGlowRef] = useState<HTMLDivElement | null>(null)
   const [openContacts, setOpenContacts] = useState(false)
@@ -39,8 +42,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   
     const fetchAndUpdate = async () => {
       try {
-        const projects = await fetchProjects("https://PortfolioPullZone.b-cdn.net/projects.json")
-        setProjects(projects)
+        const data = await fetchContent("https://PortfolioPullZone.b-cdn.net/content.json")
+        setContent(data)
+        setProjects(data.projects)
         setIsLoading(false)
       } catch (e) {
         console.error(e)
@@ -59,6 +63,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setIsLandingPage,
     projects,
     setProjects,
+    content,
+    setContent,
     animationReady,
     setAnimationReady,
     heroVideoGlowRef,
